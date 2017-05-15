@@ -17,10 +17,6 @@ while @contador <= @cantidad_usuarios
 begin
 set @nombre_usuario = (select NOMBRE from OLA_K_ASE.USUARIOS where ID_USUARIO = @contador)
 
-update OLA_K_ASE.Maestra_Stg1
-set USUARIO_ID = @contador
-where Chofer_DNI = @nombre_usuario
-
 update OLA_K_ASE.CHOFERES
 set USUARIO_ID = @contador
 where DNI = @nombre_usuario
@@ -48,10 +44,6 @@ set @contadorCL = (select max(id_usuario) from OLA_K_ASE.USUARIOS)+1
 while @contadorCL <= @cantidad_usuariosCL
 begin
 set @nombre_usuarioCL = (select NOMBRE from OLA_K_ASE.USUARIOS where ID_USUARIO = @contadorCL)
-
-update OLA_K_ASE.Maestra_Stg1
-set USUARIO_ID = @contadorCL
-where Cliente_DNI = @nombre_usuarioCL
 
 update OLA_K_ASE.CLIENTES
 set USUARIO_ID = @contadorCL
