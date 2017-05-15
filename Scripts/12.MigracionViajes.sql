@@ -1,0 +1,11 @@
+-- Migracion Viajes
+
+begin
+
+insert into OLA_K_ASE.VIAJES(FECHA_INICIO, CANTIDAD_KM, CHOFER_ID, CLIENTE_ID, AUTO_ID, TURNO_ID, RENDICION_ID, FACTURA_ID)
+select Viaje_Fecha, Viaje_Cant_Kilometros, CHOFER_ID, CLIENTE_ID, AUTO_ID, TURNO_ID, RENDICION_ID, FACTURA_ID  from OLA_K_ASE.Maestra_Stg1
+
+end
+
+
+
