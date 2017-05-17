@@ -7,3 +7,16 @@ C:\Users\gelmanc\Documents\Personal\Facultad\GDD\TP Uber Frba 1.0 - 1C 2017\Apli
 C:\Users\gelmanc\Documents\Personal\Facultad\GDD\TP Uber Frba 1.0 - 1C 2017\Aplicacion Desktop\UberFrba\obj\Debug\UberFrba.exe
 C:\Users\gelmanc\Documents\Personal\Facultad\GDD\TP Uber Frba 1.0 - 1C 2017\Aplicacion Desktop\UberFrba\obj\Debug\UberFrba.pdb
 C:\Users\gelmanc\Documents\Personal\Facultad\GDD\TP Uber Frba 1.0 - 1C 2017\Aplicacion Desktop\UberFrba\obj\Debug\UberFrba.Form1.resources
+C:\Users\gelmanc\Documents\Personal\Facultad\GDD\gdd2017\app\UberFrba\bin\Debug\UberFrba.exe.config
+C:\Users\gelmanc\Documents\Personal\Facultad\GDD\gdd2017\app\UberFrba\bin\Debug\UberFrba.exe
+C:\Users\gelmanc\Documents\Personal\Facultad\GDD\gdd2017\app\UberFrba\bin\Debug\UberFrba.pdb
+C:\Users\gelmanc\Documents\Personal\Facultad\GDD\gdd2017\app\UberFrba\bin\Debug\EntityFramework.dll
+C:\Users\gelmanc\Documents\Personal\Facultad\GDD\gdd2017\app\UberFrba\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\gelmanc\Documents\Personal\Facultad\GDD\gdd2017\app\UberFrba\bin\Debug\EntityFramework.xml
+C:\Users\gelmanc\Documents\Personal\Facultad\GDD\gdd2017\app\UberFrba\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\gelmanc\Documents\Personal\Facultad\GDD\gdd2017\app\UberFrba\obj\Debug\UberFrba.Abm_Rol.Form1.resources
+C:\Users\gelmanc\Documents\Personal\Facultad\GDD\gdd2017\app\UberFrba\obj\Debug\UberFrba.Form1.resources
+C:\Users\gelmanc\Documents\Personal\Facultad\GDD\gdd2017\app\UberFrba\obj\Debug\UberFrba.Properties.Resources.resources
+C:\Users\gelmanc\Documents\Personal\Facultad\GDD\gdd2017\app\UberFrba\obj\Debug\UberFrba.csproj.GenerateResource.Cache
+C:\Users\gelmanc\Documents\Personal\Facultad\GDD\gdd2017\app\UberFrba\obj\Debug\UberFrba.exe
+C:\Users\gelmanc\Documents\Personal\Facultad\GDD\gdd2017\app\UberFrba\obj\Debug\UberFrba.pdb

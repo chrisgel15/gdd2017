@@ -1,0 +1,1080 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="GD1C2017Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AUTOS">
+          <Key>
+            <PropertyRef Name="ID_AUTO" />
+          </Key>
+          <Property Name="ID_AUTO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MARCA_ID" Type="int" Nullable="false" />
+          <Property Name="MODELO" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="PATENTE" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="LICENCIA" Type="varchar" MaxLength="26" />
+          <Property Name="RODADO" Type="varchar" MaxLength="10" />
+          <Property Name="HABILITADO" Type="bit" Nullable="false" />
+          <Property Name="CHOFER_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AUTOS_TURNOS">
+          <Key>
+            <PropertyRef Name="TURNO_ID" />
+            <PropertyRef Name="AUTO_ID" />
+          </Key>
+          <Property Name="TURNO_ID" Type="int" Nullable="false" />
+          <Property Name="AUTO_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CHOFERES">
+          <Key>
+            <PropertyRef Name="ID_CHOFER" />
+          </Key>
+          <Property Name="ID_CHOFER" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="APELLIDO" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="DNI" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="DIRECCION" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="TELEFONO" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="MAIL" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="FECHA_NAC" Type="datetime" Nullable="false" />
+          <Property Name="USUARIO_ID" Type="int" />
+          <Property Name="HABILITADO" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CLIENTES">
+          <Key>
+            <PropertyRef Name="ID_CLIENTE" />
+          </Key>
+          <Property Name="ID_CLIENTE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="APELLIDO" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="DNI" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="DIRECCION" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="MAIL" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="TELEFONO" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="FECHA_NAC" Type="datetime" Nullable="false" />
+          <Property Name="HABIILITADO" Type="bit" Nullable="false" />
+          <Property Name="USUARIO_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="FACTURAS">
+          <Key>
+            <PropertyRef Name="ID_FACTURA" />
+          </Key>
+          <Property Name="ID_FACTURA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CLIENTE_ID" Type="int" Nullable="false" />
+          <Property Name="FECHA_INICIO" Type="datetime" Nullable="false" />
+          <Property Name="FECHA_FIN" Type="datetime" Nullable="false" />
+          <Property Name="FECHA_FACT" Type="datetime" Nullable="false" />
+          <Property Name="IMPORTE" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="NUMERO" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FUNCIONALIDADES">
+          <Key>
+            <PropertyRef Name="ID_FUNC" />
+          </Key>
+          <Property Name="ID_FUNC" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FUNCIONALIDADES_ROLES">
+          <Key>
+            <PropertyRef Name="FUNCIONALIDADES_ID" />
+            <PropertyRef Name="ROLES_ID" />
+          </Key>
+          <Property Name="FUNCIONALIDADES_ID" Type="int" Nullable="false" />
+          <Property Name="ROLES_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MARCAS">
+          <Key>
+            <PropertyRef Name="ID_MARCA" />
+          </Key>
+          <Property Name="ID_MARCA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RENDICIONES">
+          <Key>
+            <PropertyRef Name="ID_RENDICION" />
+          </Key>
+          <Property Name="ID_RENDICION" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TURNO_ID" Type="int" Nullable="false" />
+          <Property Name="NUMERO" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="FECHA" Type="datetime" Nullable="false" />
+          <Property Name="IMPORTE" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="CHOFER_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ROLES">
+          <Key>
+            <PropertyRef Name="ID_ROL" />
+          </Key>
+          <Property Name="ID_ROL" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="HABILITADO" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ROLES_USUARIOS">
+          <Key>
+            <PropertyRef Name="USUARIO_ID" />
+            <PropertyRef Name="ROLES_ID" />
+          </Key>
+          <Property Name="USUARIO_ID" Type="int" Nullable="false" />
+          <Property Name="ROLES_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TURNOS">
+          <Key>
+            <PropertyRef Name="ID_TURNO" />
+          </Key>
+          <Property Name="ID_TURNO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HORA_INICIO" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="HORA_FIN" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="VALOR_KM" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="PRECIO_BASE" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="HABILITADO" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="USUARIOS">
+          <Key>
+            <PropertyRef Name="ID_USUARIO" />
+          </Key>
+          <Property Name="ID_USUARIO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="PASSWORD" Type="binary" MaxLength="32" Nullable="false" />
+          <Property Name="CANT_FALLAS" Type="smallint" Nullable="false" />
+          <Property Name="HABILITADO" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VIAJES">
+          <Key>
+            <PropertyRef Name="ID_VIAJE" />
+          </Key>
+          <Property Name="ID_VIAJE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FECHA_INICIO" Type="datetime" Nullable="false" />
+          <Property Name="FECHA_FIN" Type="datetime" />
+          <Property Name="CANTIDAD_KM" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="CHOFER_ID" Type="int" Nullable="false" />
+          <Property Name="CLIENTE_ID" Type="int" Nullable="false" />
+          <Property Name="AUTO_ID" Type="int" Nullable="false" />
+          <Property Name="TURNO_ID" Type="int" Nullable="false" />
+          <Property Name="RENDICION_ID" Type="int" />
+          <Property Name="FACTURA_ID" Type="int" />
+        </EntityType>
+        <Association Name="FK_AUTOS_CHOFERES">
+          <End Role="CHOFERES" Type="Self.CHOFERES" Multiplicity="1" />
+          <End Role="AUTOS" Type="Self.AUTOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CHOFERES">
+              <PropertyRef Name="ID_CHOFER" />
+            </Principal>
+            <Dependent Role="AUTOS">
+              <PropertyRef Name="CHOFER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AUTOS_ID">
+          <End Role="AUTOS" Type="Self.AUTOS" Multiplicity="1" />
+          <End Role="AUTOS_TURNOS" Type="Self.AUTOS_TURNOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AUTOS">
+              <PropertyRef Name="ID_AUTO" />
+            </Principal>
+            <Dependent Role="AUTOS_TURNOS">
+              <PropertyRef Name="AUTO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AUTOS_MARCAS">
+          <End Role="MARCAS" Type="Self.MARCAS" Multiplicity="1" />
+          <End Role="AUTOS" Type="Self.AUTOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MARCAS">
+              <PropertyRef Name="ID_MARCA" />
+            </Principal>
+            <Dependent Role="AUTOS">
+              <PropertyRef Name="MARCA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CHOFER_ID">
+          <End Role="CHOFERES" Type="Self.CHOFERES" Multiplicity="1" />
+          <End Role="RENDICIONES" Type="Self.RENDICIONES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CHOFERES">
+              <PropertyRef Name="ID_CHOFER" />
+            </Principal>
+            <Dependent Role="RENDICIONES">
+              <PropertyRef Name="CHOFER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CHOFERES_USUARIOS">
+          <End Role="USUARIOS" Type="Self.USUARIOS" Multiplicity="0..1" />
+          <End Role="CHOFERES" Type="Self.CHOFERES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIOS">
+              <PropertyRef Name="ID_USUARIO" />
+            </Principal>
+            <Dependent Role="CHOFERES">
+              <PropertyRef Name="USUARIO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CLIENTE_ID">
+          <End Role="CLIENTES" Type="Self.CLIENTES" Multiplicity="1" />
+          <End Role="FACTURAS" Type="Self.FACTURAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTES">
+              <PropertyRef Name="ID_CLIENTE" />
+            </Principal>
+            <Dependent Role="FACTURAS">
+              <PropertyRef Name="CLIENTE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CLIENTES_USUARIOS">
+          <End Role="USUARIOS" Type="Self.USUARIOS" Multiplicity="0..1" />
+          <End Role="CLIENTES" Type="Self.CLIENTES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIOS">
+              <PropertyRef Name="ID_USUARIO" />
+            </Principal>
+            <Dependent Role="CLIENTES">
+              <PropertyRef Name="USUARIO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FUNCIONALIDADES_ID">
+          <End Role="FUNCIONALIDADES" Type="Self.FUNCIONALIDADES" Multiplicity="1" />
+          <End Role="FUNCIONALIDADES_ROLES" Type="Self.FUNCIONALIDADES_ROLES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FUNCIONALIDADES">
+              <PropertyRef Name="ID_FUNC" />
+            </Principal>
+            <Dependent Role="FUNCIONALIDADES_ROLES">
+              <PropertyRef Name="FUNCIONALIDADES_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ROL_ID">
+          <End Role="ROLES" Type="Self.ROLES" Multiplicity="1" />
+          <End Role="ROLES_USUARIOS" Type="Self.ROLES_USUARIOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROLES">
+              <PropertyRef Name="ID_ROL" />
+            </Principal>
+            <Dependent Role="ROLES_USUARIOS">
+              <PropertyRef Name="ROLES_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ROLES_ID">
+          <End Role="ROLES" Type="Self.ROLES" Multiplicity="1" />
+          <End Role="FUNCIONALIDADES_ROLES" Type="Self.FUNCIONALIDADES_ROLES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROLES">
+              <PropertyRef Name="ID_ROL" />
+            </Principal>
+            <Dependent Role="FUNCIONALIDADES_ROLES">
+              <PropertyRef Name="ROLES_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TURNO_ID">
+          <End Role="TURNOS" Type="Self.TURNOS" Multiplicity="1" />
+          <End Role="AUTOS_TURNOS" Type="Self.AUTOS_TURNOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TURNOS">
+              <PropertyRef Name="ID_TURNO" />
+            </Principal>
+            <Dependent Role="AUTOS_TURNOS">
+              <PropertyRef Name="TURNO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TURNOS_ID">
+          <End Role="TURNOS" Type="Self.TURNOS" Multiplicity="1" />
+          <End Role="RENDICIONES" Type="Self.RENDICIONES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TURNOS">
+              <PropertyRef Name="ID_TURNO" />
+            </Principal>
+            <Dependent Role="RENDICIONES">
+              <PropertyRef Name="TURNO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USUARIO_ID">
+          <End Role="USUARIOS" Type="Self.USUARIOS" Multiplicity="1" />
+          <End Role="ROLES_USUARIOS" Type="Self.ROLES_USUARIOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIOS">
+              <PropertyRef Name="ID_USUARIO" />
+            </Principal>
+            <Dependent Role="ROLES_USUARIOS">
+              <PropertyRef Name="USUARIO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VIAJES_AUTO_ID">
+          <End Role="AUTOS" Type="Self.AUTOS" Multiplicity="1" />
+          <End Role="VIAJES" Type="Self.VIAJES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AUTOS">
+              <PropertyRef Name="ID_AUTO" />
+            </Principal>
+            <Dependent Role="VIAJES">
+              <PropertyRef Name="AUTO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VIAJES_CHOFER_ID">
+          <End Role="CHOFERES" Type="Self.CHOFERES" Multiplicity="1" />
+          <End Role="VIAJES" Type="Self.VIAJES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CHOFERES">
+              <PropertyRef Name="ID_CHOFER" />
+            </Principal>
+            <Dependent Role="VIAJES">
+              <PropertyRef Name="CHOFER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VIAJES_CLIENTE_ID">
+          <End Role="CLIENTES" Type="Self.CLIENTES" Multiplicity="1" />
+          <End Role="VIAJES" Type="Self.VIAJES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTES">
+              <PropertyRef Name="ID_CLIENTE" />
+            </Principal>
+            <Dependent Role="VIAJES">
+              <PropertyRef Name="CLIENTE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VIAJES_FACTURA_ID">
+          <End Role="FACTURAS" Type="Self.FACTURAS" Multiplicity="0..1" />
+          <End Role="VIAJES" Type="Self.VIAJES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FACTURAS">
+              <PropertyRef Name="ID_FACTURA" />
+            </Principal>
+            <Dependent Role="VIAJES">
+              <PropertyRef Name="FACTURA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VIAJES_RENDICION_ID">
+          <End Role="RENDICIONES" Type="Self.RENDICIONES" Multiplicity="0..1" />
+          <End Role="VIAJES" Type="Self.VIAJES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RENDICIONES">
+              <PropertyRef Name="ID_RENDICION" />
+            </Principal>
+            <Dependent Role="VIAJES">
+              <PropertyRef Name="RENDICION_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VIAJES_TURNO_ID">
+          <End Role="TURNOS" Type="Self.TURNOS" Multiplicity="1" />
+          <End Role="VIAJES" Type="Self.VIAJES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TURNOS">
+              <PropertyRef Name="ID_TURNO" />
+            </Principal>
+            <Dependent Role="VIAJES">
+              <PropertyRef Name="TURNO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="insertTestTable" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nombre" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="GD1C2017ModelStoreContainer">
+          <EntitySet Name="AUTOS" EntityType="Self.AUTOS" Schema="OLA_K_ASE" store:Type="Tables" />
+          <EntitySet Name="AUTOS_TURNOS" EntityType="Self.AUTOS_TURNOS" Schema="OLA_K_ASE" store:Type="Tables" />
+          <EntitySet Name="CHOFERES" EntityType="Self.CHOFERES" Schema="OLA_K_ASE" store:Type="Tables" />
+          <EntitySet Name="CLIENTES" EntityType="Self.CLIENTES" Schema="OLA_K_ASE" store:Type="Tables" />
+          <EntitySet Name="FACTURAS" EntityType="Self.FACTURAS" Schema="OLA_K_ASE" store:Type="Tables" />
+          <EntitySet Name="FUNCIONALIDADES" EntityType="Self.FUNCIONALIDADES" Schema="OLA_K_ASE" store:Type="Tables" />
+          <EntitySet Name="FUNCIONALIDADES_ROLES" EntityType="Self.FUNCIONALIDADES_ROLES" Schema="OLA_K_ASE" store:Type="Tables" />
+          <EntitySet Name="MARCAS" EntityType="Self.MARCAS" Schema="OLA_K_ASE" store:Type="Tables" />
+          <EntitySet Name="RENDICIONES" EntityType="Self.RENDICIONES" Schema="OLA_K_ASE" store:Type="Tables" />
+          <EntitySet Name="ROLES" EntityType="Self.ROLES" Schema="OLA_K_ASE" store:Type="Tables" />
+          <EntitySet Name="ROLES_USUARIOS" EntityType="Self.ROLES_USUARIOS" Schema="OLA_K_ASE" store:Type="Tables" />
+          <EntitySet Name="TURNOS" EntityType="Self.TURNOS" Schema="OLA_K_ASE" store:Type="Tables" />
+          <EntitySet Name="USUARIOS" EntityType="Self.USUARIOS" Schema="OLA_K_ASE" store:Type="Tables" />
+          <EntitySet Name="VIAJES" EntityType="Self.VIAJES" Schema="OLA_K_ASE" store:Type="Tables" />
+          <AssociationSet Name="FK_AUTOS_CHOFERES" Association="Self.FK_AUTOS_CHOFERES">
+            <End Role="CHOFERES" EntitySet="CHOFERES" />
+            <End Role="AUTOS" EntitySet="AUTOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AUTOS_ID" Association="Self.FK_AUTOS_ID">
+            <End Role="AUTOS" EntitySet="AUTOS" />
+            <End Role="AUTOS_TURNOS" EntitySet="AUTOS_TURNOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AUTOS_MARCAS" Association="Self.FK_AUTOS_MARCAS">
+            <End Role="MARCAS" EntitySet="MARCAS" />
+            <End Role="AUTOS" EntitySet="AUTOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CHOFER_ID" Association="Self.FK_CHOFER_ID">
+            <End Role="CHOFERES" EntitySet="CHOFERES" />
+            <End Role="RENDICIONES" EntitySet="RENDICIONES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CHOFERES_USUARIOS" Association="Self.FK_CHOFERES_USUARIOS">
+            <End Role="USUARIOS" EntitySet="USUARIOS" />
+            <End Role="CHOFERES" EntitySet="CHOFERES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CLIENTE_ID" Association="Self.FK_CLIENTE_ID">
+            <End Role="CLIENTES" EntitySet="CLIENTES" />
+            <End Role="FACTURAS" EntitySet="FACTURAS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CLIENTES_USUARIOS" Association="Self.FK_CLIENTES_USUARIOS">
+            <End Role="USUARIOS" EntitySet="USUARIOS" />
+            <End Role="CLIENTES" EntitySet="CLIENTES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FUNCIONALIDADES_ID" Association="Self.FK_FUNCIONALIDADES_ID">
+            <End Role="FUNCIONALIDADES" EntitySet="FUNCIONALIDADES" />
+            <End Role="FUNCIONALIDADES_ROLES" EntitySet="FUNCIONALIDADES_ROLES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ROL_ID" Association="Self.FK_ROL_ID">
+            <End Role="ROLES" EntitySet="ROLES" />
+            <End Role="ROLES_USUARIOS" EntitySet="ROLES_USUARIOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ROLES_ID" Association="Self.FK_ROLES_ID">
+            <End Role="ROLES" EntitySet="ROLES" />
+            <End Role="FUNCIONALIDADES_ROLES" EntitySet="FUNCIONALIDADES_ROLES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TURNO_ID" Association="Self.FK_TURNO_ID">
+            <End Role="TURNOS" EntitySet="TURNOS" />
+            <End Role="AUTOS_TURNOS" EntitySet="AUTOS_TURNOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TURNOS_ID" Association="Self.FK_TURNOS_ID">
+            <End Role="TURNOS" EntitySet="TURNOS" />
+            <End Role="RENDICIONES" EntitySet="RENDICIONES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USUARIO_ID" Association="Self.FK_USUARIO_ID">
+            <End Role="USUARIOS" EntitySet="USUARIOS" />
+            <End Role="ROLES_USUARIOS" EntitySet="ROLES_USUARIOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VIAJES_AUTO_ID" Association="Self.FK_VIAJES_AUTO_ID">
+            <End Role="AUTOS" EntitySet="AUTOS" />
+            <End Role="VIAJES" EntitySet="VIAJES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VIAJES_CHOFER_ID" Association="Self.FK_VIAJES_CHOFER_ID">
+            <End Role="CHOFERES" EntitySet="CHOFERES" />
+            <End Role="VIAJES" EntitySet="VIAJES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VIAJES_CLIENTE_ID" Association="Self.FK_VIAJES_CLIENTE_ID">
+            <End Role="CLIENTES" EntitySet="CLIENTES" />
+            <End Role="VIAJES" EntitySet="VIAJES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VIAJES_FACTURA_ID" Association="Self.FK_VIAJES_FACTURA_ID">
+            <End Role="FACTURAS" EntitySet="FACTURAS" />
+            <End Role="VIAJES" EntitySet="VIAJES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VIAJES_RENDICION_ID" Association="Self.FK_VIAJES_RENDICION_ID">
+            <End Role="RENDICIONES" EntitySet="RENDICIONES" />
+            <End Role="VIAJES" EntitySet="VIAJES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VIAJES_TURNO_ID" Association="Self.FK_VIAJES_TURNO_ID">
+            <End Role="TURNOS" EntitySet="TURNOS" />
+            <End Role="VIAJES" EntitySet="VIAJES" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GD1C2017Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AUTO">
+          <Key>
+            <PropertyRef Name="ID_AUTO" />
+          </Key>
+          <Property Name="ID_AUTO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MARCA_ID" Type="Int32" Nullable="false" />
+          <Property Name="MODELO" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PATENTE" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LICENCIA" Type="String" MaxLength="26" FixedLength="false" Unicode="false" />
+          <Property Name="RODADO" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="HABILITADO" Type="Boolean" Nullable="false" />
+          <Property Name="CHOFER_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CHOFERE" Relationship="Self.FK_AUTOS_CHOFERES" FromRole="AUTOS" ToRole="CHOFERES" />
+          <NavigationProperty Name="MARCA" Relationship="Self.FK_AUTOS_MARCAS" FromRole="AUTOS" ToRole="MARCAS" />
+          <NavigationProperty Name="VIAJES" Relationship="Self.FK_VIAJES_AUTO_ID" FromRole="AUTOS" ToRole="VIAJES" />
+          <NavigationProperty Name="TURNOS" Relationship="Self.AUTOS_TURNOS" FromRole="AUTOS" ToRole="TURNOS" />
+        </EntityType>
+        <EntityType Name="CHOFERE">
+          <Key>
+            <PropertyRef Name="ID_CHOFER" />
+          </Key>
+          <Property Name="ID_CHOFER" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="APELLIDO" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DNI" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="DIRECCION" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TELEFONO" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="MAIL" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FECHA_NAC" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="USUARIO_ID" Type="Int32" />
+          <Property Name="HABILITADO" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AUTOS" Relationship="Self.FK_AUTOS_CHOFERES" FromRole="CHOFERES" ToRole="AUTOS" />
+          <NavigationProperty Name="RENDICIONES" Relationship="Self.FK_CHOFER_ID" FromRole="CHOFERES" ToRole="RENDICIONES" />
+          <NavigationProperty Name="USUARIO" Relationship="Self.FK_CHOFERES_USUARIOS" FromRole="CHOFERES" ToRole="USUARIOS" />
+          <NavigationProperty Name="VIAJES" Relationship="Self.FK_VIAJES_CHOFER_ID" FromRole="CHOFERES" ToRole="VIAJES" />
+        </EntityType>
+        <EntityType Name="CLIENTE">
+          <Key>
+            <PropertyRef Name="ID_CLIENTE" />
+          </Key>
+          <Property Name="ID_CLIENTE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="APELLIDO" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DNI" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="DIRECCION" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MAIL" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TELEFONO" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="FECHA_NAC" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="HABIILITADO" Type="Boolean" Nullable="false" />
+          <Property Name="USUARIO_ID" Type="Int32" />
+          <NavigationProperty Name="FACTURAS" Relationship="Self.FK_CLIENTE_ID" FromRole="CLIENTES" ToRole="FACTURAS" />
+          <NavigationProperty Name="USUARIO" Relationship="Self.FK_CLIENTES_USUARIOS" FromRole="CLIENTES" ToRole="USUARIOS" />
+          <NavigationProperty Name="VIAJES" Relationship="Self.FK_VIAJES_CLIENTE_ID" FromRole="CLIENTES" ToRole="VIAJES" />
+        </EntityType>
+        <EntityType Name="FACTURA">
+          <Key>
+            <PropertyRef Name="ID_FACTURA" />
+          </Key>
+          <Property Name="ID_FACTURA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CLIENTE_ID" Type="Int32" Nullable="false" />
+          <Property Name="FECHA_INICIO" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FECHA_FIN" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FECHA_FACT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IMPORTE" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="NUMERO" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <NavigationProperty Name="CLIENTE" Relationship="Self.FK_CLIENTE_ID" FromRole="FACTURAS" ToRole="CLIENTES" />
+          <NavigationProperty Name="VIAJES" Relationship="Self.FK_VIAJES_FACTURA_ID" FromRole="FACTURAS" ToRole="VIAJES" />
+        </EntityType>
+        <EntityType Name="FUNCIONALIDADE">
+          <Key>
+            <PropertyRef Name="ID_FUNC" />
+          </Key>
+          <Property Name="ID_FUNC" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ROLES" Relationship="Self.FUNCIONALIDADES_ROLES" FromRole="FUNCIONALIDADES" ToRole="ROLES" />
+        </EntityType>
+        <EntityType Name="MARCA">
+          <Key>
+            <PropertyRef Name="ID_MARCA" />
+          </Key>
+          <Property Name="ID_MARCA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="AUTOS" Relationship="Self.FK_AUTOS_MARCAS" FromRole="MARCAS" ToRole="AUTOS" />
+        </EntityType>
+        <EntityType Name="RENDICIONE">
+          <Key>
+            <PropertyRef Name="ID_RENDICION" />
+          </Key>
+          <Property Name="ID_RENDICION" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TURNO_ID" Type="Int32" Nullable="false" />
+          <Property Name="NUMERO" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="FECHA" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IMPORTE" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="CHOFER_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CHOFERE" Relationship="Self.FK_CHOFER_ID" FromRole="RENDICIONES" ToRole="CHOFERES" />
+          <NavigationProperty Name="TURNO" Relationship="Self.FK_TURNOS_ID" FromRole="RENDICIONES" ToRole="TURNOS" />
+          <NavigationProperty Name="VIAJES" Relationship="Self.FK_VIAJES_RENDICION_ID" FromRole="RENDICIONES" ToRole="VIAJES" />
+        </EntityType>
+        <EntityType Name="ROLE">
+          <Key>
+            <PropertyRef Name="ID_ROL" />
+          </Key>
+          <Property Name="ID_ROL" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="HABILITADO" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="FUNCIONALIDADES" Relationship="Self.FUNCIONALIDADES_ROLES" FromRole="ROLES" ToRole="FUNCIONALIDADES" />
+          <NavigationProperty Name="USUARIOS" Relationship="Self.ROLES_USUARIOS" FromRole="ROLES" ToRole="USUARIOS" />
+        </EntityType>
+        <EntityType Name="TURNO">
+          <Key>
+            <PropertyRef Name="ID_TURNO" />
+          </Key>
+          <Property Name="ID_TURNO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HORA_INICIO" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="HORA_FIN" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="VALOR_KM" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="PRECIO_BASE" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="HABILITADO" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="RENDICIONES" Relationship="Self.FK_TURNOS_ID" FromRole="TURNOS" ToRole="RENDICIONES" />
+          <NavigationProperty Name="VIAJES" Relationship="Self.FK_VIAJES_TURNO_ID" FromRole="TURNOS" ToRole="VIAJES" />
+          <NavigationProperty Name="AUTOS" Relationship="Self.AUTOS_TURNOS" FromRole="TURNOS" ToRole="AUTOS" />
+        </EntityType>
+        <EntityType Name="USUARIO">
+          <Key>
+            <PropertyRef Name="ID_USUARIO" />
+          </Key>
+          <Property Name="ID_USUARIO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PASSWORD" Type="Binary" MaxLength="32" FixedLength="true" Nullable="false" />
+          <Property Name="CANT_FALLAS" Type="Int16" Nullable="false" />
+          <Property Name="HABILITADO" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="CHOFERES" Relationship="Self.FK_CHOFERES_USUARIOS" FromRole="USUARIOS" ToRole="CHOFERES" />
+          <NavigationProperty Name="CLIENTES" Relationship="Self.FK_CLIENTES_USUARIOS" FromRole="USUARIOS" ToRole="CLIENTES" />
+          <NavigationProperty Name="ROLES" Relationship="Self.ROLES_USUARIOS" FromRole="USUARIOS" ToRole="ROLES" />
+        </EntityType>
+        <EntityType Name="VIAJE">
+          <Key>
+            <PropertyRef Name="ID_VIAJE" />
+          </Key>
+          <Property Name="ID_VIAJE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FECHA_INICIO" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FECHA_FIN" Type="DateTime" Precision="3" />
+          <Property Name="CANTIDAD_KM" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="CHOFER_ID" Type="Int32" Nullable="false" />
+          <Property Name="CLIENTE_ID" Type="Int32" Nullable="false" />
+          <Property Name="AUTO_ID" Type="Int32" Nullable="false" />
+          <Property Name="TURNO_ID" Type="Int32" Nullable="false" />
+          <Property Name="RENDICION_ID" Type="Int32" />
+          <Property Name="FACTURA_ID" Type="Int32" />
+          <NavigationProperty Name="AUTO" Relationship="Self.FK_VIAJES_AUTO_ID" FromRole="VIAJES" ToRole="AUTOS" />
+          <NavigationProperty Name="CHOFERE" Relationship="Self.FK_VIAJES_CHOFER_ID" FromRole="VIAJES" ToRole="CHOFERES" />
+          <NavigationProperty Name="CLIENTE" Relationship="Self.FK_VIAJES_CLIENTE_ID" FromRole="VIAJES" ToRole="CLIENTES" />
+          <NavigationProperty Name="FACTURA" Relationship="Self.FK_VIAJES_FACTURA_ID" FromRole="VIAJES" ToRole="FACTURAS" />
+          <NavigationProperty Name="RENDICIONE" Relationship="Self.FK_VIAJES_RENDICION_ID" FromRole="VIAJES" ToRole="RENDICIONES" />
+          <NavigationProperty Name="TURNO" Relationship="Self.FK_VIAJES_TURNO_ID" FromRole="VIAJES" ToRole="TURNOS" />
+        </EntityType>
+        <Association Name="FK_AUTOS_CHOFERES">
+          <End Role="CHOFERES" Type="Self.CHOFERE" Multiplicity="1" />
+          <End Role="AUTOS" Type="Self.AUTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CHOFERES">
+              <PropertyRef Name="ID_CHOFER" />
+            </Principal>
+            <Dependent Role="AUTOS">
+              <PropertyRef Name="CHOFER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AUTOS_MARCAS">
+          <End Role="MARCAS" Type="Self.MARCA" Multiplicity="1" />
+          <End Role="AUTOS" Type="Self.AUTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MARCAS">
+              <PropertyRef Name="ID_MARCA" />
+            </Principal>
+            <Dependent Role="AUTOS">
+              <PropertyRef Name="MARCA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VIAJES_AUTO_ID">
+          <End Role="AUTOS" Type="Self.AUTO" Multiplicity="1" />
+          <End Role="VIAJES" Type="Self.VIAJE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AUTOS">
+              <PropertyRef Name="ID_AUTO" />
+            </Principal>
+            <Dependent Role="VIAJES">
+              <PropertyRef Name="AUTO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CHOFER_ID">
+          <End Role="CHOFERES" Type="Self.CHOFERE" Multiplicity="1" />
+          <End Role="RENDICIONES" Type="Self.RENDICIONE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CHOFERES">
+              <PropertyRef Name="ID_CHOFER" />
+            </Principal>
+            <Dependent Role="RENDICIONES">
+              <PropertyRef Name="CHOFER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CHOFERES_USUARIOS">
+          <End Role="USUARIOS" Type="Self.USUARIO" Multiplicity="0..1" />
+          <End Role="CHOFERES" Type="Self.CHOFERE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIOS">
+              <PropertyRef Name="ID_USUARIO" />
+            </Principal>
+            <Dependent Role="CHOFERES">
+              <PropertyRef Name="USUARIO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VIAJES_CHOFER_ID">
+          <End Role="CHOFERES" Type="Self.CHOFERE" Multiplicity="1" />
+          <End Role="VIAJES" Type="Self.VIAJE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CHOFERES">
+              <PropertyRef Name="ID_CHOFER" />
+            </Principal>
+            <Dependent Role="VIAJES">
+              <PropertyRef Name="CHOFER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CLIENTE_ID">
+          <End Role="CLIENTES" Type="Self.CLIENTE" Multiplicity="1" />
+          <End Role="FACTURAS" Type="Self.FACTURA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTES">
+              <PropertyRef Name="ID_CLIENTE" />
+            </Principal>
+            <Dependent Role="FACTURAS">
+              <PropertyRef Name="CLIENTE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CLIENTES_USUARIOS">
+          <End Role="USUARIOS" Type="Self.USUARIO" Multiplicity="0..1" />
+          <End Role="CLIENTES" Type="Self.CLIENTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIOS">
+              <PropertyRef Name="ID_USUARIO" />
+            </Principal>
+            <Dependent Role="CLIENTES">
+              <PropertyRef Name="USUARIO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VIAJES_CLIENTE_ID">
+          <End Role="CLIENTES" Type="Self.CLIENTE" Multiplicity="1" />
+          <End Role="VIAJES" Type="Self.VIAJE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTES">
+              <PropertyRef Name="ID_CLIENTE" />
+            </Principal>
+            <Dependent Role="VIAJES">
+              <PropertyRef Name="CLIENTE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VIAJES_FACTURA_ID">
+          <End Role="FACTURAS" Type="Self.FACTURA" Multiplicity="0..1" />
+          <End Role="VIAJES" Type="Self.VIAJE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FACTURAS">
+              <PropertyRef Name="ID_FACTURA" />
+            </Principal>
+            <Dependent Role="VIAJES">
+              <PropertyRef Name="FACTURA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TURNOS_ID">
+          <End Role="TURNOS" Type="Self.TURNO" Multiplicity="1" />
+          <End Role="RENDICIONES" Type="Self.RENDICIONE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TURNOS">
+              <PropertyRef Name="ID_TURNO" />
+            </Principal>
+            <Dependent Role="RENDICIONES">
+              <PropertyRef Name="TURNO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VIAJES_RENDICION_ID">
+          <End Role="RENDICIONES" Type="Self.RENDICIONE" Multiplicity="0..1" />
+          <End Role="VIAJES" Type="Self.VIAJE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RENDICIONES">
+              <PropertyRef Name="ID_RENDICION" />
+            </Principal>
+            <Dependent Role="VIAJES">
+              <PropertyRef Name="RENDICION_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VIAJES_TURNO_ID">
+          <End Role="TURNOS" Type="Self.TURNO" Multiplicity="1" />
+          <End Role="VIAJES" Type="Self.VIAJE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TURNOS">
+              <PropertyRef Name="ID_TURNO" />
+            </Principal>
+            <Dependent Role="VIAJES">
+              <PropertyRef Name="TURNO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AUTOS_TURNOS">
+          <End Role="AUTOS" Type="Self.AUTO" Multiplicity="*" />
+          <End Role="TURNOS" Type="Self.TURNO" Multiplicity="*" />
+        </Association>
+        <Association Name="FUNCIONALIDADES_ROLES">
+          <End Role="FUNCIONALIDADES" Type="Self.FUNCIONALIDADE" Multiplicity="*" />
+          <End Role="ROLES" Type="Self.ROLE" Multiplicity="*" />
+        </Association>
+        <Association Name="ROLES_USUARIOS">
+          <End Role="ROLES" Type="Self.ROLE" Multiplicity="*" />
+          <End Role="USUARIOS" Type="Self.USUARIO" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="GD1C2017Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AUTOS" EntityType="Self.AUTO" />
+          <EntitySet Name="CHOFERES" EntityType="Self.CHOFERE" />
+          <EntitySet Name="CLIENTES" EntityType="Self.CLIENTE" />
+          <EntitySet Name="FACTURAS" EntityType="Self.FACTURA" />
+          <EntitySet Name="FUNCIONALIDADES" EntityType="Self.FUNCIONALIDADE" />
+          <EntitySet Name="MARCAS" EntityType="Self.MARCA" />
+          <EntitySet Name="RENDICIONES" EntityType="Self.RENDICIONE" />
+          <EntitySet Name="ROLES" EntityType="Self.ROLE" />
+          <EntitySet Name="TURNOS" EntityType="Self.TURNO" />
+          <EntitySet Name="USUARIOS" EntityType="Self.USUARIO" />
+          <EntitySet Name="VIAJES" EntityType="Self.VIAJE" />
+          <AssociationSet Name="FK_AUTOS_CHOFERES" Association="Self.FK_AUTOS_CHOFERES">
+            <End Role="CHOFERES" EntitySet="CHOFERES" />
+            <End Role="AUTOS" EntitySet="AUTOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AUTOS_MARCAS" Association="Self.FK_AUTOS_MARCAS">
+            <End Role="MARCAS" EntitySet="MARCAS" />
+            <End Role="AUTOS" EntitySet="AUTOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VIAJES_AUTO_ID" Association="Self.FK_VIAJES_AUTO_ID">
+            <End Role="AUTOS" EntitySet="AUTOS" />
+            <End Role="VIAJES" EntitySet="VIAJES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CHOFER_ID" Association="Self.FK_CHOFER_ID">
+            <End Role="CHOFERES" EntitySet="CHOFERES" />
+            <End Role="RENDICIONES" EntitySet="RENDICIONES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CHOFERES_USUARIOS" Association="Self.FK_CHOFERES_USUARIOS">
+            <End Role="USUARIOS" EntitySet="USUARIOS" />
+            <End Role="CHOFERES" EntitySet="CHOFERES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VIAJES_CHOFER_ID" Association="Self.FK_VIAJES_CHOFER_ID">
+            <End Role="CHOFERES" EntitySet="CHOFERES" />
+            <End Role="VIAJES" EntitySet="VIAJES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CLIENTE_ID" Association="Self.FK_CLIENTE_ID">
+            <End Role="CLIENTES" EntitySet="CLIENTES" />
+            <End Role="FACTURAS" EntitySet="FACTURAS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CLIENTES_USUARIOS" Association="Self.FK_CLIENTES_USUARIOS">
+            <End Role="USUARIOS" EntitySet="USUARIOS" />
+            <End Role="CLIENTES" EntitySet="CLIENTES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VIAJES_CLIENTE_ID" Association="Self.FK_VIAJES_CLIENTE_ID">
+            <End Role="CLIENTES" EntitySet="CLIENTES" />
+            <End Role="VIAJES" EntitySet="VIAJES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VIAJES_FACTURA_ID" Association="Self.FK_VIAJES_FACTURA_ID">
+            <End Role="FACTURAS" EntitySet="FACTURAS" />
+            <End Role="VIAJES" EntitySet="VIAJES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TURNOS_ID" Association="Self.FK_TURNOS_ID">
+            <End Role="TURNOS" EntitySet="TURNOS" />
+            <End Role="RENDICIONES" EntitySet="RENDICIONES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VIAJES_RENDICION_ID" Association="Self.FK_VIAJES_RENDICION_ID">
+            <End Role="RENDICIONES" EntitySet="RENDICIONES" />
+            <End Role="VIAJES" EntitySet="VIAJES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VIAJES_TURNO_ID" Association="Self.FK_VIAJES_TURNO_ID">
+            <End Role="TURNOS" EntitySet="TURNOS" />
+            <End Role="VIAJES" EntitySet="VIAJES" />
+          </AssociationSet>
+          <AssociationSet Name="AUTOS_TURNOS" Association="Self.AUTOS_TURNOS">
+            <End Role="AUTOS" EntitySet="AUTOS" />
+            <End Role="TURNOS" EntitySet="TURNOS" />
+          </AssociationSet>
+          <AssociationSet Name="FUNCIONALIDADES_ROLES" Association="Self.FUNCIONALIDADES_ROLES">
+            <End Role="FUNCIONALIDADES" EntitySet="FUNCIONALIDADES" />
+            <End Role="ROLES" EntitySet="ROLES" />
+          </AssociationSet>
+          <AssociationSet Name="ROLES_USUARIOS" Association="Self.ROLES_USUARIOS">
+            <End Role="ROLES" EntitySet="ROLES" />
+            <End Role="USUARIOS" EntitySet="USUARIOS" />
+          </AssociationSet>
+          <FunctionImport Name="insertTestTable">
+            <Parameter Name="nombre" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GD1C2017ModelStoreContainer" CdmEntityContainer="GD1C2017Entities">
+          <EntitySetMapping Name="AUTOS">
+            <EntityTypeMapping TypeName="GD1C2017Model.AUTO">
+              <MappingFragment StoreEntitySet="AUTOS">
+                <ScalarProperty Name="ID_AUTO" ColumnName="ID_AUTO" />
+                <ScalarProperty Name="MARCA_ID" ColumnName="MARCA_ID" />
+                <ScalarProperty Name="MODELO" ColumnName="MODELO" />
+                <ScalarProperty Name="PATENTE" ColumnName="PATENTE" />
+                <ScalarProperty Name="LICENCIA" ColumnName="LICENCIA" />
+                <ScalarProperty Name="RODADO" ColumnName="RODADO" />
+                <ScalarProperty Name="HABILITADO" ColumnName="HABILITADO" />
+                <ScalarProperty Name="CHOFER_ID" ColumnName="CHOFER_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CHOFERES">
+            <EntityTypeMapping TypeName="GD1C2017Model.CHOFERE">
+              <MappingFragment StoreEntitySet="CHOFERES">
+                <ScalarProperty Name="ID_CHOFER" ColumnName="ID_CHOFER" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="APELLIDO" ColumnName="APELLIDO" />
+                <ScalarProperty Name="DNI" ColumnName="DNI" />
+                <ScalarProperty Name="DIRECCION" ColumnName="DIRECCION" />
+                <ScalarProperty Name="TELEFONO" ColumnName="TELEFONO" />
+                <ScalarProperty Name="MAIL" ColumnName="MAIL" />
+                <ScalarProperty Name="FECHA_NAC" ColumnName="FECHA_NAC" />
+                <ScalarProperty Name="USUARIO_ID" ColumnName="USUARIO_ID" />
+                <ScalarProperty Name="HABILITADO" ColumnName="HABILITADO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CLIENTES">
+            <EntityTypeMapping TypeName="GD1C2017Model.CLIENTE">
+              <MappingFragment StoreEntitySet="CLIENTES">
+                <ScalarProperty Name="ID_CLIENTE" ColumnName="ID_CLIENTE" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="APELLIDO" ColumnName="APELLIDO" />
+                <ScalarProperty Name="DNI" ColumnName="DNI" />
+                <ScalarProperty Name="DIRECCION" ColumnName="DIRECCION" />
+                <ScalarProperty Name="MAIL" ColumnName="MAIL" />
+                <ScalarProperty Name="TELEFONO" ColumnName="TELEFONO" />
+                <ScalarProperty Name="FECHA_NAC" ColumnName="FECHA_NAC" />
+                <ScalarProperty Name="HABIILITADO" ColumnName="HABIILITADO" />
+                <ScalarProperty Name="USUARIO_ID" ColumnName="USUARIO_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FACTURAS">
+            <EntityTypeMapping TypeName="GD1C2017Model.FACTURA">
+              <MappingFragment StoreEntitySet="FACTURAS">
+                <ScalarProperty Name="ID_FACTURA" ColumnName="ID_FACTURA" />
+                <ScalarProperty Name="CLIENTE_ID" ColumnName="CLIENTE_ID" />
+                <ScalarProperty Name="FECHA_INICIO" ColumnName="FECHA_INICIO" />
+                <ScalarProperty Name="FECHA_FIN" ColumnName="FECHA_FIN" />
+                <ScalarProperty Name="FECHA_FACT" ColumnName="FECHA_FACT" />
+                <ScalarProperty Name="IMPORTE" ColumnName="IMPORTE" />
+                <ScalarProperty Name="NUMERO" ColumnName="NUMERO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FUNCIONALIDADES">
+            <EntityTypeMapping TypeName="GD1C2017Model.FUNCIONALIDADE">
+              <MappingFragment StoreEntitySet="FUNCIONALIDADES">
+                <ScalarProperty Name="ID_FUNC" ColumnName="ID_FUNC" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MARCAS">
+            <EntityTypeMapping TypeName="GD1C2017Model.MARCA">
+              <MappingFragment StoreEntitySet="MARCAS">
+                <ScalarProperty Name="ID_MARCA" ColumnName="ID_MARCA" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RENDICIONES">
+            <EntityTypeMapping TypeName="GD1C2017Model.RENDICIONE">
+              <MappingFragment StoreEntitySet="RENDICIONES">
+                <ScalarProperty Name="ID_RENDICION" ColumnName="ID_RENDICION" />
+                <ScalarProperty Name="TURNO_ID" ColumnName="TURNO_ID" />
+                <ScalarProperty Name="NUMERO" ColumnName="NUMERO" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="IMPORTE" ColumnName="IMPORTE" />
+                <ScalarProperty Name="CHOFER_ID" ColumnName="CHOFER_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ROLES">
+            <EntityTypeMapping TypeName="GD1C2017Model.ROLE">
+              <MappingFragment StoreEntitySet="ROLES">
+                <ScalarProperty Name="ID_ROL" ColumnName="ID_ROL" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="HABILITADO" ColumnName="HABILITADO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TURNOS">
+            <EntityTypeMapping TypeName="GD1C2017Model.TURNO">
+              <MappingFragment StoreEntitySet="TURNOS">
+                <ScalarProperty Name="ID_TURNO" ColumnName="ID_TURNO" />
+                <ScalarProperty Name="HORA_INICIO" ColumnName="HORA_INICIO" />
+                <ScalarProperty Name="HORA_FIN" ColumnName="HORA_FIN" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="VALOR_KM" ColumnName="VALOR_KM" />
+                <ScalarProperty Name="PRECIO_BASE" ColumnName="PRECIO_BASE" />
+                <ScalarProperty Name="HABILITADO" ColumnName="HABILITADO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USUARIOS">
+            <EntityTypeMapping TypeName="GD1C2017Model.USUARIO">
+              <MappingFragment StoreEntitySet="USUARIOS">
+                <ScalarProperty Name="ID_USUARIO" ColumnName="ID_USUARIO" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+                <ScalarProperty Name="CANT_FALLAS" ColumnName="CANT_FALLAS" />
+                <ScalarProperty Name="HABILITADO" ColumnName="HABILITADO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VIAJES">
+            <EntityTypeMapping TypeName="GD1C2017Model.VIAJE">
+              <MappingFragment StoreEntitySet="VIAJES">
+                <ScalarProperty Name="ID_VIAJE" ColumnName="ID_VIAJE" />
+                <ScalarProperty Name="FECHA_INICIO" ColumnName="FECHA_INICIO" />
+                <ScalarProperty Name="FECHA_FIN" ColumnName="FECHA_FIN" />
+                <ScalarProperty Name="CANTIDAD_KM" ColumnName="CANTIDAD_KM" />
+                <ScalarProperty Name="CHOFER_ID" ColumnName="CHOFER_ID" />
+                <ScalarProperty Name="CLIENTE_ID" ColumnName="CLIENTE_ID" />
+                <ScalarProperty Name="AUTO_ID" ColumnName="AUTO_ID" />
+                <ScalarProperty Name="TURNO_ID" ColumnName="TURNO_ID" />
+                <ScalarProperty Name="RENDICION_ID" ColumnName="RENDICION_ID" />
+                <ScalarProperty Name="FACTURA_ID" ColumnName="FACTURA_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AUTOS_TURNOS" TypeName="GD1C2017Model.AUTOS_TURNOS" StoreEntitySet="AUTOS_TURNOS">
+            <EndProperty Name="AUTOS">
+              <ScalarProperty Name="ID_AUTO" ColumnName="AUTO_ID" />
+            </EndProperty>
+            <EndProperty Name="TURNOS">
+              <ScalarProperty Name="ID_TURNO" ColumnName="TURNO_ID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FUNCIONALIDADES_ROLES" TypeName="GD1C2017Model.FUNCIONALIDADES_ROLES" StoreEntitySet="FUNCIONALIDADES_ROLES">
+            <EndProperty Name="FUNCIONALIDADES">
+              <ScalarProperty Name="ID_FUNC" ColumnName="FUNCIONALIDADES_ID" />
+            </EndProperty>
+            <EndProperty Name="ROLES">
+              <ScalarProperty Name="ID_ROL" ColumnName="ROLES_ID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="ROLES_USUARIOS" TypeName="GD1C2017Model.ROLES_USUARIOS" StoreEntitySet="ROLES_USUARIOS">
+            <EndProperty Name="ROLES">
+              <ScalarProperty Name="ID_ROL" ColumnName="ROLES_ID" />
+            </EndProperty>
+            <EndProperty Name="USUARIOS">
+              <ScalarProperty Name="ID_USUARIO" ColumnName="USUARIO_ID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="insertTestTable" FunctionName="GD1C2017Model.Store.insertTestTable" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
