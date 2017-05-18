@@ -115,6 +115,12 @@
     <Compile Include="MARCA.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Menu Principal\Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Menu Principal\Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Model1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

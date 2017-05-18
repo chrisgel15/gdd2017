@@ -24,7 +24,8 @@ namespace UberFrba
         {
             this.SetErrorMessage("", System.Drawing.Color.Red);
 
-            var l = new Estado();
+            var estado = new Estado();
+            int cantidadRoles;
 
             using (var dbCtx = new GD1C2017Entities())
             {
@@ -40,16 +41,36 @@ namespace UberFrba
                         this.InhabilitaUsuario(usu);
                     }
                     else
-                        this.IngresoDeUsuario(usu, l);                  
+                        this.IngresoDeUsuario(usu, estado);
                 }
                 dbCtx.SaveChanges();
-            }
 
-            if (l.Logueado)
+                cantidadRoles = usu.ROLES.Count;
+
+            }
+            if (estado.Logueado)
             {
 
-               
+                if (cantidadRoles == 0)
+                    this.SetErrorMessage("El usuario no tiene roles asignados.", System.Drawing.Color.Orange);
+
+
+                if (cantidadRoles == 1)
+                {
+                    this.Hide();
+                    new Menu_Principal.Form1().Show();
+
+                }
+
+                if (cantidadRoles > 1)
+                {
+                    this.Hide();
+                    new Seleccion_Rol.Form1().Show();
+                }
+
+
             }
+
         }
 
         private void IngresoDeUsuario(USUARIO usu, Estado l)
@@ -106,11 +127,11 @@ namespace UberFrba
     }
 
     public class Estado
-{
-    public bool Logueado { get; set; }
+    {
+        public bool Logueado { get; set; }
 
-    public USUARIO Usu { get; set; }
-}
+        public USUARIO Usu { get; set; }
+    }
 }
 
 
