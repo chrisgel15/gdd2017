@@ -20,3 +20,5 @@ C:\Users\gelmanc\Documents\Personal\Facultad\GDD\gdd2017\app\UberFrba\obj\Debug\
 C:\Users\gelmanc\Documents\Personal\Facultad\GDD\gdd2017\app\UberFrba\obj\Debug\UberFrba.csproj.GenerateResource.Cache
 C:\Users\gelmanc\Documents\Personal\Facultad\GDD\gdd2017\app\UberFrba\obj\Debug\UberFrba.exe
 C:\Users\gelmanc\Documents\Personal\Facultad\GDD\gdd2017\app\UberFrba\obj\Debug\UberFrba.pdb
+C:\Users\gelmanc\Documents\Personal\Facultad\GDD\gdd2017\app\UberFrba\obj\Debug\UberFrba.csprojResolveAssemblyReference.cache
+C:\Users\gelmanc\Documents\Personal\Facultad\GDD\gdd2017\app\UberFrba\obj\Debug\UberFrba.Abm_Automovil.Form1.resources

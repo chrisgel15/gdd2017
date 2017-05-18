@@ -24,6 +24,8 @@ namespace UberFrba
         {
             this.SetErrorMessage("", System.Drawing.Color.Red);
 
+            var l = new Estado();
+
             using (var dbCtx = new GD1C2017Entities())
             {
                 var usu = dbCtx.USUARIOS.Where(u => u.NOMBRE == this.txtUsuario.Text).FirstOrDefault();
@@ -38,16 +40,27 @@ namespace UberFrba
                         this.InhabilitaUsuario(usu);
                     }
                     else
-                        this.IngresoDeUsuario(usu);                  
+                        this.IngresoDeUsuario(usu, l);                  
                 }
                 dbCtx.SaveChanges();
             }
+
+            if (l.Logueado)
+            {
+
+               
+            }
         }
 
-        private void IngresoDeUsuario(USUARIO usu)
+        private void IngresoDeUsuario(USUARIO usu, Estado l)
         {
             if (usu.HABILITADO)
+            {
                 this.SetErrorMessage("Bienvenido!", System.Drawing.Color.Blue);
+                usu.CANT_FALLAS = 0;
+                l.Logueado = true;
+                l.Usu = usu;
+            }
             else
                 this.SetErrorMessage("Usuario Inhabilitado.", System.Drawing.Color.Red);
         }
@@ -91,4 +104,13 @@ namespace UberFrba
         }
 
     }
+
+    public class Estado
+{
+    public bool Logueado { get; set; }
+
+    public USUARIO Usu { get; set; }
 }
+}
+
+
