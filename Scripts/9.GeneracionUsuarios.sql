@@ -39,7 +39,7 @@ declare @id_usuarioCL int
 declare @nombre_usuarioCL varchar(50)
 
 set @cantidad_usuariosCL = (select count(*) from OLA_K_ASE.USUARIOS)
-set @contadorCL = (select max(id_usuario) from OLA_K_ASE.USUARIOS)+1
+set @contadorCL = (select count(*) from OLA_K_ASE.choferes)+1
 
 while @contadorCL <= @cantidad_usuariosCL
 begin
