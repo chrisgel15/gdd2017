@@ -53,6 +53,13 @@ set @contadorCL = @contadorCL + 1
 
 end
 
+-- CARGA USUARIO ADMIN
+
+begin
+insert into OLA_K_ASE.USUARIOS(NOMBRE, PASSWORD, CANT_FALLAS)
+values ('admin', HashBytes('SHA2_256',convert(varchar(255), 'w23e')),0)
+end
+
 
 end;
 
