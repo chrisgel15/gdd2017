@@ -17,15 +17,24 @@ namespace UberFrba
         public Form1()
         {
             InitializeComponent();
+            InitializeErrorProviders();
         }
 
+        private void InitializeErrorProviders()
+        {
+            errorProvider1.SetError(this.txtUsuario, String.Empty);
+            errorProvider1.SetError(this.txtPassword, String.Empty);
+        }
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
+            if (!ControlsValid())
+                return;
+
             this.SetErrorMessage("", System.Drawing.Color.Red);
 
             var estado = new Estado();
-            int cantidadRoles;
+            int cantidadRoles = 0;
 
             using (var dbCtx = new GD1C2017Entities())
             {
@@ -42,10 +51,12 @@ namespace UberFrba
                     }
                     else
                         this.IngresoDeUsuario(usu, estado);
+
+                    cantidadRoles = usu.ROLES.Count;
                 }
                 dbCtx.SaveChanges();
 
-                cantidadRoles = usu.ROLES.Count;
+              
 
             }
             if (estado.Logueado)
@@ -122,6 +133,27 @@ namespace UberFrba
         {
             this.lblError.Text = msg;
             this.lblError.ForeColor = color;
+        }
+
+        private void txtUsuario_Validated(object sender, EventArgs e)
+        {
+            if (String.IsNullOrEmpty(txtUsuario.Text))
+                errorProvider1.SetError(this.txtUsuario, "El usuario es requerido");
+            else
+                errorProvider1.SetError(this.txtUsuario, String.Empty);
+
+            if (String.IsNullOrEmpty(txtPassword.Text))
+                errorProvider1.SetError(this.txtPassword, "El password es requerido");
+            else
+                errorProvider1.SetError(this.txtPassword, String.Empty);
+
+           
+
+        }
+
+        private bool ControlsValid()
+        {
+            return !String.IsNullOrEmpty(txtUsuario.Text) && !String.IsNullOrEmpty(txtPassword.Text);
         }
 
     }
