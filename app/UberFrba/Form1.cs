@@ -14,10 +14,17 @@ namespace UberFrba
 {
     public partial class Form1 : Form
     {
+        Estado estado;
+      
+
         public Form1()
         {
             InitializeComponent();
             InitializeErrorProviders();
+            estado = new Estado();
+            estado.Logueado = false;
+            estado.IdUsuario = 0;
+            estado.IdRol = 0;
         }
 
         private void InitializeErrorProviders()
@@ -33,9 +40,6 @@ namespace UberFrba
 
             this.SetErrorMessage("", System.Drawing.Color.Red);
 
-            var estado = new Estado();
-            int cantidadRoles = 0;
-
             using (var dbCtx = new GD1C2017Entities())
             {
                 var usu = dbCtx.USUARIOS.Where(u => u.NOMBRE == this.txtUsuario.Text).FirstOrDefault();
@@ -50,9 +54,12 @@ namespace UberFrba
                         this.InhabilitaUsuario(usu);
                     }
                     else
-                        this.IngresoDeUsuario(usu, estado);
+                        this.IngresoDeUsuario(usu);
 
-                    cantidadRoles = usu.ROLES.Count;
+                    estado.CantidadRoles = usu.ROLES.Count;
+
+                    if (estado.CantidadRoles == 1)
+                        estado.IdRol = usu.ROLES.FirstOrDefault().ID_ROL;
                 }
                 dbCtx.SaveChanges();
 
@@ -62,21 +69,21 @@ namespace UberFrba
             if (estado.Logueado)
             {
 
-                if (cantidadRoles == 0)
+                if (estado.CantidadRoles == 0)
                     this.SetErrorMessage("El usuario no tiene roles asignados.", System.Drawing.Color.Orange);
 
 
-                if (cantidadRoles == 1)
+                if (estado.CantidadRoles == 1)
                 {
                     this.Hide();
-                    new Menu_Principal.Form1().Show();
+                    new Menu_Principal.Form1(estado).Show();
 
                 }
 
-                if (cantidadRoles > 1)
+                if (estado.CantidadRoles > 1)
                 {
                     this.Hide();
-                    new Seleccion_Rol.Form1().Show();
+                    new Seleccion_Rol.Form1(estado).Show();
                 }
 
 
@@ -84,14 +91,14 @@ namespace UberFrba
 
         }
 
-        private void IngresoDeUsuario(USUARIO usu, Estado l)
+        private void IngresoDeUsuario(USUARIO usu)
         {
             if (usu.HABILITADO)
             {
                 this.SetErrorMessage("Bienvenido!", System.Drawing.Color.Blue);
                 usu.CANT_FALLAS = 0;
-                l.Logueado = true;
-                l.Usu = usu;
+                this.estado.Logueado = true;
+                this.estado.IdUsuario = usu.ID_USUARIO;
             }
             else
                 this.SetErrorMessage("Usuario Inhabilitado.", System.Drawing.Color.Red);
@@ -160,9 +167,18 @@ namespace UberFrba
 
     public class Estado
     {
+        #region Propiedades
         public bool Logueado { get; set; }
 
-        public USUARIO Usu { get; set; }
+        public int IdUsuario { get; set; }
+
+        public int IdRol { get; set; }
+
+        public int CantidadRoles { get; set; }
+
+        public Menu_Principal.Form1 Menu { get; set; }
+        #endregion
+
     }
 }
 
