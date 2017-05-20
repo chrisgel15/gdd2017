@@ -24,6 +24,7 @@ namespace UberFrba.Abm_Rol
             InitializeComponent();
             this.idRol = r;
             CargaNombre();
+            this.label1.Text = String.Empty;
         }
 
         private void CargaNombre()
@@ -39,11 +40,12 @@ namespace UberFrba.Abm_Rol
 
         private void button1_Click(object sender, EventArgs e)
         {
+            this.label1.Text = String.Empty;
             var nuevoNombre = this.textBox1.Text;
 
             if (String.IsNullOrEmpty(nuevoNombre))
             {
-                // El nombre no puede ser vacio
+                this.label1.Text = "El nombre no puede ser vacio";
                 return;
             }
 
@@ -53,17 +55,18 @@ namespace UberFrba.Abm_Rol
                 var rol = dbCtx.ROLES.Where(r => r.ID_ROL == this.idRol).FirstOrDefault();
 
                 if (!dbCtx.ROLES.Any(r => r.NOMBRE == nuevoNombre && r.ID_ROL != this.idRol))
+                {
                     rol.NOMBRE = nuevoNombre;
+                    this.label1.Text = "El nombre del rol fue modificado correctamente.";
+                }
                 else
                 {
-                    // Mensaje: Ya existe uno con ese nombre
+                    this.label1.Text = "Ya existe un rol con ese nombre";
                 }
 
                 dbCtx.SaveChanges();
 
             }
-
-            this.Close();
 
 
         }

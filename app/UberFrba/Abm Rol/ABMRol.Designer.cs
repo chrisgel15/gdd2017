@@ -32,19 +32,21 @@
             this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
             this.altaAceptar = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.altaRol = new System.Windows.Forms.TextBox();
+            this.txtAltaRol = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.modifHabRol = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.modifCambFunc = new System.Windows.Forms.Button();
-            this.modifAgregarRol = new System.Windows.Forms.Button();
             this.modifCambiarRol = new System.Windows.Forms.Button();
             this.modifRol = new System.Windows.Forms.ComboBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.bajaDeshabRol = new System.Windows.Forms.Button();
             this.bajaRol = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.lblAlta = new System.Windows.Forms.Label();
+            this.lblModif = new System.Windows.Forms.Label();
+            this.lblBaja = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -52,14 +54,15 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.lblAlta);
             this.groupBox1.Controls.Add(this.checkedListBox1);
             this.groupBox1.Controls.Add(this.altaAceptar);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.altaRol);
+            this.groupBox1.Controls.Add(this.txtAltaRol);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(22, 29);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(412, 235);
+            this.groupBox1.Size = new System.Drawing.Size(412, 271);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "ALTA";
@@ -80,6 +83,7 @@
             this.altaAceptar.TabIndex = 4;
             this.altaAceptar.Text = "Aceptar";
             this.altaAceptar.UseVisualStyleBackColor = true;
+            this.altaAceptar.Click += new System.EventHandler(this.altaAceptar_Click);
             // 
             // label2
             // 
@@ -90,12 +94,12 @@
             this.label2.TabIndex = 3;
             this.label2.Text = "Funcionalidades";
             // 
-            // altaRol
+            // txtAltaRol
             // 
-            this.altaRol.Location = new System.Drawing.Point(6, 36);
-            this.altaRol.Name = "altaRol";
-            this.altaRol.Size = new System.Drawing.Size(100, 20);
-            this.altaRol.TabIndex = 1;
+            this.txtAltaRol.Location = new System.Drawing.Point(6, 36);
+            this.txtAltaRol.Name = "txtAltaRol";
+            this.txtAltaRol.Size = new System.Drawing.Size(100, 20);
+            this.txtAltaRol.TabIndex = 1;
             // 
             // label1
             // 
@@ -108,27 +112,28 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.lblModif);
             this.groupBox2.Controls.Add(this.modifHabRol);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.modifCambFunc);
-            this.groupBox2.Controls.Add(this.modifAgregarRol);
             this.groupBox2.Controls.Add(this.modifCambiarRol);
             this.groupBox2.Controls.Add(this.modifRol);
             this.groupBox2.Location = new System.Drawing.Point(22, 321);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(355, 152);
+            this.groupBox2.Size = new System.Drawing.Size(412, 152);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "MODIFICACIÓN";
             // 
             // modifHabRol
             // 
-            this.modifHabRol.Location = new System.Drawing.Point(187, 105);
+            this.modifHabRol.Location = new System.Drawing.Point(187, 77);
             this.modifHabRol.Name = "modifHabRol";
             this.modifHabRol.Size = new System.Drawing.Size(140, 25);
             this.modifHabRol.TabIndex = 5;
             this.modifHabRol.Text = "Habilitar Rol";
             this.modifHabRol.UseVisualStyleBackColor = true;
+            this.modifHabRol.Click += new System.EventHandler(this.modifHabRol_Click);
             // 
             // label3
             // 
@@ -141,21 +146,13 @@
             // 
             // modifCambFunc
             // 
-            this.modifCambFunc.Location = new System.Drawing.Point(187, 76);
+            this.modifCambFunc.Location = new System.Drawing.Point(187, 48);
             this.modifCambFunc.Name = "modifCambFunc";
             this.modifCambFunc.Size = new System.Drawing.Size(140, 23);
             this.modifCambFunc.TabIndex = 3;
             this.modifCambFunc.Text = "Cambiar Funcionalidades";
             this.modifCambFunc.UseVisualStyleBackColor = true;
-            // 
-            // modifAgregarRol
-            // 
-            this.modifAgregarRol.Location = new System.Drawing.Point(187, 47);
-            this.modifAgregarRol.Name = "modifAgregarRol";
-            this.modifAgregarRol.Size = new System.Drawing.Size(140, 23);
-            this.modifAgregarRol.TabIndex = 2;
-            this.modifAgregarRol.Text = "Agregar Rol";
-            this.modifAgregarRol.UseVisualStyleBackColor = true;
+            this.modifCambFunc.Click += new System.EventHandler(this.modifCambFunc_Click);
             // 
             // modifCambiarRol
             // 
@@ -178,12 +175,13 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.lblBaja);
             this.groupBox3.Controls.Add(this.bajaDeshabRol);
             this.groupBox3.Controls.Add(this.bajaRol);
             this.groupBox3.Controls.Add(this.label4);
             this.groupBox3.Location = new System.Drawing.Point(22, 479);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(292, 100);
+            this.groupBox3.Size = new System.Drawing.Size(412, 117);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "BAJA";
@@ -196,9 +194,11 @@
             this.bajaDeshabRol.TabIndex = 2;
             this.bajaDeshabRol.Text = "Deshabilitar Rol";
             this.bajaDeshabRol.UseVisualStyleBackColor = true;
+            this.bajaDeshabRol.Click += new System.EventHandler(this.bajaDeshabRol_Click);
             // 
             // bajaRol
             // 
+            this.bajaRol.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.bajaRol.FormattingEnabled = true;
             this.bajaRol.Location = new System.Drawing.Point(6, 37);
             this.bajaRol.Name = "bajaRol";
@@ -213,6 +213,33 @@
             this.label4.Size = new System.Drawing.Size(29, 13);
             this.label4.TabIndex = 0;
             this.label4.Text = "ROL";
+            // 
+            // lblAlta
+            // 
+            this.lblAlta.AutoSize = true;
+            this.lblAlta.Location = new System.Drawing.Point(22, 241);
+            this.lblAlta.Name = "lblAlta";
+            this.lblAlta.Size = new System.Drawing.Size(35, 13);
+            this.lblAlta.TabIndex = 3;
+            this.lblAlta.Text = "lblAlta";
+            // 
+            // lblModif
+            // 
+            this.lblModif.AutoSize = true;
+            this.lblModif.Location = new System.Drawing.Point(22, 121);
+            this.lblModif.Name = "lblModif";
+            this.lblModif.Size = new System.Drawing.Size(43, 13);
+            this.lblModif.TabIndex = 6;
+            this.lblModif.Text = "lblModif";
+            // 
+            // lblBaja
+            // 
+            this.lblBaja.AutoSize = true;
+            this.lblBaja.Location = new System.Drawing.Point(25, 81);
+            this.lblBaja.Name = "lblBaja";
+            this.lblBaja.Size = new System.Drawing.Size(38, 13);
+            this.lblBaja.TabIndex = 3;
+            this.lblBaja.Text = "lblBaja";
             // 
             // ABMRol
             // 
@@ -239,12 +266,11 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button altaAceptar;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox altaRol;
+        private System.Windows.Forms.TextBox txtAltaRol;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button modifCambFunc;
-        private System.Windows.Forms.Button modifAgregarRol;
         private System.Windows.Forms.Button modifCambiarRol;
         private System.Windows.Forms.ComboBox modifRol;
         private System.Windows.Forms.Button modifHabRol;
@@ -253,5 +279,8 @@
         private System.Windows.Forms.ComboBox bajaRol;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.CheckedListBox checkedListBox1;
+        private System.Windows.Forms.Label lblAlta;
+        private System.Windows.Forms.Label lblModif;
+        private System.Windows.Forms.Label lblBaja;
     }
 }

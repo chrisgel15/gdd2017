@@ -79,6 +79,12 @@
     <Compile Include="Abm Rol\ABMRol.Designer.cs">
       <DependentUpon>ABMRol.cs</DependentUpon>
     </Compile>
+    <Compile Include="Abm Rol\ModificaFuncionalidades.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Rol\ModificaFuncionalidades.Designer.cs">
+      <DependentUpon>ModificaFuncionalidades.cs</DependentUpon>
+    </Compile>
     <Compile Include="Abm Rol\ModificaNombre.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -182,6 +188,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Rol\ABMRol.resx">
       <DependentUpon>ABMRol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Rol\ModificaFuncionalidades.resx">
+      <DependentUpon>ModificaFuncionalidades.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Rol\ModificaNombre.resx">
       <DependentUpon>ModificaNombre.cs</DependentUpon>
