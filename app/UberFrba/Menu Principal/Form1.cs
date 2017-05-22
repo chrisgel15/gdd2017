@@ -64,6 +64,18 @@ namespace UberFrba.Menu_Principal
             new Abm_Rol.ABMRol(this.Estado).ShowDialog();
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Estado.Menu = this;
+            new Abm_ChoferCliente.FormChoferCliente(new Chofer()).Show();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            this.Estado.Menu = this;
+            new Abm_ChoferCliente.FormChoferCliente(new Clients()).Show();
+        }
+
         
        
     }
