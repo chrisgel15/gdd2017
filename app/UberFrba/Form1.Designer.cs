@@ -55,7 +55,6 @@
             this.txtUsuario.Name = "txtUsuario";
             this.txtUsuario.Size = new System.Drawing.Size(100, 20);
             this.txtUsuario.TabIndex = 1;
-            this.txtUsuario.Validated += new System.EventHandler(this.txtUsuario_Validated);
             // 
             // label2
             // 
@@ -73,7 +72,6 @@
             this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(100, 20);
             this.txtPassword.TabIndex = 3;
-            this.txtPassword.Validated += new System.EventHandler(this.txtUsuario_Validated);
             // 
             // btnLogin
             // 
@@ -105,6 +103,7 @@
             // 
             // errorProvider1
             // 
+            this.errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errorProvider1.ContainerControl = this;
             // 
             // Form1
@@ -112,6 +111,8 @@
             this.AcceptButton = this.btnLogin;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.CausesValidation = false;
             this.ClientSize = new System.Drawing.Size(483, 315);
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.label3);

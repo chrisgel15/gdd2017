@@ -64,6 +64,7 @@ namespace UberFrba.Abm_Rol
                 foreach (object o in this.checkedListBox1.CheckedItems)
                 {
                     FUNCIONALIDADE f = (FUNCIONALIDADE)o;
+                    rol.FUNCIONALIDADES.Add(f);
                     rol.FUNCIONALIDADES.Add(dbCtx.FUNCIONALIDADES.Where(fun => fun.ID_FUNC == f.ID_FUNC).FirstOrDefault());
                 }
 

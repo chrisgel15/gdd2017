@@ -15,7 +15,7 @@ namespace UberFrba
     public partial class Form1 : Form
     {
         Estado estado;
-      
+
 
         public Form1()
         {
@@ -48,7 +48,7 @@ namespace UberFrba
                     this.SetErrorMessage("El usuario no existe", System.Drawing.Color.Black);
                 else
                 {
-                    if (!usu.PASSWORD.SequenceEqual(SHA256Encrypt(this.txtPassword.Text)))
+                   if (!usu.PASSWORD.SequenceEqual(UserGenerator.SHA256Encrypt(this.txtPassword.Text)))
                     {
                         this.AgregaCantidadFallas(usu);
                         this.InhabilitaUsuario(usu);
@@ -63,7 +63,7 @@ namespace UberFrba
                 }
                 dbCtx.SaveChanges();
 
-              
+
 
             }
             if (estado.Logueado)
@@ -126,15 +126,7 @@ namespace UberFrba
             usu.CANT_FALLAS++;
         }
 
-        public byte[] SHA256Encrypt(string input)
-        {
-            SHA256CryptoServiceProvider provider = new SHA256CryptoServiceProvider();
-
-            byte[] inputBytes = Encoding.UTF8.GetBytes(input);
-            byte[] hashedBytes = provider.ComputeHash(inputBytes);
-
-            return hashedBytes;
-        }
+   
 
         private void SetErrorMessage(string msg, System.Drawing.Color color)
         {
@@ -142,27 +134,34 @@ namespace UberFrba
             this.lblError.ForeColor = color;
         }
 
-        private void txtUsuario_Validated(object sender, EventArgs e)
+
+
+        private bool ControlsValid()
         {
-            if (String.IsNullOrEmpty(txtUsuario.Text))
-                errorProvider1.SetError(this.txtUsuario, "El usuario es requerido");
+            bool isValidUsu = false;
+            bool isValidPass = false;
+
+            if (String.IsNullOrEmpty(txtUsuario.Text))            
+                errorProvider1.SetError(this.txtUsuario, "El usuario es requerido");             
             else
+            {
                 errorProvider1.SetError(this.txtUsuario, String.Empty);
+                isValidUsu = true;
+            }
 
             if (String.IsNullOrEmpty(txtPassword.Text))
                 errorProvider1.SetError(this.txtPassword, "El password es requerido");
             else
+            {
                 errorProvider1.SetError(this.txtPassword, String.Empty);
+                isValidPass = true;
+            }
+            //return !String.IsNullOrEmpty(txtUsuario.Text) && !String.IsNullOrEmpty(txtPassword.Text);
 
-           
-
+            return isValidUsu && isValidPass;
         }
 
-        private bool ControlsValid()
-        {
-            return !String.IsNullOrEmpty(txtUsuario.Text) && !String.IsNullOrEmpty(txtPassword.Text);
-        }
-
+       
     }
 
     public class Estado

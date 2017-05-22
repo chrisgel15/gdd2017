@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="GD1C2017Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="GD1C2017Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AUTOS">
           <Key>
             <PropertyRef Name="ID_AUTO" />
@@ -50,11 +50,12 @@
           <Property Name="APELLIDO" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="DNI" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="DIRECCION" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="MAIL" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="MAIL" Type="varchar" MaxLength="255" />
           <Property Name="TELEFONO" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="FECHA_NAC" Type="datetime" Nullable="false" />
           <Property Name="HABIILITADO" Type="bit" Nullable="false" />
           <Property Name="USUARIO_ID" Type="int" />
+          <Property Name="COD_POSTAL" Type="int" />
         </EntityType>
         <EntityType Name="FACTURAS">
           <Key>
@@ -477,8 +478,7 @@
             <End Role="VIAJES" EntitySet="VIAJES" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="GD1C2017Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -527,7 +527,7 @@
           <Property Name="APELLIDO" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="DNI" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="DIRECCION" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="MAIL" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MAIL" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="TELEFONO" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="FECHA_NAC" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="HABIILITADO" Type="Boolean" Nullable="false" />
@@ -535,6 +535,7 @@
           <NavigationProperty Name="FACTURAS" Relationship="Self.FK_CLIENTE_ID" FromRole="CLIENTES" ToRole="FACTURAS" />
           <NavigationProperty Name="USUARIO" Relationship="Self.FK_CLIENTES_USUARIOS" FromRole="CLIENTES" ToRole="USUARIOS" />
           <NavigationProperty Name="VIAJES" Relationship="Self.FK_VIAJES_CLIENTE_ID" FromRole="CLIENTES" ToRole="VIAJES" />
+          <Property Name="COD_POSTAL" Type="Int32" />
         </EntityType>
         <EntityType Name="FACTURA">
           <Key>
@@ -884,7 +885,7 @@
             <End Role="USUARIOS" EntitySet="USUARIOS" />
           </AssociationSet>
           <FunctionImport Name="insertTestTable">
-            <Parameter Name="nombre" Mode="In" Type="String" />
+          <Parameter Name="nombre" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
       </Schema>
@@ -926,6 +927,7 @@
           <EntitySetMapping Name="CLIENTES">
             <EntityTypeMapping TypeName="GD1C2017Model.CLIENTE">
               <MappingFragment StoreEntitySet="CLIENTES">
+                <ScalarProperty Name="COD_POSTAL" ColumnName="COD_POSTAL" />
                 <ScalarProperty Name="ID_CLIENTE" ColumnName="ID_CLIENTE" />
                 <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
                 <ScalarProperty Name="APELLIDO" ColumnName="APELLIDO" />
