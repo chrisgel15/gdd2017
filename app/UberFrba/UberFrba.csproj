@@ -55,6 +55,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abm Automovil\Alta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Automovil\Alta.Designer.cs">
+      <DependentUpon>Alta.cs</DependentUpon>
+    </Compile>
     <Compile Include="Abm Automovil\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -183,6 +189,9 @@
     <Compile Include="VIAJE.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Abm Automovil\Alta.resx">
+      <DependentUpon>Alta.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Abm Automovil\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

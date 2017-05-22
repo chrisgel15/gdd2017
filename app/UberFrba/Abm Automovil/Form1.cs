@@ -13,6 +13,7 @@ namespace UberFrba.Abm_Automovil
     public partial class Form1 : Form
     {
         private UberFrba.Form1 form1;
+        private UberFrba.Abm_Automovil.Alta formAlta;
 
         public Form1()
         {
@@ -26,9 +27,12 @@ namespace UberFrba.Abm_Automovil
             this.form1 = form1;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void altaAuto_Click(object sender, EventArgs e)
         {
-            this.form1.Close();
+            formAlta = new Abm_Automovil.Alta();
+            formAlta.Show();
         }
+
+        
     }
 }
