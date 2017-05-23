@@ -43,11 +43,12 @@ namespace UberFrba
                 };
                
              
-                if (dbCtx.CHOFERES.Any(c => c.DNI == cho.DNI))
-                    throw new ExisteClienteException("Ya existe un cliente con el mismo TELEFONO");
+                // TODO: Esta restriccion es solo para CLIENTES ???
+                //if (dbCtx.CHOFERES.Any(c => c.DNI == cho.DNI))
+                //    throw new ExisteClienteException("Ya existe un chofer con el mismo TELEFONO");
+                
+                
                 // Crear el usuario correspondiente.
-
-
                 Random r;
                 bool usuarioInexistente = true;
                 string nombreUsuario = String.Empty;
@@ -91,10 +92,13 @@ namespace UberFrba
         #region Busqueda y modificacion
         public IList<GridData> Buscar(string busqueda)
         {
+            decimal dni = 0;
+            decimal.TryParse(busqueda, out dni);
             using (var dbCtx = new GD1C2017Entities())
             {
-                var choferes = dbCtx.CHOFERES.Where(c => c.NOMBRE.Contains(busqueda)).Select(o =>
-                    new GridData { idCliente = o.ID_CHOFER, nombre = o.NOMBRE, apellido = o.APELLIDO, dni = o.DNI }).ToList();
+                var choferes = dbCtx.CHOFERES.Where(c => c.NOMBRE.Contains(busqueda)
+                                        || c.APELLIDO.Contains(busqueda) || c.DNI == dni).Select(o =>
+                    new GridData { id = o.ID_CHOFER, nombre = o.NOMBRE, apellido = o.APELLIDO, dni = o.DNI, habilitado = o.HABILITADO }).ToList();
 
 
                 return choferes;
@@ -115,6 +119,17 @@ namespace UberFrba
 
 
 
-      
+
+
+
+        public void Habilitar(int id)
+        {
+           using (var dbCtx = new GD1C2017Entities())
+           {
+               var chof = dbCtx.CHOFERES.First(ch => ch.ID_CHOFER == id);
+               chof.HABILITADO = !chof.HABILITADO;
+               dbCtx.SaveChanges();
+           }
+        }
     }
 }

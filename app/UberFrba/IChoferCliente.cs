@@ -28,6 +28,8 @@ namespace UberFrba
         void Actualizar(int p);
 
 
-        
+
+
+        void Habilitar(int id);
     }
 }

@@ -93,10 +93,13 @@ namespace UberFrba
         public IList<GridData> Buscar(string busqueda)
         {
 
+            decimal dni = 0;
+            decimal.TryParse(busqueda, out dni);
             using (var dbCtx = new GD1C2017Entities())
             {
-                var clientes = dbCtx.CLIENTES.Where(c => c.NOMBRE.Contains(busqueda)).Select(o =>
-                    new GridData { idCliente = o.ID_CLIENTE, nombre = o.NOMBRE, apellido = o.APELLIDO, dni = o.DNI }).ToList();
+                var clientes = dbCtx.CLIENTES.Where(c => c.NOMBRE.Contains(busqueda) 
+                                                        || c.APELLIDO.Contains(busqueda) || c.DNI == dni).Select(o =>
+                    new GridData { id = o.ID_CLIENTE, nombre = o.NOMBRE, apellido = o.APELLIDO, dni = o.DNI, habilitado = o.HABIILITADO }).ToList();
 
 
                 return clientes;
@@ -116,15 +119,28 @@ namespace UberFrba
 
 
 
+
+
+        public void Habilitar(int id)
+        {
+            using (var dbCtx = new GD1C2017Entities())
+            {
+                var cli = dbCtx.CLIENTES.First(cl => cl.ID_CLIENTE == id);
+                cli.HABIILITADO = !cli.HABIILITADO;
+                dbCtx.SaveChanges();
+            }
+        }
     }
 
     public class GridData
     {
-        public int idCliente { get; set; }
+        public int id { get; set; }
         public string nombre { get; set; }
         public string apellido { get; set; }
 
         public decimal dni { get; set; }
+
+        public bool habilitado { get; set; }
     }
 
     public class UserGenerator

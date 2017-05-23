@@ -56,8 +56,7 @@ namespace UberFrba.Abm_ChoferCliente
             try
             {
                 var nombreUsuarioCreado = this.choferCliente.Alta(nombre, apellido, dni, mail, direccion, codigoPostal, fechaNac, telefono);
-                this.lblError.Text = "El alta de " + this.choferCliente.Tipo + " ha sido exitosa. El usuario creado es "
-                        + nombreUsuarioCreado;
+                this.lblError.Text = "El alta de " + this.choferCliente.Tipo + " ha sido exitosa. User: " + nombreUsuarioCreado + " Pass: " + nombreUsuarioCreado;
                 this.LimpiaControles();
             }
             catch (ExisteClienteException ex)
