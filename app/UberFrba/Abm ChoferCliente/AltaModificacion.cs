@@ -33,7 +33,8 @@ namespace UberFrba.Abm_ChoferCliente
             LimpiaControles();
             this.choferCliente = c;
             this.groupBox1.Text = c.Tipo;
-            this.txtCodPostal.Enabled = c.HabilitarCodigoPostal;
+            this.txtCodPostal.Visible = c.HabilitarCodigoPostal;
+            this.txtCodPostal.Text = c.HabilitarCodigoPostal ? String.Empty : "0";
         }
 
         #endregion

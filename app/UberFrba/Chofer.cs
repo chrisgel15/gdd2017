@@ -47,11 +47,36 @@ namespace UberFrba
                     throw new ExisteClienteException("Ya existe un cliente con el mismo TELEFONO");
                 // Crear el usuario correspondiente.
 
+
+                Random r;
+                bool usuarioInexistente = true;
+                string nombreUsuario = String.Empty;
+
+                while (usuarioInexistente)
+                {
+                    r = new Random(DateTime.Now.Second);
+                    nombreUsuario = UserGenerator.GenerateLowerCaseString(r);
+                    usuarioInexistente = dbCtx.USUARIOS.Any(u => u.NOMBRE == nombreUsuario);
+                }
+
+
+                USUARIO usu = new USUARIO()
+                {
+                    CANT_FALLAS = 0,
+                    HABILITADO = true,
+                    NOMBRE = nombreUsuario,
+                    PASSWORD = UserGenerator.SHA256Encrypt(nombreUsuario),
+                    ROLES = dbCtx.ROLES.Where(rol => rol.NOMBRE.ToLower().Contains("chofer")).Take(1).ToList()
+                };
+
+                usu.CHOFERES.Add(cho);
+                dbCtx.CHOFERES.Add(cho);
+                dbCtx.USUARIOS.Add(usu);       
                 dbCtx.CHOFERES.Add(cho);
 
                 dbCtx.SaveChanges();
 
-                return "";
+                return nombreUsuario;
 
             }
         }

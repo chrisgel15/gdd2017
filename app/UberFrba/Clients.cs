@@ -69,14 +69,14 @@ namespace UberFrba
                     CANT_FALLAS = 0,
                     HABILITADO = true,
                     NOMBRE = nombreUsuario,
-                    PASSWORD = UserGenerator.SHA256Encrypt(nombreUsuario)
+                    PASSWORD = UserGenerator.SHA256Encrypt(nombreUsuario),
+                    ROLES = dbCtx.ROLES.Where(rol => rol.NOMBRE.ToLower().Contains("cliente")).Take(1).ToList()
                 };
                 
                 usu.CLIENTES.Add(cli);
                 dbCtx.CLIENTES.Add(cli);
-                dbCtx.USUARIOS.Add(usu);
+                dbCtx.USUARIOS.Add(usu);              
                 
-
                 dbCtx.SaveChanges();
 
                 return nombreUsuario;
