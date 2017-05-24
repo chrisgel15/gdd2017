@@ -5,6 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using UberFrba.Abm_ChoferCliente;
 
 namespace UberFrba
 {
@@ -26,22 +27,27 @@ namespace UberFrba
             new Abm_ChoferCliente.AltaModificacion(this).ShowDialog();
         }
 
-        public string Alta(string nombre, string apellido, int dni, string mail, string direccion, int codPostal, DateTime fechaNac, int telefono)
+        public void AbrirFormActualizar(int id)
+        {
+            new Abm_ChoferCliente.AltaModificacion(this, id).ShowDialog();
+        }
+
+        public string Alta(AltaModificacionData altaData)
         {
 
             using (var dbCtx = new GD1C2017Entities())
             {
                 CLIENTE cli = new CLIENTE()
                 {
-                    NOMBRE = nombre,
-                    APELLIDO = apellido,
-                    DNI = dni,
-                    MAIL = String.IsNullOrEmpty(mail) ? null : mail,
+                    NOMBRE = altaData.nombre,
+                    APELLIDO = altaData.apellido,
+                    DNI = altaData.dni,
+                    MAIL = String.IsNullOrEmpty(altaData.mail) ? null : altaData.mail,
                     HABIILITADO = true,
-                    TELEFONO = telefono,
-                    DIRECCION = direccion,
-                    FECHA_NAC = fechaNac,
-                    COD_POSTAL = codPostal
+                    TELEFONO = altaData.telefono,
+                    DIRECCION = altaData.direccion,
+                    FECHA_NAC = altaData.fechaNac,
+                    COD_POSTAL = altaData.codigoPostal
                 };
 
 
@@ -129,6 +135,32 @@ namespace UberFrba
                 cli.HABIILITADO = !cli.HABIILITADO;
                 dbCtx.SaveChanges();
             }
+        }
+
+
+
+
+
+        public AltaModificacionData CompletaCamposActualizar(int id)
+        {
+            CLIENTE cliente;
+
+            using (var dbCtx = new GD1C2017Entities())
+            {
+                cliente = dbCtx.CLIENTES.First(c => c.ID_CLIENTE == id);
+            }
+
+            return new AltaModificacionData()
+            {
+                nombre = cliente.NOMBRE,
+                apellido = cliente.APELLIDO,
+                dni = (int)cliente.DNI,
+                mail = cliente.MAIL,
+                direccion = cliente.DIRECCION,
+                telefono = (int)cliente.TELEFONO,
+                codigoPostal = cliente.COD_POSTAL,
+                fechaNac = cliente.FECHA_NAC
+            };
         }
     }
 

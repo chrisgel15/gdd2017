@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UberFrba.Abm_ChoferCliente;
 
 namespace UberFrba
 {
@@ -26,20 +27,20 @@ namespace UberFrba
 
         #region Alta
 
-        public string Alta(string nombre, string apellido, int dni, string mail, string direccion, int codPostal, DateTime fechaNac, int telefono)
+        public string Alta(AltaModificacionData altaData)
         {
             using (var dbCtx = new GD1C2017Entities())
             {
                 CHOFERE cho = new CHOFERE()
                 {
-                    NOMBRE = nombre,
-                    APELLIDO = apellido,
-                    DNI = dni,
-                    MAIL = mail,
+                    NOMBRE = altaData.nombre,
+                    APELLIDO = altaData.apellido,
+                    DNI = altaData.dni,
+                    MAIL = altaData.mail,
                     HABILITADO = true,
-                    TELEFONO = telefono,
-                    DIRECCION = direccion,
-                    FECHA_NAC = fechaNac
+                    TELEFONO = altaData.telefono,
+                    DIRECCION = altaData.direccion,
+                    FECHA_NAC = altaData.fechaNac
                 };
                
              
@@ -87,6 +88,11 @@ namespace UberFrba
             new Abm_ChoferCliente.AltaModificacion(this).ShowDialog();
         }
 
+        public void AbrirFormActualizar(int id)
+        {
+            new Abm_ChoferCliente.AltaModificacion(this, id);
+        }
+
         #endregion
 
         #region Busqueda y modificacion
@@ -114,14 +120,6 @@ namespace UberFrba
 
         #endregion
 
-
-
-
-
-
-
-
-
         public void Habilitar(int id)
         {
            using (var dbCtx = new GD1C2017Entities())
@@ -130,6 +128,15 @@ namespace UberFrba
                chof.HABILITADO = !chof.HABILITADO;
                dbCtx.SaveChanges();
            }
+        }
+
+
+
+
+
+        public AltaModificacionData CompletaCamposActualizar(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

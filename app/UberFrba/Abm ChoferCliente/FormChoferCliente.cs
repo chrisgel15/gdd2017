@@ -108,14 +108,22 @@ namespace UberFrba.Abm_ChoferCliente
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            var item = (GridData)this.dataGridView1.Rows[e.RowIndex].DataBoundItem;
+
             if (e.ColumnIndex == dataGridView1.Columns["Actualizar"].Index)
             {
-                this.choferCliente.Actualizar(e.RowIndex);
+                try
+                {
+                    this.choferCliente.AbrirFormActualizar(item.id);
+                }
+                catch(Exception ex)
+                {
+                    // Mostrar error
+                }
             }
 
             if (e.ColumnIndex == dataGridView1.Columns["Habilitado"].Index)
-            {
-                var item = (GridData)this.dataGridView1.Rows[e.RowIndex].DataBoundItem;
+            {               
                 try
                 {
                     this.choferCliente.Habilitar(item.id);
@@ -124,11 +132,7 @@ namespace UberFrba.Abm_ChoferCliente
                 {
                     // Mostrar error
                 }
-            }
-
-          
-
-
+            }       
 
         }
         #endregion

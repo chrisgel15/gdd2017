@@ -112,7 +112,6 @@
             this.btnAceptar.TabIndex = 14;
             this.btnAceptar.Text = "Aceptar";
             this.btnAceptar.UseVisualStyleBackColor = true;
-            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
             // 
             // dtFechaNac
             // 
@@ -121,6 +120,7 @@
             this.dtFechaNac.Name = "dtFechaNac";
             this.dtFechaNac.Size = new System.Drawing.Size(107, 20);
             this.dtFechaNac.TabIndex = 13;
+            this.dtFechaNac.Value = new System.DateTime(2017, 5, 24, 0, 0, 0, 0);
             // 
             // label1
             // 

@@ -73,6 +73,7 @@
     <Compile Include="Abm ChoferCliente\AltaModificacion.Designer.cs">
       <DependentUpon>AltaModificacion.cs</DependentUpon>
     </Compile>
+    <Compile Include="Abm ChoferCliente\AltaModificacionData.cs" />
     <Compile Include="Abm ChoferCliente\FormChoferCliente.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -29,12 +29,43 @@ namespace UberFrba.Abm_ChoferCliente
 
         public AltaModificacion(IChoferCliente c)
         {
+            Inicializar(c);
+            this.SetAltaHandler();
+        }
+
+        private void Inicializar(IChoferCliente c)
+        {
             InitializeComponent();
             LimpiaControles();
             this.choferCliente = c;
             this.groupBox1.Text = c.Tipo;
             this.txtCodPostal.Visible = c.HabilitarCodigoPostal;
             this.txtCodPostal.Text = c.HabilitarCodigoPostal ? String.Empty : "0";
+            this.btnAceptar.Click -= btnAceptar_Click;
+            this.btnAceptar.Click -= btnModificar_Click;
+        }
+
+        public AltaModificacion(IChoferCliente c, int id)
+        {
+            Inicializar(c);
+            this.SetModificacionHandler();
+            this.CompletaCamposActualizar(id);
+        }
+
+        public void SetAltaHandler()
+        {
+            this.btnAceptar.Click += btnAceptar_Click;
+        }
+
+        public void SetModificacionHandler()
+        {
+            this.btnAceptar.Click += btnModificar_Click;
+        }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            if (!ValidaInfo())
+                return;
         }
 
         #endregion
@@ -45,17 +76,12 @@ namespace UberFrba.Abm_ChoferCliente
             if (!ValidaInfo())
                 return;
 
-            var nombre = this.txtNombre.Text;
-            var apellido = this.txtApellido.Text;
-            var dni = int.Parse(this.txtDni.Text);
-            var mail = this.txtMail.Text;
-            var telefono = int.Parse(this.txtTelefono.Text);
-            var direccion = this.txtDireccion.Text;
-            var codigoPostal = int.Parse(this.txtCodPostal.Text);
-            var fechaNac = DateTime.Parse(this.dtFechaNac.Text);
+            var altaData = new AltaModificacionData(this.txtNombre.Text, this.txtApellido.Text, int.Parse(this.txtDni.Text),
+                this.txtMail.Text, int.Parse(this.txtTelefono.Text), this.txtDireccion.Text, int.Parse(this.txtCodPostal.Text), DateTime.Parse(this.dtFechaNac.Text));
+
             try
             {
-                var nombreUsuarioCreado = this.choferCliente.Alta(nombre, apellido, dni, mail, direccion, codigoPostal, fechaNac, telefono);
+                var nombreUsuarioCreado = this.choferCliente.Alta(altaData);
                 this.lblError.Text = "El alta de " + this.choferCliente.Tipo + " ha sido exitosa. User: " + nombreUsuarioCreado + " Pass: " + nombreUsuarioCreado;
                 this.LimpiaControles();
             }
@@ -69,6 +95,24 @@ namespace UberFrba.Abm_ChoferCliente
             }
 
         }
+
+        private void CompletaCamposActualizar(int id)
+        {
+            AltaModificacionData modificacionData = this.choferCliente.CompletaCamposActualizar(id);
+
+            this.txtNombre.Text = modificacionData.nombre;
+            this.txtApellido.Text = modificacionData.apellido;
+            this.txtDireccion.Text = modificacionData.direccion;
+            this.txtDni.Text = modificacionData.dni.ToString();
+            this.txtTelefono.Text = modificacionData.telefono.ToString();
+            this.txtMail.Text = modificacionData.mail;
+            this.txtCodPostal.Text = this.choferCliente.ValidarCodigoPostal ? modificacionData.codigoPostal.ToString() : "0";
+
+            this.dtFechaNac.Value = modificacionData.fechaNac.Date;
+            this.dtFechaNac.Text = modificacionData.fechaNac.Date.ToString();
+            
+            
+        }
         #endregion
 
         #region Common
@@ -79,7 +123,7 @@ namespace UberFrba.Abm_ChoferCliente
             this.txtDni.Text = String.Empty;
             this.txtTelefono.Text = String.Empty;
             this.txtDireccion.Text = String.Empty;
-            this.dtFechaNac.Text = String.Empty;
+            //this.dtFechaNac.Text = String.Empty;
             this.txtMail.Text = String.Empty;
             this.txtCodPostal.Text = String.Empty;
 
@@ -142,4 +186,6 @@ namespace UberFrba.Abm_ChoferCliente
         }
         #endregion
     }
+
+   
 }
