@@ -27,11 +27,6 @@ namespace UberFrba
             new Abm_ChoferCliente.AltaModificacion(this).ShowDialog();
         }
 
-        public void AbrirFormActualizar(int id)
-        {
-            new Abm_ChoferCliente.AltaModificacion(this, id).ShowDialog();
-        }
-
         public string Alta(AltaModificacionData altaData)
         {
 
@@ -94,7 +89,7 @@ namespace UberFrba
         }
         #endregion
 
-        #region Busqueda y modificacion
+        #region Busqueda, modificacion y baja
 
         public IList<GridData> Buscar(string busqueda)
         {
@@ -115,31 +110,10 @@ namespace UberFrba
 
         }
 
-
-        public void Actualizar(int p)
+        public void AbrirFormActualizar(int id)
         {
-            throw new NotImplementedException();
+            new Abm_ChoferCliente.AltaModificacion(this, id).ShowDialog();
         }
-
-        #endregion
-
-
-
-
-
-        public void Habilitar(int id)
-        {
-            using (var dbCtx = new GD1C2017Entities())
-            {
-                var cli = dbCtx.CLIENTES.First(cl => cl.ID_CLIENTE == id);
-                cli.HABIILITADO = !cli.HABIILITADO;
-                dbCtx.SaveChanges();
-            }
-        }
-
-
-
-
 
         public AltaModificacionData CompletaCamposActualizar(int id)
         {
@@ -161,6 +135,39 @@ namespace UberFrba
                 codigoPostal = cliente.COD_POSTAL,
                 fechaNac = cliente.FECHA_NAC
             };
+        }
+
+        public void Habilitar(int id)
+        {
+            using (var dbCtx = new GD1C2017Entities())
+            {
+                var cli = dbCtx.CLIENTES.First(cl => cl.ID_CLIENTE == id);
+                cli.HABIILITADO = !cli.HABIILITADO;
+                dbCtx.SaveChanges();
+            }
+        }
+
+        #endregion
+
+
+
+        public void Modificacion(AltaModificacionData modificacionData)
+        {
+            using (var dbCtx = new GD1C2017Entities())
+            {
+                var cli = dbCtx.CLIENTES.First(c => c.ID_CLIENTE == modificacionData.id);
+
+                cli.NOMBRE = modificacionData.nombre;
+                cli.APELLIDO = modificacionData.apellido;
+                cli.DIRECCION = modificacionData.direccion;
+                cli.DNI = modificacionData.dni;
+                cli.FECHA_NAC = modificacionData.fechaNac;
+                cli.MAIL = modificacionData.mail;
+                cli.TELEFONO = modificacionData.telefono;
+                cli.COD_POSTAL = modificacionData.codigoPostal;
+
+                dbCtx.SaveChanges();
+            }
         }
     }
 

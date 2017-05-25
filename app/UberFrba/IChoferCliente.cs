@@ -26,12 +26,12 @@ namespace UberFrba
 
         IList<GridData> Buscar(string busqueda);
 
-        void Actualizar(int p);
-
         void Habilitar(int id);
 
         void AbrirFormActualizar(int p);
 
         AltaModificacionData CompletaCamposActualizar(int id);
+
+        void Modificacion(AltaModificacionData modificacionData);
     }
 }

@@ -88,11 +88,6 @@ namespace UberFrba
             new Abm_ChoferCliente.AltaModificacion(this).ShowDialog();
         }
 
-        public void AbrirFormActualizar(int id)
-        {
-            new Abm_ChoferCliente.AltaModificacion(this, id);
-        }
-
         #endregion
 
         #region Busqueda y modificacion
@@ -112,31 +107,64 @@ namespace UberFrba
             }
         }
 
-
-        public void Actualizar(int p)
+        public void Habilitar(int id)
         {
-            new Abm_ChoferCliente.AltaModificacion(this).ShowDialog();
+            using (var dbCtx = new GD1C2017Entities())
+            {
+                var chof = dbCtx.CHOFERES.First(ch => ch.ID_CHOFER == id);
+                chof.HABILITADO = !chof.HABILITADO;
+                dbCtx.SaveChanges();
+            }
+        }
+
+        public AltaModificacionData CompletaCamposActualizar(int id)
+        {
+            CHOFERE chofer;
+
+            using (var dbCtx = new GD1C2017Entities())
+            {
+                chofer = dbCtx.CHOFERES.First(c => c.ID_CHOFER == id);
+            }
+
+            return new AltaModificacionData()
+            {
+                nombre = chofer.NOMBRE,
+                apellido = chofer.APELLIDO,
+                dni = (int)chofer.DNI,
+                mail = chofer.MAIL,
+                direccion = chofer.DIRECCION,
+                telefono = (int)chofer.TELEFONO,
+                codigoPostal = null,
+                fechaNac = chofer.FECHA_NAC
+            };
+        }
+
+        public void AbrirFormActualizar(int id)
+        {
+            new Abm_ChoferCliente.AltaModificacion(this, id).ShowDialog();
         }
 
         #endregion
 
-        public void Habilitar(int id)
+
+
+
+        public void Modificacion(AltaModificacionData modificacionData)
         {
-           using (var dbCtx = new GD1C2017Entities())
-           {
-               var chof = dbCtx.CHOFERES.First(ch => ch.ID_CHOFER == id);
-               chof.HABILITADO = !chof.HABILITADO;
-               dbCtx.SaveChanges();
-           }
-        }
+            using(var dbCtx = new GD1C2017Entities())
+            {
+                var chof = dbCtx.CHOFERES.First(c => c.ID_CHOFER == modificacionData.id);
 
+                chof.NOMBRE = modificacionData.nombre;
+                chof.APELLIDO = modificacionData.apellido;
+                chof.DIRECCION = modificacionData.direccion;
+                chof.DNI = modificacionData.dni;
+                chof.FECHA_NAC = modificacionData.fechaNac;
+                chof.MAIL = modificacionData.mail;
+                chof.TELEFONO = modificacionData.telefono;
 
-
-
-
-        public AltaModificacionData CompletaCamposActualizar(int id)
-        {
-            throw new NotImplementedException();
+                dbCtx.SaveChanges();
+            }
         }
     }
 }

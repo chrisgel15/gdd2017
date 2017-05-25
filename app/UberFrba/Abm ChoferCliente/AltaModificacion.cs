@@ -17,15 +17,11 @@ namespace UberFrba.Abm_ChoferCliente
 
         public IChoferCliente choferCliente { get; set; }
 
+        private int id;
+
         #endregion
 
         #region Constructores
-
-        //public AltaModificacion()
-        //{
-        //    InitializeComponent();
-        //    LimpiaControles();
-        //}
 
         public AltaModificacion(IChoferCliente c)
         {
@@ -33,17 +29,6 @@ namespace UberFrba.Abm_ChoferCliente
             this.SetAltaHandler();
         }
 
-        private void Inicializar(IChoferCliente c)
-        {
-            InitializeComponent();
-            LimpiaControles();
-            this.choferCliente = c;
-            this.groupBox1.Text = c.Tipo;
-            this.txtCodPostal.Visible = c.HabilitarCodigoPostal;
-            this.txtCodPostal.Text = c.HabilitarCodigoPostal ? String.Empty : "0";
-            this.btnAceptar.Click -= btnAceptar_Click;
-            this.btnAceptar.Click -= btnModificar_Click;
-        }
 
         public AltaModificacion(IChoferCliente c, int id)
         {
@@ -51,23 +36,6 @@ namespace UberFrba.Abm_ChoferCliente
             this.SetModificacionHandler();
             this.CompletaCamposActualizar(id);
         }
-
-        public void SetAltaHandler()
-        {
-            this.btnAceptar.Click += btnAceptar_Click;
-        }
-
-        public void SetModificacionHandler()
-        {
-            this.btnAceptar.Click += btnModificar_Click;
-        }
-
-        private void btnModificar_Click(object sender, EventArgs e)
-        {
-            if (!ValidaInfo())
-                return;
-        }
-
         #endregion
 
         #region Alta
@@ -91,7 +59,7 @@ namespace UberFrba.Abm_ChoferCliente
             }
             catch (Exception ex)
             {
-                this.lblError.Text = "Ha ocurrido un error";
+                this.lblError.Text = "Ha ocurrido un error en el Alta";
             }
 
         }
@@ -110,12 +78,25 @@ namespace UberFrba.Abm_ChoferCliente
 
             this.dtFechaNac.Value = modificacionData.fechaNac.Date;
             this.dtFechaNac.Text = modificacionData.fechaNac.Date.ToString();
-            
-            
+
+            this.id = id;
         }
         #endregion
 
         #region Common
+
+        private void Inicializar(IChoferCliente c)
+        {
+            InitializeComponent();
+            LimpiaControles();
+            this.choferCliente = c;
+            this.groupBox1.Text = c.Tipo;
+            this.txtCodPostal.Visible = c.HabilitarCodigoPostal;
+            this.txtCodPostal.Text = c.HabilitarCodigoPostal ? String.Empty : "0";
+            this.btnAceptar.Click -= btnAceptar_Click;
+            this.btnAceptar.Click -= btnModificar_Click;
+        }
+
         private void LimpiaControles()
         {
             this.txtNombre.Text = String.Empty;
@@ -123,10 +104,12 @@ namespace UberFrba.Abm_ChoferCliente
             this.txtDni.Text = String.Empty;
             this.txtTelefono.Text = String.Empty;
             this.txtDireccion.Text = String.Empty;
-            //this.dtFechaNac.Text = String.Empty;
             this.txtMail.Text = String.Empty;
             this.txtCodPostal.Text = String.Empty;
 
+            this.dtFechaNac.Text = DateTime.Now.Date.ToString();
+            this.dtFechaNac.Value = DateTime.Now.Date;
+            
             LimpiaErrores(this.txtNombre);
             LimpiaErrores(this.txtApellido);
             LimpiaErrores(this.txtDni);
@@ -176,16 +159,55 @@ namespace UberFrba.Abm_ChoferCliente
 
         private bool ValidaNumerico(Control c)
         {
-          
-            if (!c.Text.All(Char.IsDigit))            
-                this.errorProvider1.SetError(c, "Este campo debe ser numerico.");            
-            else            
-                this.errorProvider1.SetError(c, String.Empty);          
+
+            if (!c.Text.All(Char.IsDigit))
+                this.errorProvider1.SetError(c, "Este campo debe ser numerico.");
+            else
+                this.errorProvider1.SetError(c, String.Empty);
 
             return c.Text.All(Char.IsDigit);
+        }
+
+        public void SetAltaHandler()
+        {
+            this.btnAceptar.Click += btnAceptar_Click;
+        }
+
+        public void SetModificacionHandler()
+        {
+            this.btnAceptar.Click += btnModificar_Click;
+        }
+        #endregion
+
+        #region Modificacion
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            if (!ValidaInfo())
+                return;
+
+            var modificacionData = new AltaModificacionData(this.txtNombre.Text, this.txtApellido.Text, int.Parse(this.txtDni.Text), 
+                this.txtMail.Text, int.Parse(this.txtTelefono.Text), this.txtDireccion.Text, int.Parse(this.txtCodPostal.Text), DateTime.Parse(this.dtFechaNac.Text));
+
+            modificacionData.id = this.id;
+
+            try
+            {
+                this.choferCliente.Modificacion(modificacionData);
+                this.lblError.Text = "La modificacion de " + this.choferCliente.Tipo + " ha sido exitosa";
+                this.LimpiaControles();
+            }
+            catch (ExisteClienteException ex)
+            {
+                this.lblError.Text = ex.Message;
+            }
+            catch (Exception ex)
+            {
+                this.lblError.Text = "Ha ocurrido un error en la modificacion";
+            }
+
         }
         #endregion
     }
 
-   
+
 }

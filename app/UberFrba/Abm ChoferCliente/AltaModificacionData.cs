@@ -8,7 +8,7 @@ namespace UberFrba.Abm_ChoferCliente
 {
     public class AltaModificacionData
     {
-
+        public int? id { get; set; }
         public string nombre { get; set; }
         public string apellido { get; set; }
         public int dni { get; set; }
@@ -27,6 +27,7 @@ namespace UberFrba.Abm_ChoferCliente
             this.telefono = tel;
             this.direccion = dire;
             this.fechaNac = fechaNac;
+            this.codigoPostal = cp;
         }
 
         public AltaModificacionData()

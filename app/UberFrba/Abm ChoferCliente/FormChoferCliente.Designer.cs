@@ -33,6 +33,7 @@
             this.btnBuscar = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.btnNuevo = new System.Windows.Forms.Button();
+            this.lblMsgChoferCliente = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -79,11 +80,21 @@
             this.btnNuevo.UseVisualStyleBackColor = true;
             this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
             // 
+            // lblMsgChoferCliente
+            // 
+            this.lblMsgChoferCliente.AutoSize = true;
+            this.lblMsgChoferCliente.Location = new System.Drawing.Point(261, 89);
+            this.lblMsgChoferCliente.Name = "lblMsgChoferCliente";
+            this.lblMsgChoferCliente.Size = new System.Drawing.Size(35, 13);
+            this.lblMsgChoferCliente.TabIndex = 14;
+            this.lblMsgChoferCliente.Text = "label1";
+            // 
             // FormChoferCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(938, 445);
+            this.Controls.Add(this.lblMsgChoferCliente);
             this.Controls.Add(this.btnNuevo);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.btnBuscar);
@@ -104,5 +115,6 @@
         private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button btnNuevo;
+        private System.Windows.Forms.Label lblMsgChoferCliente;
     }
 }
