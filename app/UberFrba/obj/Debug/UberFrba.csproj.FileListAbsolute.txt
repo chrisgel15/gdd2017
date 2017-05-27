@@ -1,9 +1,0 @@
-E:\src\UberFrba\UberFrba\bin\Debug\UberFrba.exe.config
-C:\Users\gelmanc\Documents\Personal\Facultad\GDD\TP Uber Frba 1.0 - 1C 2017\Aplicacion Desktop\UberFrba\bin\Debug\UberFrba.exe.config
-C:\Users\gelmanc\Documents\Personal\Facultad\GDD\TP Uber Frba 1.0 - 1C 2017\Aplicacion Desktop\UberFrba\bin\Debug\UberFrba.exe
-C:\Users\gelmanc\Documents\Personal\Facultad\GDD\TP Uber Frba 1.0 - 1C 2017\Aplicacion Desktop\UberFrba\bin\Debug\UberFrba.pdb
-C:\Users\gelmanc\Documents\Personal\Facultad\GDD\TP Uber Frba 1.0 - 1C 2017\Aplicacion Desktop\UberFrba\obj\Debug\UberFrba.Properties.Resources.resources
-C:\Users\gelmanc\Documents\Personal\Facultad\GDD\TP Uber Frba 1.0 - 1C 2017\Aplicacion Desktop\UberFrba\obj\Debug\UberFrba.csproj.GenerateResource.Cache
-C:\Users\gelmanc\Documents\Personal\Facultad\GDD\TP Uber Frba 1.0 - 1C 2017\Aplicacion Desktop\UberFrba\obj\Debug\UberFrba.exe
-C:\Users\gelmanc\Documents\Personal\Facultad\GDD\TP Uber Frba 1.0 - 1C 2017\Aplicacion Desktop\UberFrba\obj\Debug\UberFrba.pdb
-C:\Users\gelmanc\Documents\Personal\Facultad\GDD\TP Uber Frba 1.0 - 1C 2017\Aplicacion Desktop\UberFrba\obj\Debug\UberFrba.Form1.resources

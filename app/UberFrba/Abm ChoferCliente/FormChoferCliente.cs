@@ -17,6 +17,8 @@ namespace UberFrba.Abm_ChoferCliente
 
         public IChoferCliente choferCliente { get; set; }
 
+        public string busqueda { get; set; }
+
         #endregion
 
         #region Constructores
@@ -27,6 +29,7 @@ namespace UberFrba.Abm_ChoferCliente
             this.lblTipo.Text = this.choferCliente.Tipo;
             this.CrearDataGrid();
             this.dataGridView1.Visible = false;
+            this.lblMsgChoferCliente.Text = String.Empty;
         }
         #endregion        
 
@@ -37,7 +40,7 @@ namespace UberFrba.Abm_ChoferCliente
             {
                 Name = "ID",
                 HeaderText = "ID",
-                DataPropertyName = "idCliente"
+                DataPropertyName = "id"
             };
 
             DataGridViewTextBoxColumn nombre = new DataGridViewTextBoxColumn()
@@ -62,6 +65,13 @@ namespace UberFrba.Abm_ChoferCliente
                 DataPropertyName = "dni"
             };
 
+            DataGridViewCheckBoxColumn habilitado = new DataGridViewCheckBoxColumn()
+            {
+                Name = "HABILITADO",
+                HeaderText = "HABILITADO",
+                DataPropertyName = "habilitado"
+            };
+
             var columnaActualizar = new DataGridViewButtonColumn();
             columnaActualizar.Name = "Actualizar";
             columnaActualizar.Text = "Actualizar";
@@ -83,47 +93,66 @@ namespace UberFrba.Abm_ChoferCliente
             dataGridView1.Columns.Insert(1, nombre);
             dataGridView1.Columns.Insert(2, apellido);
             dataGridView1.Columns.Insert(3, dni);
-            dataGridView1.Columns.Insert(4, columnaActualizar);
-            dataGridView1.Columns.Insert(5, columnaHabilitar);
-            dataGridView1.Columns.Insert(6, columnaDeshabilitar);
+            dataGridView1.Columns.Insert(4, habilitado);
+            dataGridView1.Columns.Insert(5, columnaActualizar);
+      
+            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
 
             dataGridView1.DataSource = null;
         }
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            var busqueda = this.txtBusqueda.Text;
-            dataGridView1.CellClick += dataGridView1_CellClick;
+            this.lblMsgChoferCliente.Text = String.Empty;
+            this.busqueda = this.txtBusqueda.Text;
 
             this.dataGridView1.DataSource = this.choferCliente.Buscar(busqueda);
             this.dataGridView1.Visible = true;
+            this.dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
+        }
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            this.lblMsgChoferCliente.Text = String.Empty;
+            var item = (GridData)this.dataGridView1.Rows[e.RowIndex].DataBoundItem;
+
+            if (e.ColumnIndex == dataGridView1.Columns["Actualizar"].Index)
+            {
+                try
+                {
+                    this.choferCliente.AbrirFormActualizar(item.id);
+                    this.RefrescarGrilla();
+                    
+                }
+                catch(Exception ex)
+                {
+                    // Mostrar error
+                }
+            }
+
+            if (e.ColumnIndex == dataGridView1.Columns["Habilitado"].Index)
+            {               
+                try
+                {
+                    this.choferCliente.Habilitar(item.id);
+                }
+                catch(Exception ex)
+                {
+                    this.lblMsgChoferCliente.Text = "Ha ocurrido un error con la Habilitacion/Inhabilitacion del " + this.lblTipo.Text;
+                }
+            }       
 
         }
 
-        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void RefrescarGrilla()
         {
-            if (e.ColumnIndex == dataGridView1.Columns["Actualizar"].Index)
-            {
-                this.choferCliente.Actualizar(e.RowIndex);
-            }
-
-            if (e.ColumnIndex == dataGridView1.Columns["Habilitar"].Index)
-            {
-
-            }
-
-            if (e.ColumnIndex == dataGridView1.Columns["Deshabilitar"].Index)
-            {
-
-            }
-
-
+            this.dataGridView1.DataSource = this.choferCliente.Buscar(busqueda);
         }
         #endregion
 
         #region Alta
         private void btnNuevo_Click(object sender, EventArgs e)
         {
+            this.lblMsgChoferCliente.Text = String.Empty;
             this.dataGridView1.Visible = false;
             this.choferCliente.AbrirForm();
         }

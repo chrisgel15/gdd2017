@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblError = new System.Windows.Forms.Label();
             this.txtCodPostal = new System.Windows.Forms.TextBox();
             this.lblCP = new System.Windows.Forms.Label();
             this.btnAceptar = new System.Windows.Forms.Button();
@@ -48,7 +49,6 @@
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.lblNombre = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.lblError = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
@@ -80,6 +80,14 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "ALTA Y MODIFICACION";
             // 
+            // lblError
+            // 
+            this.lblError.AutoSize = true;
+            this.lblError.Location = new System.Drawing.Point(91, 310);
+            this.lblError.Name = "lblError";
+            this.lblError.Size = new System.Drawing.Size(0, 13);
+            this.lblError.TabIndex = 17;
+            // 
             // txtCodPostal
             // 
             this.txtCodPostal.Location = new System.Drawing.Point(261, 216);
@@ -104,7 +112,6 @@
             this.btnAceptar.TabIndex = 14;
             this.btnAceptar.Text = "Aceptar";
             this.btnAceptar.UseVisualStyleBackColor = true;
-            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
             // 
             // dtFechaNac
             // 
@@ -113,6 +120,7 @@
             this.dtFechaNac.Name = "dtFechaNac";
             this.dtFechaNac.Size = new System.Drawing.Size(107, 20);
             this.dtFechaNac.TabIndex = 13;
+            this.dtFechaNac.Value = new System.DateTime(2017, 5, 24, 0, 0, 0, 0);
             // 
             // label1
             // 
@@ -223,14 +231,6 @@
             // 
             this.errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errorProvider1.ContainerControl = this;
-            // 
-            // lblError
-            // 
-            this.lblError.AutoSize = true;
-            this.lblError.Location = new System.Drawing.Point(179, 317);
-            this.lblError.Name = "lblError";
-            this.lblError.Size = new System.Drawing.Size(0, 13);
-            this.lblError.TabIndex = 17;
             // 
             // AltaModificacion
             // 

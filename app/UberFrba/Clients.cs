@@ -5,6 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using UberFrba.Abm_ChoferCliente;
 
 namespace UberFrba
 {
@@ -26,22 +27,22 @@ namespace UberFrba
             new Abm_ChoferCliente.AltaModificacion(this).ShowDialog();
         }
 
-        public string Alta(string nombre, string apellido, int dni, string mail, string direccion, int codPostal, DateTime fechaNac, int telefono)
+        public string Alta(AltaModificacionData altaData)
         {
 
             using (var dbCtx = new GD1C2017Entities())
             {
                 CLIENTE cli = new CLIENTE()
                 {
-                    NOMBRE = nombre,
-                    APELLIDO = apellido,
-                    DNI = dni,
-                    MAIL = String.IsNullOrEmpty(mail) ? null : mail,
+                    NOMBRE = altaData.nombre,
+                    APELLIDO = altaData.apellido,
+                    DNI = altaData.dni,
+                    MAIL = String.IsNullOrEmpty(altaData.mail) ? null : altaData.mail,
                     HABIILITADO = true,
-                    TELEFONO = telefono,
-                    DIRECCION = direccion,
-                    FECHA_NAC = fechaNac,
-                    COD_POSTAL = codPostal
+                    TELEFONO = altaData.telefono,
+                    DIRECCION = altaData.direccion,
+                    FECHA_NAC = altaData.fechaNac,
+                    COD_POSTAL = altaData.codigoPostal
                 };
 
 
@@ -69,14 +70,14 @@ namespace UberFrba
                     CANT_FALLAS = 0,
                     HABILITADO = true,
                     NOMBRE = nombreUsuario,
-                    PASSWORD = UserGenerator.SHA256Encrypt(nombreUsuario)
+                    PASSWORD = UserGenerator.SHA256Encrypt(nombreUsuario),
+                    ROLES = dbCtx.ROLES.Where(rol => rol.NOMBRE.ToLower().Contains("cliente")).Take(1).ToList()
                 };
                 
                 usu.CLIENTES.Add(cli);
                 dbCtx.CLIENTES.Add(cli);
-                dbCtx.USUARIOS.Add(usu);
+                dbCtx.USUARIOS.Add(usu);              
                 
-
                 dbCtx.SaveChanges();
 
                 return nombreUsuario;
@@ -88,15 +89,18 @@ namespace UberFrba
         }
         #endregion
 
-        #region Busqueda y modificacion
+        #region Busqueda, modificacion y baja
 
         public IList<GridData> Buscar(string busqueda)
         {
 
+            decimal dni = 0;
+            decimal.TryParse(busqueda, out dni);
             using (var dbCtx = new GD1C2017Entities())
             {
-                var clientes = dbCtx.CLIENTES.Where(c => c.NOMBRE.Contains(busqueda)).Select(o =>
-                    new GridData { idCliente = o.ID_CLIENTE, nombre = o.NOMBRE, apellido = o.APELLIDO, dni = o.DNI }).ToList();
+                var clientes = dbCtx.CLIENTES.Where(c => c.NOMBRE.Contains(busqueda) 
+                                                        || c.APELLIDO.Contains(busqueda) || c.DNI == dni).Select(o =>
+                    new GridData { id = o.ID_CLIENTE, nombre = o.NOMBRE, apellido = o.APELLIDO, dni = o.DNI, habilitado = o.HABIILITADO }).ToList();
 
 
                 return clientes;
@@ -106,25 +110,76 @@ namespace UberFrba
 
         }
 
-
-        public void Actualizar(int p)
+        public void AbrirFormActualizar(int id)
         {
-            throw new NotImplementedException();
+            new Abm_ChoferCliente.AltaModificacion(this, id).ShowDialog();
+        }
+
+        public AltaModificacionData CompletaCamposActualizar(int id)
+        {
+            CLIENTE cliente;
+
+            using (var dbCtx = new GD1C2017Entities())
+            {
+                cliente = dbCtx.CLIENTES.First(c => c.ID_CLIENTE == id);
+            }
+
+            return new AltaModificacionData()
+            {
+                nombre = cliente.NOMBRE,
+                apellido = cliente.APELLIDO,
+                dni = (int)cliente.DNI,
+                mail = cliente.MAIL,
+                direccion = cliente.DIRECCION,
+                telefono = (int)cliente.TELEFONO,
+                codigoPostal = cliente.COD_POSTAL,
+                fechaNac = cliente.FECHA_NAC
+            };
+        }
+
+        public void Habilitar(int id)
+        {
+            using (var dbCtx = new GD1C2017Entities())
+            {
+                var cli = dbCtx.CLIENTES.First(cl => cl.ID_CLIENTE == id);
+                cli.HABIILITADO = !cli.HABIILITADO;
+                dbCtx.SaveChanges();
+            }
         }
 
         #endregion
 
 
 
+        public void Modificacion(AltaModificacionData modificacionData)
+        {
+            using (var dbCtx = new GD1C2017Entities())
+            {
+                var cli = dbCtx.CLIENTES.First(c => c.ID_CLIENTE == modificacionData.id);
+
+                cli.NOMBRE = modificacionData.nombre;
+                cli.APELLIDO = modificacionData.apellido;
+                cli.DIRECCION = modificacionData.direccion;
+                cli.DNI = modificacionData.dni;
+                cli.FECHA_NAC = modificacionData.fechaNac;
+                cli.MAIL = modificacionData.mail;
+                cli.TELEFONO = modificacionData.telefono;
+                cli.COD_POSTAL = modificacionData.codigoPostal;
+
+                dbCtx.SaveChanges();
+            }
+        }
     }
 
     public class GridData
     {
-        public int idCliente { get; set; }
+        public int id { get; set; }
         public string nombre { get; set; }
         public string apellido { get; set; }
 
         public decimal dni { get; set; }
+
+        public bool habilitado { get; set; }
     }
 
     public class UserGenerator

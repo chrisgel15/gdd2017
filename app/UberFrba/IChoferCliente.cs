@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using UberFrba.Abm_ChoferCliente;
 
 namespace UberFrba
 {
@@ -21,13 +22,16 @@ namespace UberFrba
 
         void AbrirForm();
 
-        string Alta(string nombre, string apellido, int dni, string mail, string direccion, int codPostal, DateTime fechaNac, int telefono);
+        string Alta(AltaModificacionData data);
 
         IList<GridData> Buscar(string busqueda);
 
-        void Actualizar(int p);
+        void Habilitar(int id);
 
+        void AbrirFormActualizar(int p);
 
-        
+        AltaModificacionData CompletaCamposActualizar(int id);
+
+        void Modificacion(AltaModificacionData modificacionData);
     }
 }

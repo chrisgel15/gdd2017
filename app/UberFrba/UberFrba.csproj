@@ -79,6 +79,7 @@
     <Compile Include="Abm ChoferCliente\AltaModificacion.Designer.cs">
       <DependentUpon>AltaModificacion.cs</DependentUpon>
     </Compile>
+    <Compile Include="Abm ChoferCliente\AltaModificacionData.cs" />
     <Compile Include="Abm ChoferCliente\FormChoferCliente.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -115,6 +116,19 @@
     <Compile Include="Abm Rol\ModificaNombre.Designer.cs">
       <DependentUpon>ModificaNombre.cs</DependentUpon>
     </Compile>
+    <Compile Include="Abm Turno\AbmTurno.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Turno\AbmTurno.Designer.cs">
+      <DependentUpon>AbmTurno.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Turno\AltaModificacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Turno\AltaModificacion.Designer.cs">
+      <DependentUpon>AltaModificacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Turno\AltaModificacionData.cs" />
     <Compile Include="AUTO.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -234,6 +248,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Rol\ModificaNombre.resx">
       <DependentUpon>ModificaNombre.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Turno\AbmTurno.resx">
+      <DependentUpon>AbmTurno.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Turno\AltaModificacion.resx">
+      <DependentUpon>AltaModificacion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
