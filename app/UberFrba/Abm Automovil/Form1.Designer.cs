@@ -29,9 +29,10 @@
         private void InitializeComponent()
         {
             this.grupoAuto = new System.Windows.Forms.GroupBox();
-            this.altaAuto = new System.Windows.Forms.Button();
-            this.modifAuto = new System.Windows.Forms.Button();
             this.bajaAuto = new System.Windows.Forms.Button();
+            this.modifAuto = new System.Windows.Forms.Button();
+            this.altaAuto = new System.Windows.Forms.Button();
+            this.btnSalir = new System.Windows.Forms.Button();
             this.grupoAuto.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -47,6 +48,25 @@
             this.grupoAuto.TabStop = false;
             this.grupoAuto.Text = "Control de Autos";
             // 
+            // bajaAuto
+            // 
+            this.bajaAuto.Location = new System.Drawing.Point(7, 100);
+            this.bajaAuto.Name = "bajaAuto";
+            this.bajaAuto.Size = new System.Drawing.Size(111, 23);
+            this.bajaAuto.TabIndex = 2;
+            this.bajaAuto.Text = "Dar Baja";
+            this.bajaAuto.UseVisualStyleBackColor = true;
+            // 
+            // modifAuto
+            // 
+            this.modifAuto.Location = new System.Drawing.Point(7, 60);
+            this.modifAuto.Name = "modifAuto";
+            this.modifAuto.Size = new System.Drawing.Size(111, 23);
+            this.modifAuto.TabIndex = 1;
+            this.modifAuto.Text = "Modificar Existente";
+            this.modifAuto.UseVisualStyleBackColor = true;
+            this.modifAuto.Click += new System.EventHandler(this.modifAuto_Click);
+            // 
             // altaAuto
             // 
             this.altaAuto.Location = new System.Drawing.Point(7, 20);
@@ -57,29 +77,22 @@
             this.altaAuto.UseVisualStyleBackColor = true;
             this.altaAuto.Click += new System.EventHandler(this.altaAuto_Click);
             // 
-            // modifAuto
+            // btnSalir
             // 
-            this.modifAuto.Location = new System.Drawing.Point(7, 60);
-            this.modifAuto.Name = "modifAuto";
-            this.modifAuto.Size = new System.Drawing.Size(111, 23);
-            this.modifAuto.TabIndex = 1;
-            this.modifAuto.Text = "Modificar Existente";
-            this.modifAuto.UseVisualStyleBackColor = true;
-            // 
-            // bajaAuto
-            // 
-            this.bajaAuto.Location = new System.Drawing.Point(7, 100);
-            this.bajaAuto.Name = "bajaAuto";
-            this.bajaAuto.Size = new System.Drawing.Size(111, 23);
-            this.bajaAuto.TabIndex = 2;
-            this.bajaAuto.Text = "Dar Baja";
-            this.bajaAuto.UseVisualStyleBackColor = true;
+            this.btnSalir.Location = new System.Drawing.Point(34, 170);
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(75, 23);
+            this.btnSalir.TabIndex = 1;
+            this.btnSalir.Text = "Salir";
+            this.btnSalir.UseVisualStyleBackColor = true;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(176, 177);
+            this.ClientSize = new System.Drawing.Size(176, 219);
+            this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.grupoAuto);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -94,6 +107,7 @@
         private System.Windows.Forms.Button bajaAuto;
         private System.Windows.Forms.Button modifAuto;
         private System.Windows.Forms.Button altaAuto;
+        private System.Windows.Forms.Button btnSalir;
 
     }
 }

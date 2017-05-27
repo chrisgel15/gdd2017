@@ -76,6 +76,12 @@ namespace UberFrba.Menu_Principal
             new Abm_ChoferCliente.FormChoferCliente(new Clients()).Show();
         }
 
+        private void btnAbmAuto_Click(object sender, EventArgs e)
+        {
+            this.Estado.Menu = this;
+            new Abm_Automovil.Form1().Show();
+        }
+
         
        
     }
