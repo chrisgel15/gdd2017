@@ -81,12 +81,19 @@ namespace UberFrba.Menu_Principal
         {
             this.Estado.Menu = this;
             new Abm_Automovil.Form1().Show();
+        }
 
         private void button5_Click(object sender, EventArgs e)
         {
             this.Estado.Menu = this;
             new Abm_Turno.AbmTurno().Show();
 
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            this.Estado.Menu = this;
+            new Registro_Viajes.Form1().Show();
         }
 
         
