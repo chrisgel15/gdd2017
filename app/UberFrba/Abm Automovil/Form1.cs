@@ -14,6 +14,7 @@ namespace UberFrba.Abm_Automovil
     {
         private UberFrba.Form1 form1;
         private UberFrba.Abm_Automovil.Alta formAlta;
+        private UberFrba.Abm_Automovil.Listado listado;
 
         public Form1()
         {
@@ -31,6 +32,17 @@ namespace UberFrba.Abm_Automovil
         {
             formAlta = new Abm_Automovil.Alta();
             formAlta.Show();
+        }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void modifAuto_Click(object sender, EventArgs e)
+        {
+            listado = new Abm_Automovil.Listado();
+            listado.Show();
         }
 
         
