@@ -154,12 +154,12 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="IChoferCliente.cs" />
-    <Compile Include="Listado Estadistico\Form1.cs">
+    <!--<Compile Include="Listado Estadistico\Form1.cs">
       <SubType>Form</SubType>
-    </Compile>
+    </Compile> 
     <Compile Include="Listado Estadistico\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
+    </Compile>-->
     <Compile Include="MARCA.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
