@@ -86,6 +86,7 @@
             this.ddlAuto.Name = "ddlAuto";
             this.ddlAuto.Size = new System.Drawing.Size(152, 21);
             this.ddlAuto.TabIndex = 3;
+            this.ddlAuto.SelectedIndexChanged += new System.EventHandler(this.ddlAuto_SelectedIndexChanged);
             // 
             // label3
             // 

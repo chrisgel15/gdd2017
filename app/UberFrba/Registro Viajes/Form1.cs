@@ -16,6 +16,7 @@ namespace UberFrba.Registro_Viajes
         {
             InitializeComponent();
             LimpiaControles();
+            LimpiaErrores();
             LlenarCombos();
         }
 
@@ -39,9 +40,13 @@ namespace UberFrba.Registro_Viajes
 
             this.dtFin.Format = DateTimePickerFormat.Custom;
             this.dtFin.CustomFormat = "dd/MM/yyyy hh:mm:ss"; 
+         
 
+        }
+
+        private void LimpiaErrores()
+        {
             this.lblError.Text = String.Empty;
-
             LimpiaErrores(this.ddlChofer);
             LimpiaErrores(this.ddlAuto);
             LimpiaErrores(this.ddlTurno);
@@ -49,7 +54,6 @@ namespace UberFrba.Registro_Viajes
             LimpiaErrores(this.txtKilometros);
             LimpiaErrores(this.dtInicio);
             LimpiaErrores(this.dtFin);
-
         }
 
         private void LimpiaErrores(Control c)
@@ -72,9 +76,9 @@ namespace UberFrba.Registro_Viajes
 
 
                 this.ddlCliente.Items.Add("-- Seleccione --");
-                var clientes = dbCtx.CHOFERES.Where(c => c.HABILITADO).ToArray();
+                var clientes = dbCtx.CLIENTES.Where(c => c.HABIILITADO).ToArray();
 
-                this.ddlCliente.Items.AddRange(choferes);
+                this.ddlCliente.Items.AddRange(clientes);
 
                 this.ddlCliente.ValueMember = "ID_CLIENTE";
                 this.ddlCliente.DisplayMember = "NOMBRE";
@@ -122,12 +126,130 @@ namespace UberFrba.Registro_Viajes
            
         }
 
+        private void ddlAuto_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ddlTurno.Items.Clear();
+            ddlTurno.Enabled = false;
+
+            if (ddlAuto.SelectedIndex > 0)
+            {
+                var auto = (AUTO)ddlAuto.SelectedItem;
+
+                using (var dbCtx = new GD1C2017Entities())
+                {
+                    var turnos = dbCtx.TURNOS.Where(t => t.AUTOS.Any(a => a.ID_AUTO == auto.ID_AUTO) && t.HABILITADO).ToArray();
+                    if (turnos != null)
+                    {
+                        this.ddlTurno.Items.Add("-- Seleccione -- ");
+                        this.ddlTurno.Items.AddRange(turnos);
+                        this.ddlTurno.Enabled = true;
+                        this.ddlTurno.ValueMember = "ID_NOMBRE";
+                        this.ddlTurno.DisplayMember = "DESCRIPCION";
+                        this.ddlTurno.SelectedIndex = 0;
+                    }
+                    else
+                        this.lblError.Text = "El auto seleccionado no posee turnos asignados";
+
+                }
+            }
+            else
+                this.ddlTurno.Enabled = false;
+        }
+
         private void btnAceptar_Click(object sender, EventArgs e)
         {
+            LimpiaErrores();
+
             var choferValido = ValidaDDLRequerido(this.ddlChofer);
             var clienteValido = ValidaDDLRequerido(this.ddlCliente);
             var autoValido = ValidaDDLRequerido(this.ddlAuto);
+            var turnoValido = ValidaDDLRequerido(this.ddlTurno);
             var distanciaValida = ValidaDistancia(this.txtKilometros);
+
+            bool fechasValidas = false;
+
+            if (choferValido && clienteValido)
+                fechasValidas = ValidaFechas();
+
+            if (fechasValidas && autoValido && turnoValido && distanciaValida)
+            {
+                AgregarViaje();
+            }
+        }
+
+        private void AgregarViaje()
+        {
+            using (var dbCtx = new GD1C2017Entities())
+            {
+                VIAJE v = new VIAJE()
+                {
+                    AUTO_ID = ((AUTO)ddlAuto.SelectedItem).ID_AUTO,
+                    CHOFER_ID = ((CHOFERE)ddlChofer.SelectedItem).ID_CHOFER,
+                    CLIENTE_ID = ((CLIENTE)ddlCliente.SelectedItem).ID_CLIENTE,
+                    TURNO_ID = ((TURNO)ddlTurno.SelectedItem).ID_TURNO,
+                    CANTIDAD_KM = this.txtKilometros.Value,
+                    FECHA_INICIO = this.dtInicio.Value,
+                    FECHA_FIN = this.dtFin.Value
+                };
+
+                try
+                {
+                    dbCtx.VIAJES.Add(v);
+                    dbCtx.SaveChanges();
+                    this.lblError.Text = "El viaje se ha agregado con exito";
+
+
+                }
+                catch (Exception ex)
+                {
+                    this.lblError.Text = "Ocurrio un error al agregar el viaje";
+                }
+            }
+
+            LimpiaControles();
+            LlenarCombos();
+        }
+
+        private bool ValidaFechas()
+        {
+            if(this.dtInicio.Value >= this.dtFin.Value)
+            {
+                this.errorProvider1.SetError(dtInicio, "La fecha inicio no puede ser mayor ni iguala la fecha fin");
+                this.errorProvider1.SetError(dtFin, "La fecha inicio no puede ser mayor ni igual a la fecha fin");
+                return false;
+            }
+
+            var cliente = (CLIENTE)this.ddlCliente.SelectedItem;
+            var chofer = (CHOFERE)this.ddlChofer.SelectedItem;
+
+            using(var dbCtx = new GD1C2017Entities())
+            {
+                if (dbCtx.VIAJES.Any(v => v.CLIENTE_ID == cliente.ID_CLIENTE && dtInicio.Value >= v.FECHA_INICIO && dtInicio.Value <= v.FECHA_FIN))
+                {
+                    this.errorProvider1.SetError(dtInicio, "El cliente tiene un viaje en esa fecha de inicio");
+                    return false;
+                }
+
+                if (dbCtx.VIAJES.Any(v => v.CLIENTE_ID == cliente.ID_CLIENTE && dtFin.Value >= v.FECHA_INICIO && dtFin.Value <= v.FECHA_FIN))
+                {
+                    this.errorProvider1.SetError(dtFin, "El cliente tiene un viaje en esa fecha de Fin");
+                    return false;
+                }
+
+                if (dbCtx.VIAJES.Any(v => v.CHOFER_ID == chofer.ID_CHOFER && dtInicio.Value >= v.FECHA_INICIO && dtInicio.Value <= v.FECHA_FIN))
+                {
+                    this.errorProvider1.SetError(dtInicio, "El chofer tiene un viaje en esa fecha de inicio");
+                    return false;
+                }
+
+                if (dbCtx.VIAJES.Any(v => v.CHOFER_ID == chofer.ID_CHOFER && dtFin.Value >= v.FECHA_INICIO && dtFin.Value <= v.FECHA_FIN))
+                {
+                    this.errorProvider1.SetError(dtFin, "El chofer tiene un viaje en esa fecha de Fin");
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         private bool ValidaDDLRequerido(ComboBox c)
@@ -149,5 +271,7 @@ namespace UberFrba.Registro_Viajes
 
             return n.Value > 0;
         }
+
+       
     }
 }
