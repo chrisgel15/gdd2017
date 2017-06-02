@@ -13,12 +13,13 @@ namespace UberFrba.Abm_Automovil
     public partial class Listado : Form
     {
         private string marca_combo;
+        private Modificacion modifForm;
         public Listado()
         {
             InitializeComponent();
             List<String> filtrosDisponibles = new List<string> { "Marca", "Modelo", "Patente", "Chofer" };
             initCombo(filtrosDisponibles);
-            
+                        
         }
 
         private void initCombo(List<string> filtrosDisponibles)
@@ -103,6 +104,7 @@ namespace UberFrba.Abm_Automovil
             var _chofer = txtChofer.Text;
             var _marca = marca_combo;
 
+            gridResultados.Visible = true;
             Brand.DataPropertyName = "marca";
             Modelo.DataPropertyName = "modelo";
             Patente.DataPropertyName = "patente";
@@ -132,34 +134,17 @@ namespace UberFrba.Abm_Automovil
                         modelo = o.MODELO,
                         rodado = o.RODADO,
                         marca = o.MARCA.NOMBRE,
-                        chofer = o.CHOFERE.NOMBRE
+                        chofer = o.CHOFERE.NOMBRE + " " + o.CHOFERE.APELLIDO,
+                        habilitado = o.HABILITADO,
+                        id = o.ID_AUTO
                     }).ToList();
 
-               // dataGridView1.AutoGenerateColumns = true;
-                //dataGridView1.DataSource = q2;
+                gridResultados.AutoGenerateColumns = false;
                 gridResultados.DataSource = q2;
                 
                 
-                /* var autos = dbCtx.AUTOS.Where(a => a.MODELO.Contains(_modelo) ||
-                    a.PATENTE.Contains(_patente)).Select(o =>
-                    new GridQueryResult
-                    {
-                        patente = o.PATENTE,
-                        licencia = o.LICENCIA,
-                        modelo = o.MODELO,
-                        rodado = o.RODADO,
-                        marca = o.MARCA.NOMBRE,
-                        chofer = o.CHOFERE.NOMBRE
-                    }).ToList();
-               
-                gridResultados.DataSource = autos;*/
-
-              
-               
+                
            }
-
-           
-
         }
 
         private void comboMarca_SelectionChangeCommitted(object sender, EventArgs e)
@@ -167,7 +152,53 @@ namespace UberFrba.Abm_Automovil
             marca_combo = comboMarca.SelectedValue.ToString();
         }
 
-        
+        private void gridResultados_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var grilla = (DataGridView)sender;
+            var item = (GridQueryResult)this.gridResultados.Rows[e.RowIndex].DataBoundItem;
+            
+            if (e.ColumnIndex == grilla.Columns["Seleccionar"].Index && e.RowIndex >= 0)
+            {
+                modifForm = new Abm_Automovil.Modificacion(item);
+                modifForm.Show();
+
+            }
+            
+            if (e.ColumnIndex == grilla.Columns["Deshabilitar"].Index && e.RowIndex >= 0)
+            {
+                var result = MessageBox.Show("Esta Seguro?", "Deshabilitar Auto",MessageBoxButtons.YesNo,MessageBoxIcon.Question);
+
+                if (result == DialogResult.No)
+                    return;
+                if (result == DialogResult.Yes)
+                {
+                    deshabilitarItem(item);
+                }
+
+            }
+        }
+
+        private void deshabilitarItem(GridQueryResult item)
+        {
+            using (var dbCtx = new GD1C2017Entities())
+            {
+                var auto = dbCtx.AUTOS.Where(
+                    a => a.MARCA.NOMBRE == item.marca &&
+                        a.MODELO == item.modelo &&
+                        a.LICENCIA == item.licencia &&
+                        a.PATENTE == item.patente &&
+                        a.RODADO == item.rodado && (
+                        a.CHOFERE.NOMBRE == item.chofer || a.CHOFERE.APELLIDO == item.chofer)).
+                        First();
+                if (auto.HABILITADO)
+                    auto.HABILITADO = !auto.HABILITADO;
+                
+                dbCtx.SaveChanges();
+
+                
+            }
+        }
+
     }
 }
 
@@ -180,6 +211,7 @@ public class GridQueryResult
     public string patente {get; set;}
     public string rodado {get; set;}
     public string chofer { get; set; }
-    
+    public bool habilitado { get; set; }
+    public int id { get; set; }
 
 }

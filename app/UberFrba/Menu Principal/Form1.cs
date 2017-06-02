@@ -81,6 +81,7 @@ namespace UberFrba.Menu_Principal
         {
             this.Estado.Menu = this;
             new Abm_Automovil.Form1().Show();
+        }
 
         private void button5_Click(object sender, EventArgs e)
         {

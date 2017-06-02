@@ -13,6 +13,7 @@ namespace UberFrba.Abm_Automovil
     public partial class Alta : Form
     {
         private bool habilitaDatos = false;
+        private bool impactado = false;
         private int id_chofer;
                 
         public Alta()
@@ -30,6 +31,7 @@ namespace UberFrba.Abm_Automovil
                 var marcas = dbCtx.MARCAS.ToList();
                 comboMarca.DataSource = marcas;
                 comboMarca.DisplayMember = "NOMBRE";
+                comboMarca.ValueMember = "NOMBRE";
             }
         }
 
@@ -55,8 +57,7 @@ namespace UberFrba.Abm_Automovil
                 LICENCIA = licencia,
                 RODADO = rodado,
                 HABILITADO = true,
-                //MARCA_ID = 0,
-                //CHOFER_ID = 0
+                
             };
             
             dvmAlta();
@@ -65,6 +66,11 @@ namespace UberFrba.Abm_Automovil
             {
                 impactarDatos(auto);
                 limpiarCampo();
+                
+            }
+            if (impactado) 
+            {
+                MessageBox.Show("Se guardaron los datos");
                 this.Close();
             }
         }
@@ -84,15 +90,30 @@ namespace UberFrba.Abm_Automovil
         {
             using (var dbCtx = new GD1C2017Entities())
             {
+                /*Guardo el id de la marca*/
                 var marca = dbCtx.MARCAS.Where(m => m.NOMBRE == comboMarca.Text).FirstOrDefault();
                 auto.MARCA_ID = marca.ID_MARCA;
+                
+                /*guardo el id del chofer traido en dvmDatosBase*/
                 auto.CHOFER_ID = id_chofer;
 
+                /*Busco el turno para crear registro en tabla relacion AUTOS_TURNOS*/
+                string substrTurno = txtTurno.Text.Substring(0,3); //pido ingresar en el form "mañana", "tarde" o "noche", guardo las primeras letras
+                
+                var turno = dbCtx.TURNOS.Where(t => t.DESCRIPCION.
+                    Contains(substrTurno)).FirstOrDefault();
+
+                //Agrago un auto a la lista de autos que tiene el turno
+                turno.AUTOS.Add(auto);
+                //agrego el auto a la base
                 dbCtx.AUTOS.Add(auto);
+                
                 dbCtx.SaveChanges();
                 
             }
 
+            impactado = true;
+            
         }
 
         #region ValidacionDatos
@@ -138,21 +159,7 @@ namespace UberFrba.Abm_Automovil
             
             using(var dbCtx = new GD1C2017Entities())
             {
-                //busca chofer ingresado en el form con un auto habilitado y asignado
-                /*var chofer = dbCtx.CHOFERES.Join(dbCtx.AUTOS, c => c.ID_CHOFER, a => a.CHOFER_ID, (c, a) => new { c, a }).
-                Where(chof => chof.c.APELLIDO == txtApeChofer.Text && chof.c.NOMBRE == txtNomChofer.Text && chof.a.HABILITADO).FirstOrDefault();
-
-                if (chofer != null)
-                {
-                    if (!(String.IsNullOrEmpty(chofer.c.ID_CHOFER.ToString())))
-                    {
-                        MessageBox.Show("El chofer ya tiene asignado un auto activo\n" + "seleccione un chofer diferente");
-                        txtNomChofer.Text = String.Empty;
-                        txtApeChofer.Text = String.Empty;
-                    }
-                    //me guardo el id del chofer para el momento de insertar el registro   
-                    id_chofer = chofer.c.ID_CHOFER;
-                }*/
+                
                 var chofer = dbCtx.CHOFERES.Where(c => c.APELLIDO == txtApeChofer.Text && c.NOMBRE == txtNomChofer.Text).FirstOrDefault();
                 if (chofer == null)
                 {
@@ -178,7 +185,7 @@ namespace UberFrba.Abm_Automovil
                 
             }
             
-            //limpiarCampo();
+           
           }
         
 

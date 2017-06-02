@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.comboMarca = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -53,6 +54,8 @@
             this.txtLicencia = new System.Windows.Forms.TextBox();
             this.lblRodado = new System.Windows.Forms.Label();
             this.txtRodado = new System.Windows.Forms.TextBox();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTip2 = new System.Windows.Forms.ToolTip(this.components);
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -73,6 +76,7 @@
             this.comboMarca.Name = "comboMarca";
             this.comboMarca.Size = new System.Drawing.Size(100, 21);
             this.comboMarca.TabIndex = 1;
+            this.toolTip2.SetToolTip(this.comboMarca, "Desplegá el combo y seleccioná la marca");
             // 
             // label2
             // 
@@ -134,6 +138,7 @@
             this.txtTurno.Name = "txtTurno";
             this.txtTurno.Size = new System.Drawing.Size(100, 20);
             this.txtTurno.TabIndex = 8;
+            this.toolTip1.SetToolTip(this.txtTurno, "Tip: los turnos son \"mañana\", \"tarde\" o \"noche\"");
             this.txtTurno.TextChanged += new System.EventHandler(this.txtTurno_TextChanged);
             // 
             // lblNomChofer
@@ -346,5 +351,7 @@
         private System.Windows.Forms.TextBox txtLicencia;
         private System.Windows.Forms.Label lblRodado;
         private System.Windows.Forms.TextBox txtRodado;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.ToolTip toolTip2;
     }
 }

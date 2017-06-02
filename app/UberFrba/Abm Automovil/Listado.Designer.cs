@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.groupFiltros = new System.Windows.Forms.GroupBox();
             this.btnSalir = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
@@ -51,6 +52,7 @@
             this.Chofer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Seleccionar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Deshabilitar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.groupFiltros.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridResultados)).BeginInit();
             this.SuspendLayout();
@@ -163,12 +165,12 @@
             // 
             // comboMarca
             // 
-            this.comboMarca.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboMarca.FormattingEnabled = true;
             this.comboMarca.Location = new System.Drawing.Point(232, 16);
             this.comboMarca.Name = "comboMarca";
             this.comboMarca.Size = new System.Drawing.Size(121, 21);
             this.comboMarca.TabIndex = 3;
+            this.toolTip1.SetToolTip(this.comboMarca, "Desplegá el combo y seleccioná la marca");
             this.comboMarca.Visible = false;
             this.comboMarca.SelectionChangeCommitted += new System.EventHandler(this.comboMarca_SelectionChangeCommitted);
             // 
@@ -217,6 +219,8 @@
             this.gridResultados.Name = "gridResultados";
             this.gridResultados.Size = new System.Drawing.Size(581, 150);
             this.gridResultados.TabIndex = 1;
+            this.gridResultados.Visible = false;
+            this.gridResultados.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridResultados_CellContentClick);
             // 
             // Brand
             // 
@@ -301,5 +305,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Chofer;
         private System.Windows.Forms.DataGridViewButtonColumn Seleccionar;
         private System.Windows.Forms.DataGridViewButtonColumn Deshabilitar;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

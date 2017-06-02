@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.grupoAuto = new System.Windows.Forms.GroupBox();
-            this.bajaAuto = new System.Windows.Forms.Button();
             this.modifAuto = new System.Windows.Forms.Button();
             this.altaAuto = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
@@ -38,24 +37,14 @@
             // 
             // grupoAuto
             // 
-            this.grupoAuto.Controls.Add(this.bajaAuto);
             this.grupoAuto.Controls.Add(this.modifAuto);
             this.grupoAuto.Controls.Add(this.altaAuto);
             this.grupoAuto.Location = new System.Drawing.Point(13, 13);
             this.grupoAuto.Name = "grupoAuto";
-            this.grupoAuto.Size = new System.Drawing.Size(149, 138);
+            this.grupoAuto.Size = new System.Drawing.Size(149, 114);
             this.grupoAuto.TabIndex = 0;
             this.grupoAuto.TabStop = false;
             this.grupoAuto.Text = "Control de Autos";
-            // 
-            // bajaAuto
-            // 
-            this.bajaAuto.Location = new System.Drawing.Point(7, 100);
-            this.bajaAuto.Name = "bajaAuto";
-            this.bajaAuto.Size = new System.Drawing.Size(111, 23);
-            this.bajaAuto.TabIndex = 2;
-            this.bajaAuto.Text = "Dar Baja";
-            this.bajaAuto.UseVisualStyleBackColor = true;
             // 
             // modifAuto
             // 
@@ -104,7 +93,6 @@
         #endregion
 
         private System.Windows.Forms.GroupBox grupoAuto;
-        private System.Windows.Forms.Button bajaAuto;
         private System.Windows.Forms.Button modifAuto;
         private System.Windows.Forms.Button altaAuto;
         private System.Windows.Forms.Button btnSalir;

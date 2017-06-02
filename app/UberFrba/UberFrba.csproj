@@ -73,6 +73,12 @@
     <Compile Include="Abm Automovil\Listado.Designer.cs">
       <DependentUpon>Listado.cs</DependentUpon>
     </Compile>
+    <Compile Include="Abm Automovil\Modificacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Automovil\Modificacion.Designer.cs">
+      <DependentUpon>Modificacion.cs</DependentUpon>
+    </Compile>
     <Compile Include="Abm ChoferCliente\AltaModificacion.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -160,11 +166,11 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="IChoferCliente.cs" />
-    <Compile Include="Listado Estadistico\Form1.cs">
+    <Compile Include="Listado Estadistico\FormListados.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Listado Estadistico\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Listado Estadistico\FormListados.Designer.cs">
+      <DependentUpon>FormListados.cs</DependentUpon>
     </Compile>
     <Compile Include="MARCA.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -234,6 +240,9 @@
     <EmbeddedResource Include="Abm Automovil\Listado.resx">
       <DependentUpon>Listado.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Abm Automovil\Modificacion.resx">
+      <DependentUpon>Modificacion.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Abm ChoferCliente\AltaModificacion.resx">
       <DependentUpon>AltaModificacion.cs</DependentUpon>
     </EmbeddedResource>
@@ -257,6 +266,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listado Estadistico\FormListados.resx">
+      <DependentUpon>FormListados.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Menu Principal\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
