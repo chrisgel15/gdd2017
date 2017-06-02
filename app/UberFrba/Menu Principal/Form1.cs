@@ -90,6 +90,18 @@ namespace UberFrba.Menu_Principal
 
         }
 
+        private void button7_Click(object sender, EventArgs e)
+        {
+            this.Estado.Menu = this;
+            new Registro_Viajes.Form1().Show();
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            this.Estado.Menu = this;
+            new Rendicion_Viajes.Form1().Show();
+        }
+
         
        
     }

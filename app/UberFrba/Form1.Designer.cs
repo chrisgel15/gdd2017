@@ -88,7 +88,7 @@
             this.lblError.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblError.Location = new System.Drawing.Point(73, 231);
             this.lblError.Name = "lblError";
-            this.lblError.Size = new System.Drawing.Size(297, 26);
+            this.lblError.Size = new System.Drawing.Size(385, 26);
             this.lblError.TabIndex = 5;
             this.lblError.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
