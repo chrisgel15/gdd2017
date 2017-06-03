@@ -156,6 +156,12 @@ namespace UberFrba.Abm_Rol
                 return;
             }
 
+            if (this.checkedListBox1.CheckedItems.Count == 0)
+            {
+                this.lblAlta.Text = "Elija al menos una funcionalidad";
+                return;
+            }
+
             try
             {
                 using (var dbCtx = new GD1C2017Entities())
