@@ -72,6 +72,8 @@ namespace UberFrba.Rendicion_Viajes
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
+            this.dataGridView1.DataSource = null;
+
             LimpiaErrores();
 
             var choferValido = ValidaDDLRequerido(this.ddlChofer);
@@ -100,6 +102,8 @@ namespace UberFrba.Rendicion_Viajes
 
                 var viajesDelChofer = dbCtx.VIAJES.Where(v => v.CHOFER_ID == idChofer && v.FECHA_INICIO >= dtInicio.Value.Date && v.FECHA_INICIO < diaDespues).ToList();
 
+                var listaViajes = new List<DataGridRendicion>();
+
                 foreach(VIAJE vi in viajesDelChofer)
                 {
                     var precioBase = dbCtx.TURNOS.Where(t => t.ID_TURNO == vi.TURNO_ID).FirstOrDefault().PRECIO_BASE;
@@ -107,6 +111,16 @@ namespace UberFrba.Rendicion_Viajes
                     var cantidadKm = vi.CANTIDAD_KM;
 
                     importeViajes += precioBase + precioKm * cantidadKm;
+
+                    listaViajes.Add(new DataGridRendicion{ 
+                        clienteNombre = vi.CLIENTE.NOMBRE, 
+                        cantidadKilomentro = vi.CANTIDAD_KM,
+                        fechaInicio = vi.FECHA_INICIO, 
+                        fechaFin = vi.FECHA_FIN, 
+                        Importe = precioBase + precioKm*cantidadKm,
+                        clienteApellido = vi.CLIENTE.APELLIDO,
+                        clienteDNI = vi.CLIENTE.DNI
+                    });
 
                 }
 
@@ -124,9 +138,15 @@ namespace UberFrba.Rendicion_Viajes
                 {
                     dbCtx.RENDICIONES.Add(r);
                     dbCtx.SaveChanges();
-                    this.lblError.Text = "Se ha generado la rendicion por PESOS....";
+                    this.lblError.Text = "Se ha generado la rendicion por $ " + importeViajes.ToString();
 
-
+                    if (listaViajes.Count > 0)
+                    {
+                        this.dataGridView1.Visible = true;
+                        this.dataGridView1.DataSource = listaViajes;
+                    }
+                    else
+                        this.dataGridView1.Visible = false;                  
                 }
                 catch (Exception ex)
                 {

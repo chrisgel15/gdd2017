@@ -138,6 +138,7 @@
     <Compile Include="FACTURA.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Facturacion\DataGridFacturacion.cs" />
     <Compile Include="Facturacion\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -154,14 +155,12 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="IChoferCliente.cs" />
-
     <Compile Include="Listado Estadistico\FormListados.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Listado Estadistico\FormListados.Designer.cs">
       <DependentUpon>FormListados.cs</DependentUpon>
     </Compile>
-
     <Compile Include="MARCA.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -194,6 +193,7 @@
     <Compile Include="Registro Viajes\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Rendicion Viajes\DataGridRendicion.cs" />
     <Compile Include="Rendicion Viajes\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -253,6 +253,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Turno\AltaModificacion.resx">
       <DependentUpon>AltaModificacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Facturacion\Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
@@ -317,6 +320,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

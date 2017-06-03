@@ -13,6 +13,7 @@ namespace UberFrba.Menu_Principal
     public partial class Form1 : Form
     {
         private Estado Estado;
+        public List<ROLE> roles { get; set; }
 
         public Form1()
         {
@@ -24,10 +25,40 @@ namespace UberFrba.Menu_Principal
             this.Estado = est;
             InitializeComponent();
             SetearLabels();
+            //  ActivarBotonesSegunRol(this.roles);
         }
 
-        private void DesactivarBotonesSegunRol(int idRol)
+        private void ActivarBotonesSegunRol(List<FUNCIONALIDADE> funcionalidades)
         {
+            this.btnAbmRol.Enabled = false;
+            this.btnABMCliente.Enabled = false;
+            this.btnAbmAuto.Enabled = false;
+            this.btnABMChofer.Enabled = false;
+            this.btnRegistroViaje.Enabled = false;
+            this.btnRendicion.Enabled = false;
+            this.btnFacturacion.Enabled = false;
+            this.btnReportes.Enabled = false;
+
+
+            foreach (FUNCIONALIDADE f in funcionalidades)
+            {
+                switch (f.ID_FUNC)
+                {
+                    case 1: this.btnAbmRol.Enabled = true; break;
+                    //case 2: 
+                    //case 3: 
+                    case 4: this.btnABMCliente.Enabled = true; break;
+                    case 5: this.btnAbmAuto.Enabled = true; break;
+                    case 6: this.btnABMChofer.Enabled = true; break;
+                    case 7: this.btnRegistroViaje.Enabled = true; break;
+                    case 8: this.btnRendicion.Enabled = true; break;
+                    case 9: this.btnFacturacion.Enabled = true; break;
+                    case 10: btnReportes.Enabled = true; break;
+                    default: break;
+                }
+            }
+
+
 
         }
 
@@ -39,8 +70,18 @@ namespace UberFrba.Menu_Principal
 
                 this.lblNombreUsuario.Text = usu.NOMBRE;
                 this.lblRolUsuario.Text = dbCtx.ROLES.Where(r => r.ID_ROL == Estado.IdRol).FirstOrDefault().NOMBRE;
+                // this.roles = usu.ROLES.ToList();
+
+                var funcionalidades = dbCtx.ROLES.Where(r => r.ID_ROL == this.Estado.IdRol).First().FUNCIONALIDADES.ToList();
+                ActivarBotonesSegunRol(funcionalidades);
+
 
             }
+        }
+
+        private void ActivarBotonesSegunRol()
+        {
+            throw new NotImplementedException();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -64,13 +105,13 @@ namespace UberFrba.Menu_Principal
             new Abm_Rol.ABMRol(this.Estado).ShowDialog();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void btnABMChofer_Click(object sender, EventArgs e)
         {
             this.Estado.Menu = this;
             new Abm_ChoferCliente.FormChoferCliente(new Chofer()).Show();
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void btnABMCliente_Click(object sender, EventArgs e)
         {
             this.Estado.Menu = this;
             new Abm_ChoferCliente.FormChoferCliente(new Clients()).Show();
@@ -83,26 +124,34 @@ namespace UberFrba.Menu_Principal
             new Abm_Automovil.Form1().Show();
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        private void btnAbmTurno_Click(object sender, EventArgs e)
         {
             this.Estado.Menu = this;
             new Abm_Turno.AbmTurno().Show();
 
         }
 
-        private void button7_Click(object sender, EventArgs e)
+        private void btnRegistroViaje_Click(object sender, EventArgs e)
         {
             this.Estado.Menu = this;
             new Registro_Viajes.Form1().Show();
         }
 
-        private void button8_Click(object sender, EventArgs e)
+        private void btnRendicion_Click(object sender, EventArgs e)
         {
             this.Estado.Menu = this;
             new Rendicion_Viajes.Form1().Show();
         }
 
-        
-       
+        private void btnFacturacion_Click(object sender, EventArgs e)
+        {
+            this.Estado.Menu = this;
+            new Facturacion.Form1().Show();
+        }
+
+
+
+
+
     }
 }

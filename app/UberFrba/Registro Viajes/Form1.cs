@@ -36,10 +36,10 @@ namespace UberFrba.Registro_Viajes
             this.dtFin.Value = DateTime.Now;
 
             this.dtInicio.Format = DateTimePickerFormat.Custom;
-            this.dtInicio.CustomFormat = "dd/MM/yyyy hh:mm:ss";
+            this.dtInicio.CustomFormat = "dd/MM/yyyy HH:mm:ss";
 
             this.dtFin.Format = DateTimePickerFormat.Custom;
-            this.dtFin.CustomFormat = "dd/MM/yyyy hh:mm:ss"; 
+            this.dtFin.CustomFormat = "dd/MM/yyyy HH:mm:ss"; 
          
 
         }
@@ -222,27 +222,42 @@ namespace UberFrba.Registro_Viajes
             var cliente = (CLIENTE)this.ddlCliente.SelectedItem;
             var chofer = (CHOFERE)this.ddlChofer.SelectedItem;
 
+            
+
+
             using(var dbCtx = new GD1C2017Entities())
             {
-                if (dbCtx.VIAJES.Any(v => v.CLIENTE_ID == cliente.ID_CLIENTE && dtInicio.Value >= v.FECHA_INICIO && dtInicio.Value <= v.FECHA_FIN))
+                var viajes = dbCtx.VIAJES.Where(v => v.CLIENTE_ID == cliente.ID_CLIENTE && dtInicio.Value >= v.FECHA_INICIO && dtInicio.Value <= v.FECHA_FIN && v.FECHA_FIN != null);
+
+                foreach (VIAJE v in viajes)
+                {
+                    if (v.FECHA_FIN != null)
+                    {
+                        bool b1 = dtInicio.Value >= v.FECHA_INICIO;
+                        bool b2 = dtInicio.Value <= v.FECHA_FIN;
+                    }
+                }
+
+
+                if (dbCtx.VIAJES.Any(v => v.CLIENTE_ID == cliente.ID_CLIENTE && dtInicio.Value >= v.FECHA_INICIO && dtInicio.Value <= v.FECHA_FIN && v.FECHA_FIN != null))
                 {
                     this.errorProvider1.SetError(dtInicio, "El cliente tiene un viaje en esa fecha de inicio");
                     return false;
                 }
 
-                if (dbCtx.VIAJES.Any(v => v.CLIENTE_ID == cliente.ID_CLIENTE && dtFin.Value >= v.FECHA_INICIO && dtFin.Value <= v.FECHA_FIN))
+                if (dbCtx.VIAJES.Any(v => v.CLIENTE_ID == cliente.ID_CLIENTE && dtFin.Value >= v.FECHA_INICIO && dtFin.Value <= v.FECHA_FIN && v.FECHA_FIN != null))
                 {
                     this.errorProvider1.SetError(dtFin, "El cliente tiene un viaje en esa fecha de Fin");
                     return false;
                 }
 
-                if (dbCtx.VIAJES.Any(v => v.CHOFER_ID == chofer.ID_CHOFER && dtInicio.Value >= v.FECHA_INICIO && dtInicio.Value <= v.FECHA_FIN))
+                if (dbCtx.VIAJES.Any(v => v.CHOFER_ID == chofer.ID_CHOFER && dtInicio.Value >= v.FECHA_INICIO && dtInicio.Value <= v.FECHA_FIN && v.FECHA_FIN != null))
                 {
                     this.errorProvider1.SetError(dtInicio, "El chofer tiene un viaje en esa fecha de inicio");
                     return false;
                 }
 
-                if (dbCtx.VIAJES.Any(v => v.CHOFER_ID == chofer.ID_CHOFER && dtFin.Value >= v.FECHA_INICIO && dtFin.Value <= v.FECHA_FIN))
+                if (dbCtx.VIAJES.Any(v => v.CHOFER_ID == chofer.ID_CHOFER && dtFin.Value >= v.FECHA_INICIO && dtFin.Value <= v.FECHA_FIN && v.FECHA_FIN != null))
                 {
                     this.errorProvider1.SetError(dtFin, "El chofer tiene un viaje en esa fecha de Fin");
                     return false;
