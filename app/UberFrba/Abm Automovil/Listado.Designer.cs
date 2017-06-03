@@ -112,6 +112,7 @@
             // txtChofer
             // 
             this.txtChofer.Location = new System.Drawing.Point(232, 95);
+            this.txtChofer.MaxLength = 20;
             this.txtChofer.Name = "txtChofer";
             this.txtChofer.Size = new System.Drawing.Size(121, 20);
             this.txtChofer.TabIndex = 9;
@@ -130,6 +131,7 @@
             // txtPatente
             // 
             this.txtPatente.Location = new System.Drawing.Point(232, 69);
+            this.txtPatente.MaxLength = 20;
             this.txtPatente.Name = "txtPatente";
             this.txtPatente.Size = new System.Drawing.Size(122, 20);
             this.txtPatente.TabIndex = 7;
@@ -148,6 +150,7 @@
             // txtModelo
             // 
             this.txtModelo.Location = new System.Drawing.Point(232, 43);
+            this.txtModelo.MaxLength = 20;
             this.txtModelo.Name = "txtModelo";
             this.txtModelo.Size = new System.Drawing.Size(121, 20);
             this.txtModelo.TabIndex = 5;

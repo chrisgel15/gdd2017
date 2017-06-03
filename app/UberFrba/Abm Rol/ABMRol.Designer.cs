@@ -29,24 +29,24 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblAlta = new System.Windows.Forms.Label();
             this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
             this.altaAceptar = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.txtAltaRol = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.lblModif = new System.Windows.Forms.Label();
             this.modifHabRol = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.modifCambFunc = new System.Windows.Forms.Button();
             this.modifCambiarRol = new System.Windows.Forms.Button();
             this.modifRol = new System.Windows.Forms.ComboBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.lblBaja = new System.Windows.Forms.Label();
             this.bajaDeshabRol = new System.Windows.Forms.Button();
             this.bajaRol = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.lblAlta = new System.Windows.Forms.Label();
-            this.lblModif = new System.Windows.Forms.Label();
-            this.lblBaja = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -66,6 +66,15 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "ALTA";
+            // 
+            // lblAlta
+            // 
+            this.lblAlta.AutoSize = true;
+            this.lblAlta.Location = new System.Drawing.Point(22, 241);
+            this.lblAlta.Name = "lblAlta";
+            this.lblAlta.Size = new System.Drawing.Size(35, 13);
+            this.lblAlta.TabIndex = 3;
+            this.lblAlta.Text = "lblAlta";
             // 
             // checkedListBox1
             // 
@@ -97,6 +106,7 @@
             // txtAltaRol
             // 
             this.txtAltaRol.Location = new System.Drawing.Point(6, 36);
+            this.txtAltaRol.MaxLength = 20;
             this.txtAltaRol.Name = "txtAltaRol";
             this.txtAltaRol.Size = new System.Drawing.Size(100, 20);
             this.txtAltaRol.TabIndex = 1;
@@ -124,6 +134,15 @@
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "MODIFICACIÓN";
+            // 
+            // lblModif
+            // 
+            this.lblModif.AutoSize = true;
+            this.lblModif.Location = new System.Drawing.Point(22, 121);
+            this.lblModif.Name = "lblModif";
+            this.lblModif.Size = new System.Drawing.Size(43, 13);
+            this.lblModif.TabIndex = 6;
+            this.lblModif.Text = "lblModif";
             // 
             // modifHabRol
             // 
@@ -186,6 +205,15 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "BAJA";
             // 
+            // lblBaja
+            // 
+            this.lblBaja.AutoSize = true;
+            this.lblBaja.Location = new System.Drawing.Point(25, 81);
+            this.lblBaja.Name = "lblBaja";
+            this.lblBaja.Size = new System.Drawing.Size(38, 13);
+            this.lblBaja.TabIndex = 3;
+            this.lblBaja.Text = "lblBaja";
+            // 
             // bajaDeshabRol
             // 
             this.bajaDeshabRol.Location = new System.Drawing.Point(139, 34);
@@ -213,33 +241,6 @@
             this.label4.Size = new System.Drawing.Size(29, 13);
             this.label4.TabIndex = 0;
             this.label4.Text = "ROL";
-            // 
-            // lblAlta
-            // 
-            this.lblAlta.AutoSize = true;
-            this.lblAlta.Location = new System.Drawing.Point(22, 241);
-            this.lblAlta.Name = "lblAlta";
-            this.lblAlta.Size = new System.Drawing.Size(35, 13);
-            this.lblAlta.TabIndex = 3;
-            this.lblAlta.Text = "lblAlta";
-            // 
-            // lblModif
-            // 
-            this.lblModif.AutoSize = true;
-            this.lblModif.Location = new System.Drawing.Point(22, 121);
-            this.lblModif.Name = "lblModif";
-            this.lblModif.Size = new System.Drawing.Size(43, 13);
-            this.lblModif.TabIndex = 6;
-            this.lblModif.Text = "lblModif";
-            // 
-            // lblBaja
-            // 
-            this.lblBaja.AutoSize = true;
-            this.lblBaja.Location = new System.Drawing.Point(25, 81);
-            this.lblBaja.Name = "lblBaja";
-            this.lblBaja.Size = new System.Drawing.Size(38, 13);
-            this.lblBaja.TabIndex = 3;
-            this.lblBaja.Text = "lblBaja";
             // 
             // ABMRol
             // 

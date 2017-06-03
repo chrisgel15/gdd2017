@@ -100,6 +100,7 @@
             // txtModelo
             // 
             this.txtModelo.Location = new System.Drawing.Point(66, 46);
+            this.txtModelo.MaxLength = 20;
             this.txtModelo.Name = "txtModelo";
             this.txtModelo.Size = new System.Drawing.Size(100, 20);
             this.txtModelo.TabIndex = 4;
@@ -117,6 +118,7 @@
             // txtPatente
             // 
             this.txtPatente.Location = new System.Drawing.Point(66, 80);
+            this.txtPatente.MaxLength = 20;
             this.txtPatente.Name = "txtPatente";
             this.txtPatente.Size = new System.Drawing.Size(100, 20);
             this.txtPatente.TabIndex = 6;
@@ -135,6 +137,7 @@
             // txtTurno
             // 
             this.txtTurno.Location = new System.Drawing.Point(66, 119);
+            this.txtTurno.MaxLength = 20;
             this.txtTurno.Name = "txtTurno";
             this.txtTurno.Size = new System.Drawing.Size(100, 20);
             this.txtTurno.TabIndex = 8;
@@ -153,6 +156,7 @@
             // txtNomChofer
             // 
             this.txtNomChofer.Location = new System.Drawing.Point(61, 30);
+            this.txtNomChofer.MaxLength = 100;
             this.txtNomChofer.Name = "txtNomChofer";
             this.txtNomChofer.Size = new System.Drawing.Size(100, 20);
             this.txtNomChofer.TabIndex = 10;
@@ -221,6 +225,7 @@
             // txtApeChofer
             // 
             this.txtApeChofer.Location = new System.Drawing.Point(61, 64);
+            this.txtApeChofer.MaxLength = 100;
             this.txtApeChofer.Name = "txtApeChofer";
             this.txtApeChofer.Size = new System.Drawing.Size(100, 20);
             this.txtApeChofer.TabIndex = 17;
@@ -271,6 +276,7 @@
             // txtLicencia
             // 
             this.txtLicencia.Location = new System.Drawing.Point(277, 43);
+            this.txtLicencia.MaxLength = 20;
             this.txtLicencia.Name = "txtLicencia";
             this.txtLicencia.Size = new System.Drawing.Size(100, 20);
             this.txtLicencia.TabIndex = 20;
@@ -287,6 +293,7 @@
             // txtRodado
             // 
             this.txtRodado.Location = new System.Drawing.Point(277, 76);
+            this.txtRodado.MaxLength = 20;
             this.txtRodado.Name = "txtRodado";
             this.txtRodado.Size = new System.Drawing.Size(100, 20);
             this.txtRodado.TabIndex = 22;

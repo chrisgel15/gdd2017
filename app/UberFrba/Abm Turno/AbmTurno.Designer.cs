@@ -49,6 +49,7 @@
             // txtBusqueda
             // 
             this.txtBusqueda.Location = new System.Drawing.Point(27, 75);
+            this.txtBusqueda.MaxLength = 30;
             this.txtBusqueda.Name = "txtBusqueda";
             this.txtBusqueda.Size = new System.Drawing.Size(100, 20);
             this.txtBusqueda.TabIndex = 15;
