@@ -91,23 +91,30 @@ namespace UberFrba
 
         #region Busqueda, modificacion y baja
 
-        public IList<GridData> Buscar(string busqueda)
+        public IList<GridData> Buscar(string busquedaApellido, string busquedaNombre, string busquedaDni)
         {
 
-            decimal dni = 0;
-            decimal.TryParse(busqueda, out dni);
+           decimal dni = 0;
+           decimal.TryParse(busquedaDni, out dni);
             using (var dbCtx = new GD1C2017Entities())
             {
-                var clientes = dbCtx.CLIENTES.Where(c => c.NOMBRE.Contains(busqueda) 
-                                                        || c.APELLIDO.Contains(busqueda) || c.DNI == dni).Select(o =>
+                List<CLIENTE> clientes = dbCtx.CLIENTES.ToList();
+
+                if (!String.IsNullOrEmpty(busquedaApellido))
+                    clientes = clientes.Where(c => c.APELLIDO.ToUpper().Contains(busquedaApellido.ToUpper())).ToList();
+
+                if (!String.IsNullOrEmpty(busquedaNombre))
+                    clientes = clientes.Where(c => c.NOMBRE.ToUpper().Contains(busquedaNombre.ToUpper())).ToList();
+
+                if (dni > 0)
+                    clientes = clientes.Where(c => c.DNI == dni).ToList();
+
+                IList<GridData> returnList = clientes.Select(o =>
                     new GridData { id = o.ID_CLIENTE, nombre = o.NOMBRE, apellido = o.APELLIDO, dni = o.DNI, habilitado = o.HABIILITADO }).ToList();
 
-
-                return clientes;
+                return returnList; ;
 
             }
-
-
         }
 
         public void AbrirFormActualizar(int id)

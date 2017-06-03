@@ -91,18 +91,27 @@ namespace UberFrba
         #endregion
 
         #region Busqueda y modificacion
-        public IList<GridData> Buscar(string busqueda)
+        public IList<GridData> Buscar(string busquedaApellido, string busquedaNombre, string busquedaDni)
         {
             decimal dni = 0;
-            decimal.TryParse(busqueda, out dni);
+            decimal.TryParse(busquedaDni, out dni);
             using (var dbCtx = new GD1C2017Entities())
             {
-                var choferes = dbCtx.CHOFERES.Where(c => c.NOMBRE.Contains(busqueda)
-                                        || c.APELLIDO.Contains(busqueda) || c.DNI == dni).Select(o =>
+                List<CHOFERE> choferes = dbCtx.CHOFERES.ToList();
+
+                if (!String.IsNullOrEmpty(busquedaApellido))
+                    choferes = choferes.Where(c => c.APELLIDO.ToUpper().Contains(busquedaApellido.ToUpper())).ToList();
+
+                if (!String.IsNullOrEmpty(busquedaNombre))
+                    choferes = choferes.Where(c => c.NOMBRE.ToUpper().Contains(busquedaNombre.ToUpper())).ToList();
+
+                if (dni > 0)
+                    choferes = choferes.Where(c => c.DNI == dni).ToList();
+
+                IList<GridData> returnList = choferes.Select(o =>
                     new GridData { id = o.ID_CHOFER, nombre = o.NOMBRE, apellido = o.APELLIDO, dni = o.DNI, habilitado = o.HABILITADO }).ToList();
 
-
-                return choferes;
+                return returnList; ;
 
             }
         }

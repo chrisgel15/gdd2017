@@ -24,7 +24,7 @@ namespace UberFrba
 
         string Alta(AltaModificacionData data);
 
-        IList<GridData> Buscar(string busqueda);
+        IList<GridData> Buscar(string busquedaApellido, string busquedaNombre, string busquedaDni);
 
         void Habilitar(int id);
 

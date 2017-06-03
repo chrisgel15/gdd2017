@@ -1,4 +1,5 @@
 ﻿using System;
+
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,7 +18,10 @@ namespace UberFrba.Abm_ChoferCliente
 
         public IChoferCliente choferCliente { get; set; }
 
-        public string busqueda { get; set; }
+        public string busquedaApellido { get; set; }
+        public string busquedaNombre { get; set; }
+
+        public string busquedaDni { get; set; }
 
         #endregion
 
@@ -103,9 +107,11 @@ namespace UberFrba.Abm_ChoferCliente
         private void btnBuscar_Click(object sender, EventArgs e)
         {
             this.lblMsgChoferCliente.Text = String.Empty;
-            this.busqueda = this.txtBusqueda.Text;
+            this.busquedaApellido = this.txtBusquedaApellido.Text;
+            this.busquedaNombre = this.txtBusquedaNombre.Text;
+            this.busquedaDni = this.txtDniNombre.Text;
 
-            this.dataGridView1.DataSource = this.choferCliente.Buscar(busqueda);
+            this.dataGridView1.DataSource = this.choferCliente.Buscar(busquedaApellido, busquedaNombre, busquedaDni);
             this.dataGridView1.Visible = true;
             this.dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
@@ -145,7 +151,7 @@ namespace UberFrba.Abm_ChoferCliente
 
         private void RefrescarGrilla()
         {
-            this.dataGridView1.DataSource = this.choferCliente.Buscar(busqueda);
+            this.dataGridView1.DataSource = this.choferCliente.Buscar(busquedaApellido, busquedaNombre, busquedaDni);
         }
         #endregion
 
