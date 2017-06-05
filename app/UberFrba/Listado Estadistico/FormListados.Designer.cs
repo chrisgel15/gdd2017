@@ -31,15 +31,17 @@
             this.label1 = new System.Windows.Forms.Label();
             this.aniotxtb = new System.Windows.Forms.TextBox();
             this.label = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboBoxTRIMESTRE = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.radioButton4 = new System.Windows.Forms.RadioButton();
             this.label3 = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.gridResultados = new System.Windows.Forms.DataGridView();
+            this.boxOpciones = new System.Windows.Forms.GroupBox();
+            ((System.ComponentModel.ISupportInitialize)(this.gridResultados)).BeginInit();
+            this.boxOpciones.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -50,7 +52,6 @@
             this.label1.Size = new System.Drawing.Size(38, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "Año";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // aniotxtb
             // 
@@ -68,14 +69,13 @@
             this.label.TabIndex = 2;
             this.label.Text = "Trimestre";
             // 
-            // comboBox1
+            // comboBoxTRIMESTRE
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(491, 22);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 28);
-            this.comboBox1.TabIndex = 3;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.comboBoxTRIMESTRE.FormattingEnabled = true;
+            this.comboBoxTRIMESTRE.Location = new System.Drawing.Point(491, 22);
+            this.comboBoxTRIMESTRE.Name = "comboBoxTRIMESTRE";
+            this.comboBoxTRIMESTRE.Size = new System.Drawing.Size(121, 28);
+            this.comboBoxTRIMESTRE.TabIndex = 3;
             // 
             // label2
             // 
@@ -90,7 +90,7 @@
             // radioButton1
             // 
             this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(139, 153);
+            this.radioButton1.Location = new System.Drawing.Point(6, 14);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(267, 24);
             this.radioButton1.TabIndex = 5;
@@ -101,7 +101,7 @@
             // radioButton2
             // 
             this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(139, 183);
+            this.radioButton2.Location = new System.Drawing.Point(6, 44);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(321, 24);
             this.radioButton2.TabIndex = 6;
@@ -112,7 +112,7 @@
             // radioButton3
             // 
             this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(139, 213);
+            this.radioButton3.Location = new System.Drawing.Point(6, 74);
             this.radioButton3.Name = "radioButton3";
             this.radioButton3.Size = new System.Drawing.Size(237, 24);
             this.radioButton3.TabIndex = 7;
@@ -123,14 +123,13 @@
             // radioButton4
             // 
             this.radioButton4.AutoSize = true;
-            this.radioButton4.Location = new System.Drawing.Point(139, 243);
+            this.radioButton4.Location = new System.Drawing.Point(6, 104);
             this.radioButton4.Name = "radioButton4";
             this.radioButton4.Size = new System.Drawing.Size(539, 24);
             this.radioButton4.TabIndex = 8;
             this.radioButton4.TabStop = true;
             this.radioButton4.Text = "Cliente que utilizo más veces el mismo automóvil en los viajes realizados";
             this.radioButton4.UseVisualStyleBackColor = true;
-            this.radioButton4.CheckedChanged += new System.EventHandler(this.radioButton4_CheckedChanged);
             // 
             // label3
             // 
@@ -141,35 +140,45 @@
             this.label3.TabIndex = 9;
             this.label3.Text = "(Se mostrará un TOP 5)";
             // 
-            // dataGridView1
+            // gridResultados
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 293);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 28;
-            this.dataGridView1.Size = new System.Drawing.Size(728, 219);
-            this.dataGridView1.TabIndex = 10;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.gridResultados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gridResultados.Location = new System.Drawing.Point(12, 293);
+            this.gridResultados.Name = "gridResultados";
+            this.gridResultados.RowTemplate.Height = 28;
+            this.gridResultados.Size = new System.Drawing.Size(728, 219);
+            this.gridResultados.TabIndex = 10;
             // 
-            // Form1
+            // boxOpciones
+            // 
+            this.boxOpciones.Controls.Add(this.radioButton1);
+            this.boxOpciones.Controls.Add(this.radioButton2);
+            this.boxOpciones.Controls.Add(this.radioButton3);
+            this.boxOpciones.Controls.Add(this.radioButton4);
+            this.boxOpciones.Location = new System.Drawing.Point(101, 144);
+            this.boxOpciones.Name = "boxOpciones";
+            this.boxOpciones.Size = new System.Drawing.Size(558, 143);
+            this.boxOpciones.TabIndex = 11;
+            this.boxOpciones.TabStop = false;
+            // 
+            // Opciones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(752, 524);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.boxOpciones);
+            this.Controls.Add(this.gridResultados);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.radioButton4);
-            this.Controls.Add(this.radioButton3);
-            this.Controls.Add(this.radioButton2);
-            this.Controls.Add(this.radioButton1);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.comboBoxTRIMESTRE);
             this.Controls.Add(this.label);
             this.Controls.Add(this.aniotxtb);
             this.Controls.Add(this.label1);
-            this.Name = "Form1";
+            this.Name = "Opciones";
             this.Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridResultados)).EndInit();
+            this.boxOpciones.ResumeLayout(false);
+            this.boxOpciones.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -180,13 +189,14 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox aniotxtb;
         private System.Windows.Forms.Label label;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comboBoxTRIMESTRE;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton radioButton3;
         private System.Windows.Forms.RadioButton radioButton4;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView gridResultados;
+        private System.Windows.Forms.GroupBox boxOpciones;
     }
 }

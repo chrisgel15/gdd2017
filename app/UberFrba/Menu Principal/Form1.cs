@@ -53,7 +53,7 @@ namespace UberFrba.Menu_Principal
                     case 7: this.btnRegistroViaje.Enabled = true; break;
                     case 8: this.btnRendicion.Enabled = true; break;
                     case 9: this.btnFacturacion.Enabled = true; break;
-                    case 10: btnReportes.Enabled = true; break;
+                    case 10: this.btnReportes.Enabled = true; break;
                     default: break;
                 }
             }
@@ -147,6 +147,12 @@ namespace UberFrba.Menu_Principal
         {
             this.Estado.Menu = this;
             new Facturacion.Form1().Show();
+        }
+
+        private void btnReportes_Click(object sender, EventArgs e)
+        {
+            this.Estado.Menu = this;
+            new Listado_Estadistico.Form1().Show();
         }
 
 
