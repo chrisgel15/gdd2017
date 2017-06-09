@@ -13,43 +13,60 @@ namespace UberFrba.Listado_Estadistico
 {
     public partial class Form1 : Form
     {
-        private String trimestre_combo;
-
         public Form1()
         {
             InitializeComponent();
-            
+            for (int i = 1; i <= 4; i++)
+            {
+                comboBoxTRIMESTRE.Items.Add(i);
+            }
+
         }
 
-        private void boxOpciones_Click(object sender, EventArgs e)
+        private void radioButton1_CheckedChanged_1(object sender, EventArgs e)
         {
-            /*using (var dbCtx = new GD1C2017Entities())
             {
-                using (System.Data.SqlClient.SqlCommand cmd = new SqlCommand("choferesMayorRecaudacionSP",dbCtx))
+                String trimestre = comboBoxTRIMESTRE.SelectedItem.ToString();
+                String inicio = "";
+                String fin = "";
+
+                using (var dbCtx = new GD1C2017Entities())
                 {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add("@Anio", SqlDbType.VarChar).Value = aniotxtb.Text;
-                    var trimestre = comboBoxTRIMESTRE.SelectedItem.ToString();
+
+
                     switch (trimestre)
                     {
                         case "1":
-                            cmd.Parameters.Add("@Inicio", SqlDbType.VarChar).Value = 1;
-                            cmd.Parameters.Add("@Fin", SqlDbType.VarChar).Value = 3;
+                            inicio = "01";
+                            fin = "03";
+                            break;
                         case "2":
-                            cmd.Parameters.Add("@Inicio", SqlDbType.VarChar).Value = 4;
-                            cmd.Parameters.Add("@Fin", SqlDbType.VarChar).Value = 6;
+                            inicio = "04";
+                            fin = "06";
+                            break;
                         case "3":
-                            cmd.Parameters.Add("@Inicio", SqlDbType.VarChar).Value = 7;
-                            cmd.Parameters.Add("@Fin", SqlDbType.VarChar).Value = 9;
+                            inicio = "07";
+                            fin = "09";
+                            break;
                         case "4":
-                            cmd.Parameters.Add("@Inicio", SqlDbType.VarChar).Value = 10;
-                            cmd.Parameters.Add("@Fin", SqlDbType.VarChar).Value = 12;
+                            inicio = "10";
+                            fin = "12";
+                            break;
+                        default:
+                            break;
                     }
-                    
-                    cmd.ExecuteNonQuery();
-                }*/
+
+                    SqlParameter inicioP = new SqlParameter("@Inicio", inicio);
+                    SqlParameter finP = new SqlParameter("@Fin", fin);
+                    List<GD1C2017Entities> lista = dbCtx.Database.SqlQuery<GD1C2017Entities>("exec ChoferesMayorRecaudacionSP @Inicio,@Fin", inicioP, finP).ToList();
+
+                    gridResultados.DataSource = lista;
+
+
+                }
+
+
             }
-       
+        }
     }
 }
-

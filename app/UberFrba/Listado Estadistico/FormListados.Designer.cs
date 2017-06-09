@@ -97,6 +97,7 @@
             this.radioButton1.TabStop = true;
             this.radioButton1.Text = "Choferes con mayor recaudación";
             this.radioButton1.UseVisualStyleBackColor = true;
+            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged_1);
             // 
             // radioButton2
             // 
@@ -161,7 +162,7 @@
             this.boxOpciones.TabIndex = 11;
             this.boxOpciones.TabStop = false;
             // 
-            // Opciones
+            // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -174,7 +175,7 @@
             this.Controls.Add(this.label);
             this.Controls.Add(this.aniotxtb);
             this.Controls.Add(this.label1);
-            this.Name = "Opciones";
+            this.Name = "Form1";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.gridResultados)).EndInit();
             this.boxOpciones.ResumeLayout(false);

@@ -37,7 +37,7 @@ namespace UberFrba.Menu_Principal
             this.btnRegistroViaje.Enabled = false;
             this.btnRendicion.Enabled = false;
             this.btnFacturacion.Enabled = false;
-            this.btnReportes.Enabled = false;
+            this.btnReportes.Enabled = true;
 
 
             foreach (FUNCIONALIDADE f in funcionalidades)
