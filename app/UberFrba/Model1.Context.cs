@@ -39,7 +39,7 @@ namespace UberFrba
         public virtual DbSet<USUARIO> USUARIOS { get; set; }
         public virtual DbSet<VIAJE> VIAJES { get; set; }
     
-        public virtual ObjectResult<choferesMayorRecaudacionSP_Result1> choferesMayorRecaudacionSP(Nullable<int> anio, Nullable<int> inicio, Nullable<int> fin)
+        public virtual ObjectResult<choferesMayorRecaudacionSP_Result> choferesMayorRecaudacionSP(Nullable<int> anio, Nullable<int> inicio, Nullable<int> fin)
         {
             var anioParameter = anio.HasValue ?
                 new ObjectParameter("Anio", anio) :
@@ -53,10 +53,10 @@ namespace UberFrba
                 new ObjectParameter("Fin", fin) :
                 new ObjectParameter("Fin", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<choferesMayorRecaudacionSP_Result1>("choferesMayorRecaudacionSP", anioParameter, inicioParameter, finParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<choferesMayorRecaudacionSP_Result>("choferesMayorRecaudacionSP", anioParameter, inicioParameter, finParameter);
         }
     
-        public virtual ObjectResult<choferesViajeMasLargoSP_Result1> choferesViajeMasLargoSP(Nullable<int> anio, Nullable<int> inicio, Nullable<int> fin)
+        public virtual ObjectResult<choferesViajeMasLargoSP_Result> choferesViajeMasLargoSP(Nullable<int> anio, Nullable<int> inicio, Nullable<int> fin)
         {
             var anioParameter = anio.HasValue ?
                 new ObjectParameter("Anio", anio) :
@@ -70,10 +70,10 @@ namespace UberFrba
                 new ObjectParameter("Fin", fin) :
                 new ObjectParameter("Fin", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<choferesViajeMasLargoSP_Result1>("choferesViajeMasLargoSP", anioParameter, inicioParameter, finParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<choferesViajeMasLargoSP_Result>("choferesViajeMasLargoSP", anioParameter, inicioParameter, finParameter);
         }
     
-        public virtual ObjectResult<clientesMayorConsumoSP_Result1> clientesMayorConsumoSP(Nullable<int> anio, Nullable<int> inicio, Nullable<int> fin)
+        public virtual ObjectResult<clientesMayorConsumoSP_Result> clientesMayorConsumoSP(Nullable<int> anio, Nullable<int> inicio, Nullable<int> fin)
         {
             var anioParameter = anio.HasValue ?
                 new ObjectParameter("Anio", anio) :
@@ -87,10 +87,10 @@ namespace UberFrba
                 new ObjectParameter("Fin", fin) :
                 new ObjectParameter("Fin", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<clientesMayorConsumoSP_Result1>("clientesMayorConsumoSP", anioParameter, inicioParameter, finParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<clientesMayorConsumoSP_Result>("clientesMayorConsumoSP", anioParameter, inicioParameter, finParameter);
         }
     
-        public virtual ObjectResult<clientesMismoAutomovilMasFrecuenciaSP_Result1> clientesMismoAutomovilMasFrecuenciaSP(Nullable<int> anio, Nullable<int> inicio, Nullable<int> fin)
+        public virtual ObjectResult<clientesMismoAutomovilMasFrecuenciaSP_Result> clientesMismoAutomovilMasFrecuenciaSP(Nullable<int> anio, Nullable<int> inicio, Nullable<int> fin)
         {
             var anioParameter = anio.HasValue ?
                 new ObjectParameter("Anio", anio) :
@@ -104,7 +104,7 @@ namespace UberFrba
                 new ObjectParameter("Fin", fin) :
                 new ObjectParameter("Fin", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<clientesMismoAutomovilMasFrecuenciaSP_Result1>("clientesMismoAutomovilMasFrecuenciaSP", anioParameter, inicioParameter, finParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<clientesMismoAutomovilMasFrecuenciaSP_Result>("clientesMismoAutomovilMasFrecuenciaSP", anioParameter, inicioParameter, finParameter);
         }
     }
 }
