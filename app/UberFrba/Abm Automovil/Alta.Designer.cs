@@ -37,7 +37,6 @@
             this.lblPatente = new System.Windows.Forms.Label();
             this.txtPatente = new System.Windows.Forms.TextBox();
             this.lblTurno = new System.Windows.Forms.Label();
-            this.txtTurno = new System.Windows.Forms.TextBox();
             this.lblNomChofer = new System.Windows.Forms.Label();
             this.txtNomChofer = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -56,6 +55,7 @@
             this.txtRodado = new System.Windows.Forms.TextBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.toolTip2 = new System.Windows.Forms.ToolTip(this.components);
+            this.comboTurno = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -133,16 +133,6 @@
             this.lblTurno.TabIndex = 7;
             this.lblTurno.Text = "Turno";
             this.lblTurno.Click += new System.EventHandler(this.label5_Click);
-            // 
-            // txtTurno
-            // 
-            this.txtTurno.Location = new System.Drawing.Point(66, 119);
-            this.txtTurno.MaxLength = 20;
-            this.txtTurno.Name = "txtTurno";
-            this.txtTurno.Size = new System.Drawing.Size(100, 20);
-            this.txtTurno.TabIndex = 8;
-            this.toolTip1.SetToolTip(this.txtTurno, "Tip: los turnos son \"mañana\", \"tarde\" o \"noche\"");
-            this.txtTurno.TextChanged += new System.EventHandler(this.txtTurno_TextChanged);
             // 
             // lblNomChofer
             // 
@@ -298,11 +288,22 @@
             this.txtRodado.Size = new System.Drawing.Size(100, 20);
             this.txtRodado.TabIndex = 22;
             // 
+            // comboTurno
+            // 
+            this.comboTurno.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboTurno.FormattingEnabled = true;
+            this.comboTurno.Location = new System.Drawing.Point(66, 119);
+            this.comboTurno.Name = "comboTurno";
+            this.comboTurno.Size = new System.Drawing.Size(100, 21);
+            this.comboTurno.TabIndex = 23;
+            this.comboTurno.SelectionChangeCommitted += new System.EventHandler(this.comboTurno_SelectionChangeCommitted);
+            // 
             // Alta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(404, 388);
+            this.Controls.Add(this.comboTurno);
             this.Controls.Add(this.txtRodado);
             this.Controls.Add(this.lblRodado);
             this.Controls.Add(this.txtLicencia);
@@ -313,7 +314,6 @@
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.txtTurno);
             this.Controls.Add(this.lblTurno);
             this.Controls.Add(this.txtPatente);
             this.Controls.Add(this.lblPatente);
@@ -341,7 +341,6 @@
         private System.Windows.Forms.Label lblPatente;
         private System.Windows.Forms.TextBox txtPatente;
         private System.Windows.Forms.Label lblTurno;
-        private System.Windows.Forms.TextBox txtTurno;
         private System.Windows.Forms.Label lblNomChofer;
         private System.Windows.Forms.TextBox txtNomChofer;
         private System.Windows.Forms.Label label7;
@@ -360,5 +359,6 @@
         private System.Windows.Forms.TextBox txtRodado;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.ToolTip toolTip2;
+        private System.Windows.Forms.ComboBox comboTurno;
     }
 }

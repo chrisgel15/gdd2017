@@ -15,6 +15,7 @@ namespace UberFrba.Abm_Automovil
         private bool habilitaDatos = false;
         private bool impactado = false;
         private int id_chofer;
+        private int turnoEnCombo;
                 
         public Alta()
         {
@@ -22,16 +23,29 @@ namespace UberFrba.Abm_Automovil
             inicializaCombo();
         }
 
-       
-
-        private void inicializaCombo() 
+       private void inicializaCombo() 
         {
             using (var dbCtx = new GD1C2017Entities())
             {
-                var marcas = dbCtx.MARCAS.ToList();
-                comboMarca.DataSource = marcas;
+                //Lleno combo Marcas con los datos de la base//
+                var marcas = dbCtx.MARCAS.ToArray();
+                comboMarca.Items.Add("-- Seleccione -- ");
+                comboMarca.Items.AddRange(marcas);
                 comboMarca.DisplayMember = "NOMBRE";
                 comboMarca.ValueMember = "NOMBRE";
+                comboMarca.SelectedIndex = 0;
+
+                //Lleno combo Turnos con los datos de la base
+                var turnos = dbCtx.TURNOS.ToArray();
+                if (turnos != null)
+                {
+                    comboTurno.Items.Add("-- Seleccione -- ");
+                    comboTurno.Items.AddRange(turnos);
+                    comboTurno.Enabled = true;
+                    comboTurno.ValueMember = "ID_TURNO";
+                    comboTurno.DisplayMember = "DESCRIPCION";
+                    comboTurno.SelectedIndex = 0;
+                }
             }
         }
 
@@ -48,7 +62,7 @@ namespace UberFrba.Abm_Automovil
             var patente = txtPatente.Text;
             var licencia = txtLicencia.Text;
             var rodado = txtRodado.Text;
-            var turno = txtTurno.Text;
+           
 
             AUTO auto = new AUTO
             {
@@ -79,7 +93,6 @@ namespace UberFrba.Abm_Automovil
         {
             txtModelo.Text = String.Empty;
             txtPatente.Text = String.Empty;
-            txtTurno.Text = String.Empty;
             txtNomChofer.Text = String.Empty;
             txtApeChofer.Text = String.Empty;
             txtLicencia.Text = String.Empty;
@@ -97,18 +110,16 @@ namespace UberFrba.Abm_Automovil
                 /*guardo el id del chofer traido en dvmDatosBase*/
                 auto.CHOFER_ID = id_chofer;
 
-                /*Busco el turno para crear registro en tabla relacion AUTOS_TURNOS*/
-                string substrTurno = txtTurno.Text.Substring(0,3); //pido ingresar en el form "mañana", "tarde" o "noche", guardo las primeras letras
-                
-                var turno = dbCtx.TURNOS.Where(t => t.DESCRIPCION.
-                    Contains(substrTurno)).FirstOrDefault();
+               /*Busco el turno para crear registro en tabla relacion AUTOS_TURNOS*/
+               var turno = dbCtx.TURNOS.Where(t => t.ID_TURNO == turnoEnCombo).FirstOrDefault();
 
-                //Agrago un auto a la lista de autos que tiene el turno
-                turno.AUTOS.Add(auto);
-                //agrego el auto a la base
-                dbCtx.AUTOS.Add(auto);
+               //Agrago un auto a la lista de autos que tiene el turno
+               turno.AUTOS.Add(auto);
+               
+               //agrego el auto a la base
+               dbCtx.AUTOS.Add(auto);
                 
-                dbCtx.SaveChanges();
+               dbCtx.SaveChanges();
                 
             }
 
@@ -181,11 +192,7 @@ namespace UberFrba.Abm_Automovil
                     }
                     habilitaDatos = true;
                 }
-
-                
             }
-            
-           
           }
         
 
@@ -200,7 +207,7 @@ namespace UberFrba.Abm_Automovil
             if (String.IsNullOrEmpty(txtPatente.Text))
                 mensajes.Add(lblPatente.Text);
 
-            if (String.IsNullOrEmpty(txtTurno.Text))
+            if (String.IsNullOrEmpty(comboTurno.Text) || comboTurno.SelectedIndex == 0)
                 mensajes.Add(lblTurno.Text);
 
             if (String.IsNullOrEmpty(txtNomChofer.Text))
@@ -256,11 +263,13 @@ namespace UberFrba.Abm_Automovil
         {
 
         }
-
-        private void comboMarca_DropDown(object sender, EventArgs e)
-        {
-
-        }
         #endregion OtrosEventos
+
+        private void comboTurno_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            turnoEnCombo = ((TURNO)comboTurno.SelectedItem).ID_TURNO;
+            
+        }
+
     }
 }
