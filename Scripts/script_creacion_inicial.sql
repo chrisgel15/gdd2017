@@ -1015,12 +1015,12 @@ GO
 create PROCEDURE OLA_K_ASE.clientesMismoAutomovilMasFrecuenciaSP @Anio integer = Null, @Inicio integer = Null, @Fin integer = Null
 as
 begin
-select top 5 cli.nombre, cli.apellido, vi.AUTO_ID, au.PATENTE, count(vi.ID_VIAJE) as cantidad_viajes 
+select top 5 year(vi.FECHA_INICIO) as ANIO, month(vi.FECHA_INICIO) as MES,cli.nombre, cli.apellido, vi.AUTO_ID, au.PATENTE, count(vi.ID_VIAJE) as cantidad_viajes 
 from OLA_K_ASE.viajes vi
 left join OLA_K_ASE.CLIENTES cli on cli.ID_CLIENTE= vi.CLIENTE_ID
 left join ola_K_ase.AUTOS au on au.ID_AUTO = vi.AUTO_ID
 where year(vi.FECHA_INICIO) = @Anio and month(vi.FECHA_INICIO) between @Inicio and @Fin 
-group by cli.nombre, cli.apellido, vi.AUTO_ID, au.PATENTE 
+group by vi.FECHA_INICIO, cli.nombre, cli.apellido, vi.AUTO_ID, au.PATENTE 
 order by count(vi.ID_VIAJE) desc
 end
 go
@@ -1031,7 +1031,7 @@ GO
 CREATE PROCEDURE OLA_K_ASE.clientesMayorConsumoSP @Anio integer = Null, @Inicio integer = Null, @Fin integer = Null
 as
 begin
-select top 5 year(fac.FECHA_FACT) as anio, month(fac.FECHA_FACT) as mes, cli.nombre, cli.apellido, sum(fac.importe) as consumo
+select top 5 year(fac.FECHA_FACT) as ANIO, month(fac.FECHA_FACT) as MES, cli.nombre, cli.apellido, sum(fac.importe) as consumo
 from ola_k_ase.FACTURAS fac
 left join OLA_K_ASE.CLIENTES cli on cli.ID_CLIENTE= fac.CLIENTE_ID
 where year(fac.FECHA_FACT) = @Anio and month(fac.FECHA_FACT) between @Inicio and @Fin 
@@ -1046,7 +1046,7 @@ GO
 CREATE PROCEDURE OLA_K_ASE.choferesViajeMasLargoSP @Anio integer = Null, @Inicio integer = Null, @Fin integer = Null
 as
 begin
-select top 5 year(vi.FECHA_INICIO) as anio , month(vi.FECHA_INICIO) as mes, chof.NOMBRE, 
+select top 5 year(vi.FECHA_INICIO) as ANIO , month(vi.FECHA_INICIO) as MES, chof.NOMBRE, 
 CHOF.APELLIDO, DATEDIFF(minute,vi.FECHA_INICIO,isnull(vi.FECHA_FIN,0)) as DURACION_VIAJE
 from ola_k_ase.viajes vi
 left join ola_k_ase.choferes chof on vi.CHOFER_ID= chof.ID_CHOFER
@@ -1062,7 +1062,7 @@ GO
 CREATE PROCEDURE OLA_K_ASE.choferesMayorRecaudacionSP @Anio integer = Null, @Inicio integer = Null, @Fin integer = Null
 as
 begin
-select top 5 year(ren.fecha) as anio , month(ren.fecha) as mes, chof.NOMBRE, CHOF.APELLIDO,  sum(ren.importe) as RECAUDACION from ola_k_ase.RENDICIONES ren
+select top 5 year(ren.fecha) as ANIO , month(ren.fecha) as MES, chof.NOMBRE, CHOF.APELLIDO,  sum(ren.importe) as RECAUDACION from ola_k_ase.RENDICIONES ren
 left join ola_k_ase.choferes chof on ren.CHOFER_ID= chof.ID_CHOFER
 where year(ren.FECHA) = @Anio and month(ren.FECHA) between @Inicio and @Fin 
 group by ren.fecha,chof.NOMBRE, CHOF.APELLIDO order by sum(ren.importe) desc
