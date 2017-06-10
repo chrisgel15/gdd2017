@@ -20,53 +20,68 @@ namespace UberFrba.Listado_Estadistico
             {
                 comboBoxTRIMESTRE.Items.Add(i);
             }
-
+            this.ChofViajeMasLargoBTT.CheckedChanged += new EventHandler(RadioButtons_CheckedChanged_1);
+            this.ChofMayorRecaudacionBTT.CheckedChanged += new EventHandler(RadioButtons_CheckedChanged_1);
+            this.ClienteMasVecesAutoBTT.CheckedChanged += new EventHandler(RadioButtons_CheckedChanged_1);
+            this.ClientesMayorConsumoBTT.CheckedChanged += new EventHandler(RadioButtons_CheckedChanged_1);
         }
 
-        private void radioButton1_CheckedChanged_1(object sender, EventArgs e)
-        {
-            {
-                String trimestre = comboBoxTRIMESTRE.SelectedItem.ToString();
-                String inicio = "";
-                String fin = "";
 
-                using (var dbCtx = new GD1C2017Entities())
+
+        private void RadioButtons_CheckedChanged_1(object sender, EventArgs e)
+        {
+            comboBoxTRIMESTRE.DropDownStyle = ComboBoxStyle.DropDownList;
+            String trimestre = comboBoxTRIMESTRE.SelectedItem.ToString();
+            String inicio = "";
+            String fin = "";
+
+            using (var dbCtx = new GD1C2017Entities())
+            {
+                switch (trimestre)
+                {
+                    case "1":
+                        inicio = "01";
+                        fin = "03";
+                        break;
+                    case "2":
+                        inicio = "04";
+                        fin = "06";
+                        break;
+                    case "3":
+                        inicio = "07";
+                        fin = "09";
+                        break;
+                    case "4":
+                        inicio = "10";
+                        fin = "12";
+                        break;
+                    default:
+                        break;
+                }
+                String anioString = aniotxtb.Text;
+                int anio = Int32.Parse(anioString);
+                int inicioP = Int32.Parse(inicio);
+                int finP = Int32.Parse(fin);
+                try
+                {
+                  if(this.ChofMayorRecaudacionBTT.Checked)
+                    gridResultados.DataSource = dbCtx.choferesMayorRecaudacionSP(anio, inicioP, finP);
+                  if (this.ChofViajeMasLargoBTT.Checked)
+                      gridResultados.DataSource = dbCtx.choferesViajeMasLargoSP(anio, inicioP, finP);
+                  if (this.ClientesMayorConsumoBTT.Checked)
+                      gridResultados.DataSource = dbCtx.clientesMayorConsumoSP(anio, inicioP, finP);
+                  if (this.ClienteMasVecesAutoBTT.Checked)
+                      gridResultados.DataSource = dbCtx.clientesMismoAutomovilMasFrecuenciaSP(anio, inicioP, finP);
+                  
+                }
+                catch (Exception ex)
                 {
 
-
-                    switch (trimestre)
-                    {
-                        case "1":
-                            inicio = "01";
-                            fin = "03";
-                            break;
-                        case "2":
-                            inicio = "04";
-                            fin = "06";
-                            break;
-                        case "3":
-                            inicio = "07";
-                            fin = "09";
-                            break;
-                        case "4":
-                            inicio = "10";
-                            fin = "12";
-                            break;
-                        default:
-                            break;
-                    }
-
-                    SqlParameter inicioP = new SqlParameter("@Inicio", inicio);
-                    SqlParameter finP = new SqlParameter("@Fin", fin);
-                    List<GD1C2017Entities> lista = dbCtx.Database.SqlQuery<GD1C2017Entities>("exec ChoferesMayorRecaudacionSP @Inicio,@Fin", inicioP, finP).ToList();
-
-                    gridResultados.DataSource = lista;
-
-
                 }
-
-
             }
+
         }
+        
+
     }
 }

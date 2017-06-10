@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="GD1C2017Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="GD1C2017Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AUTOS">
           <Key>
             <PropertyRef Name="ID_AUTO" />
@@ -383,9 +383,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="insertTestTable" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="nombre" Type="varchar" Mode="In" />
-        </Function>
         <Function Name="choferesMayorRecaudacionSP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="OLA_K_ASE">
           <Parameter Name="Anio" Type="int" Mode="In" />
           <Parameter Name="Inicio" Type="int" Mode="In" />
@@ -904,25 +901,22 @@
             <End Role="ROLES" EntitySet="ROLES" />
             <End Role="USUARIOS" EntitySet="USUARIOS" />
           </AssociationSet>
-          <FunctionImport Name="insertTestTable">
-          <Parameter Name="nombre" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="choferesMayorRecaudacionSP" ReturnType="Collection(GD1C2017Model.choferesMayorRecaudacionSP_Result)">
+          <FunctionImport Name="choferesMayorRecaudacionSP" ReturnType="Collection(GD1C2017Model.choferesMayorRecaudacionSP_Result1)">
             <Parameter Name="Anio" Mode="In" Type="Int32" />
             <Parameter Name="Inicio" Mode="In" Type="Int32" />
             <Parameter Name="Fin" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="choferesViajeMasLargoSP" ReturnType="Collection(GD1C2017Model.choferesViajeMasLargoSP_Result)">
+          <FunctionImport Name="choferesViajeMasLargoSP" ReturnType="Collection(GD1C2017Model.choferesViajeMasLargoSP_Result1)">
             <Parameter Name="Anio" Mode="In" Type="Int32" />
             <Parameter Name="Inicio" Mode="In" Type="Int32" />
             <Parameter Name="Fin" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="clientesMayorConsumoSP" ReturnType="Collection(GD1C2017Model.clientesMayorConsumoSP_Result)">
+          <FunctionImport Name="clientesMayorConsumoSP" ReturnType="Collection(GD1C2017Model.clientesMayorConsumoSP_Result1)">
             <Parameter Name="Anio" Mode="In" Type="Int32" />
             <Parameter Name="Inicio" Mode="In" Type="Int32" />
             <Parameter Name="Fin" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="clientesMismoAutomovilMasFrecuenciaSP" ReturnType="Collection(GD1C2017Model.clientesMismoAutomovilMasFrecuenciaSP_Result)">
+          <FunctionImport Name="clientesMismoAutomovilMasFrecuenciaSP" ReturnType="Collection(GD1C2017Model.clientesMismoAutomovilMasFrecuenciaSP_Result1)">
             <Parameter Name="Anio" Mode="In" Type="Int32" />
             <Parameter Name="Inicio" Mode="In" Type="Int32" />
             <Parameter Name="Fin" Mode="In" Type="Int32" />
@@ -950,6 +944,62 @@
           <Property Type="Decimal" Name="consumo" Nullable="true" Precision="38" Scale="2" />
         </ComplexType>
         <ComplexType Name="clientesMismoAutomovilMasFrecuenciaSP_Result">
+          <Property Type="String" Name="nombre" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="apellido" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="AUTO_ID" Nullable="false" />
+          <Property Type="String" Name="PATENTE" Nullable="true" MaxLength="10" />
+          <Property Type="Int32" Name="cantidad_viajes" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="choferesMayorRecaudacionSP1_Result">
+          <Property Type="Int32" Name="anio" Nullable="true" />
+          <Property Type="Int32" Name="mes" Nullable="true" />
+          <Property Type="String" Name="NOMBRE" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="APELLIDO" Nullable="true" MaxLength="255" />
+          <Property Type="Decimal" Name="RECAUDACION" Nullable="true" Precision="38" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="choferesViajeMasLargoSP1_Result">
+          <Property Type="Int32" Name="anio" Nullable="true" />
+          <Property Type="Int32" Name="mes" Nullable="true" />
+          <Property Type="String" Name="NOMBRE" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="APELLIDO" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="DURACION_VIAJE" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="clientesMayorConsumoSP1_Result">
+          <Property Type="Int32" Name="anio" Nullable="true" />
+          <Property Type="Int32" Name="mes" Nullable="true" />
+          <Property Type="String" Name="nombre" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="apellido" Nullable="true" MaxLength="255" />
+          <Property Type="Decimal" Name="consumo" Nullable="true" Precision="38" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="clientesMismoAutomovilMasFrecuenciaSP1_Result">
+          <Property Type="String" Name="nombre" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="apellido" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="AUTO_ID" Nullable="false" />
+          <Property Type="String" Name="PATENTE" Nullable="true" MaxLength="10" />
+          <Property Type="Int32" Name="cantidad_viajes" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="choferesMayorRecaudacionSP_Result1">
+          <Property Type="Int32" Name="anio" Nullable="true" />
+          <Property Type="Int32" Name="mes" Nullable="true" />
+          <Property Type="String" Name="NOMBRE" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="APELLIDO" Nullable="true" MaxLength="255" />
+          <Property Type="Decimal" Name="RECAUDACION" Nullable="true" Precision="38" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="choferesViajeMasLargoSP_Result1">
+          <Property Type="Int32" Name="anio" Nullable="true" />
+          <Property Type="Int32" Name="mes" Nullable="true" />
+          <Property Type="String" Name="NOMBRE" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="APELLIDO" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="DURACION_VIAJE" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="clientesMayorConsumoSP_Result1">
+          <Property Type="Int32" Name="anio" Nullable="true" />
+          <Property Type="Int32" Name="mes" Nullable="true" />
+          <Property Type="String" Name="nombre" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="apellido" Nullable="true" MaxLength="255" />
+          <Property Type="Decimal" Name="consumo" Nullable="true" Precision="38" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="clientesMismoAutomovilMasFrecuenciaSP_Result1">
           <Property Type="String" Name="nombre" Nullable="true" MaxLength="255" />
           <Property Type="String" Name="apellido" Nullable="true" MaxLength="255" />
           <Property Type="Int32" Name="AUTO_ID" Nullable="false" />
@@ -1123,10 +1173,9 @@
               <ScalarProperty Name="ID_USUARIO" ColumnName="USUARIO_ID" />
             </EndProperty>
           </AssociationSetMapping>
-          <FunctionImportMapping FunctionImportName="insertTestTable" FunctionName="GD1C2017Model.Store.insertTestTable" />
           <FunctionImportMapping FunctionImportName="choferesMayorRecaudacionSP" FunctionName="GD1C2017Model.Store.choferesMayorRecaudacionSP">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="GD1C2017Model.choferesMayorRecaudacionSP_Result">
+              <ComplexTypeMapping TypeName="GD1C2017Model.choferesMayorRecaudacionSP_Result1">
                 <ScalarProperty Name="anio" ColumnName="anio" />
                 <ScalarProperty Name="mes" ColumnName="mes" />
                 <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
@@ -1137,7 +1186,7 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="choferesViajeMasLargoSP" FunctionName="GD1C2017Model.Store.choferesViajeMasLargoSP">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="GD1C2017Model.choferesViajeMasLargoSP_Result">
+              <ComplexTypeMapping TypeName="GD1C2017Model.choferesViajeMasLargoSP_Result1">
                 <ScalarProperty Name="anio" ColumnName="anio" />
                 <ScalarProperty Name="mes" ColumnName="mes" />
                 <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
@@ -1148,7 +1197,7 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="clientesMayorConsumoSP" FunctionName="GD1C2017Model.Store.clientesMayorConsumoSP">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="GD1C2017Model.clientesMayorConsumoSP_Result">
+              <ComplexTypeMapping TypeName="GD1C2017Model.clientesMayorConsumoSP_Result1">
                 <ScalarProperty Name="anio" ColumnName="anio" />
                 <ScalarProperty Name="mes" ColumnName="mes" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -1159,7 +1208,7 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="clientesMismoAutomovilMasFrecuenciaSP" FunctionName="GD1C2017Model.Store.clientesMismoAutomovilMasFrecuenciaSP">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="GD1C2017Model.clientesMismoAutomovilMasFrecuenciaSP_Result">
+              <ComplexTypeMapping TypeName="GD1C2017Model.clientesMismoAutomovilMasFrecuenciaSP_Result1">
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
                 <ScalarProperty Name="apellido" ColumnName="apellido" />
                 <ScalarProperty Name="AUTO_ID" ColumnName="AUTO_ID" />
@@ -1168,7 +1217,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-        </EntityContainerMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>
