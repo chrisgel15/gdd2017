@@ -2,9 +2,11 @@
 
 USE [GD1C2017]
 GO
-CREATE SCHEMA [OLA_K_ASE]
+if not exists (select * from sys.schemas where name = 'OLA_K_ASE')
+begin 
+	exec('CREATE SCHEMA OLA_K_ASE')
+end 
 GO
-
 ----------------------------------------------------------Creación de la base---------------------------------------------------------------
 
 USE [GD1C2017]
