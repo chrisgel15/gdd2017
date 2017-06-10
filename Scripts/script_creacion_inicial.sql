@@ -1011,7 +1011,7 @@ end
 --clientesMismoAutomovilMasFrecuenciaSP
 USE [GD1C2017]
 GO
-create PROCEDURE dbo.clientesMismoAutomovilMasFrecuenciaSP @Anio integer = Null, @Inicio integer = Null, @Fin integer = Null
+create PROCEDURE OLA_K_ASE.clientesMismoAutomovilMasFrecuenciaSP @Anio integer = Null, @Inicio integer = Null, @Fin integer = Null
 as
 begin
 select top 5 cli.nombre, cli.apellido, vi.AUTO_ID, au.PATENTE, count(vi.ID_VIAJE) as cantidad_viajes 
@@ -1027,7 +1027,7 @@ go
 --clientesMayorConsumoSP
 USE [GD1C2017]
 GO
-CREATE PROCEDURE dbo.clientesMayorConsumoSP @Anio integer = Null, @Inicio integer = Null, @Fin integer = Null
+CREATE PROCEDURE OLA_K_ASE.clientesMayorConsumoSP @Anio integer = Null, @Inicio integer = Null, @Fin integer = Null
 as
 begin
 select top 5 year(fac.FECHA_FACT) as anio, month(fac.FECHA_FACT) as mes, cli.nombre, cli.apellido, sum(fac.importe) as consumo
@@ -1042,7 +1042,7 @@ go
 --ChoferesViajeMasLargoSP
 USE [GD1C2017]
 GO
-CREATE PROCEDURE dbo.choferesViajeMasLargoSP @Anio integer = Null, @Inicio integer = Null, @Fin integer = Null
+CREATE PROCEDURE OLA_K_ASE.choferesViajeMasLargoSP @Anio integer = Null, @Inicio integer = Null, @Fin integer = Null
 as
 begin
 select top 5 year(vi.FECHA_INICIO) as anio , month(vi.FECHA_INICIO) as mes, chof.NOMBRE, 
@@ -1058,7 +1058,7 @@ GO
 --ChoferesMayorRecaudacionSP
 USE [GD1C2017]
 GO
-CREATE PROCEDURE dbo.choferesMayorRecaudacionSP @Anio integer = Null, @Inicio integer = Null, @Fin integer = Null
+CREATE PROCEDURE OLA_K_ASE.choferesMayorRecaudacionSP @Anio integer = Null, @Inicio integer = Null, @Fin integer = Null
 as
 begin
 select top 5 year(ren.fecha) as anio , month(ren.fecha) as mes, chof.NOMBRE, CHOF.APELLIDO,  sum(ren.importe) as RECAUDACION from ola_k_ase.RENDICIONES ren

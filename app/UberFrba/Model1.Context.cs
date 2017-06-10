@@ -47,5 +47,73 @@ namespace UberFrba
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("insertTestTable", nombreParameter);
         }
+    
+        public virtual ObjectResult<choferesMayorRecaudacionSP_Result> choferesMayorRecaudacionSP(Nullable<int> anio, Nullable<int> inicio, Nullable<int> fin)
+        {
+            var anioParameter = anio.HasValue ?
+                new ObjectParameter("Anio", anio) :
+                new ObjectParameter("Anio", typeof(int));
+    
+            var inicioParameter = inicio.HasValue ?
+                new ObjectParameter("Inicio", inicio) :
+                new ObjectParameter("Inicio", typeof(int));
+    
+            var finParameter = fin.HasValue ?
+                new ObjectParameter("Fin", fin) :
+                new ObjectParameter("Fin", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<choferesMayorRecaudacionSP_Result>("choferesMayorRecaudacionSP", anioParameter, inicioParameter, finParameter);
+        }
+    
+        public virtual ObjectResult<choferesViajeMasLargoSP_Result> choferesViajeMasLargoSP(Nullable<int> anio, Nullable<int> inicio, Nullable<int> fin)
+        {
+            var anioParameter = anio.HasValue ?
+                new ObjectParameter("Anio", anio) :
+                new ObjectParameter("Anio", typeof(int));
+    
+            var inicioParameter = inicio.HasValue ?
+                new ObjectParameter("Inicio", inicio) :
+                new ObjectParameter("Inicio", typeof(int));
+    
+            var finParameter = fin.HasValue ?
+                new ObjectParameter("Fin", fin) :
+                new ObjectParameter("Fin", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<choferesViajeMasLargoSP_Result>("choferesViajeMasLargoSP", anioParameter, inicioParameter, finParameter);
+        }
+    
+        public virtual ObjectResult<clientesMayorConsumoSP_Result> clientesMayorConsumoSP(Nullable<int> anio, Nullable<int> inicio, Nullable<int> fin)
+        {
+            var anioParameter = anio.HasValue ?
+                new ObjectParameter("Anio", anio) :
+                new ObjectParameter("Anio", typeof(int));
+    
+            var inicioParameter = inicio.HasValue ?
+                new ObjectParameter("Inicio", inicio) :
+                new ObjectParameter("Inicio", typeof(int));
+    
+            var finParameter = fin.HasValue ?
+                new ObjectParameter("Fin", fin) :
+                new ObjectParameter("Fin", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<clientesMayorConsumoSP_Result>("clientesMayorConsumoSP", anioParameter, inicioParameter, finParameter);
+        }
+    
+        public virtual ObjectResult<clientesMismoAutomovilMasFrecuenciaSP_Result> clientesMismoAutomovilMasFrecuenciaSP(Nullable<int> anio, Nullable<int> inicio, Nullable<int> fin)
+        {
+            var anioParameter = anio.HasValue ?
+                new ObjectParameter("Anio", anio) :
+                new ObjectParameter("Anio", typeof(int));
+    
+            var inicioParameter = inicio.HasValue ?
+                new ObjectParameter("Inicio", inicio) :
+                new ObjectParameter("Inicio", typeof(int));
+    
+            var finParameter = fin.HasValue ?
+                new ObjectParameter("Fin", fin) :
+                new ObjectParameter("Fin", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<clientesMismoAutomovilMasFrecuenciaSP_Result>("clientesMismoAutomovilMasFrecuenciaSP", anioParameter, inicioParameter, finParameter);
+        }
     }
 }
