@@ -37,7 +37,8 @@ namespace UberFrba.Menu_Principal
             this.btnRegistroViaje.Enabled = false;
             this.btnRendicion.Enabled = false;
             this.btnFacturacion.Enabled = false;
-            this.btnReportes.Enabled = true;
+            this.btnReportes.Enabled = false;
+            this.btnAbmTurno.Enabled = false;
 
 
             foreach (FUNCIONALIDADE f in funcionalidades)
@@ -54,6 +55,7 @@ namespace UberFrba.Menu_Principal
                     case 8: this.btnRendicion.Enabled = true; break;
                     case 9: this.btnFacturacion.Enabled = true; break;
                     case 10: this.btnReportes.Enabled = true; break;
+                    case 11: this.btnAbmTurno.Enabled = true; break;
                     default: break;
                 }
             }
