@@ -1007,3 +1007,62 @@ select Viaje_Fecha, Viaje_Cant_Kilometros, CHOFER_ID, CLIENTE_ID, AUTO_ID, TURNO
 
 end
 
+------------ STORED PROCEDURES
+--clientesMismoAutomovilMasFrecuenciaSP
+USE [GD1C2017]
+GO
+create PROCEDURE dbo.clientesMismoAutomovilMasFrecuenciaSP @Anio integer = Null, @Inicio integer = Null, @Fin integer = Null
+as
+begin
+select top 5 cli.nombre, cli.apellido, vi.AUTO_ID, au.PATENTE, count(vi.ID_VIAJE) as cantidad_viajes 
+from OLA_K_ASE.viajes vi
+left join OLA_K_ASE.CLIENTES cli on cli.ID_CLIENTE= vi.CLIENTE_ID
+left join ola_K_ase.AUTOS au on au.ID_AUTO = vi.AUTO_ID
+where year(vi.FECHA_INICIO) = @Anio and month(vi.FECHA_INICIO) between @Inicio and @Fin 
+group by cli.nombre, cli.apellido, vi.AUTO_ID, au.PATENTE 
+order by count(vi.ID_VIAJE) desc
+end
+go
+
+--clientesMayorConsumoSP
+USE [GD1C2017]
+GO
+CREATE PROCEDURE dbo.clientesMayorConsumoSP @Anio integer = Null, @Inicio integer = Null, @Fin integer = Null
+as
+begin
+select top 5 year(fac.FECHA_FACT) as anio, month(fac.FECHA_FACT) as mes, cli.nombre, cli.apellido, sum(fac.importe) as consumo
+from ola_k_ase.FACTURAS fac
+left join OLA_K_ASE.CLIENTES cli on cli.ID_CLIENTE= fac.CLIENTE_ID
+where year(fac.FECHA_FACT) = @Anio and month(fac.FECHA_FACT) between @Inicio and @Fin 
+group by fac.FECHA_FACT, cli.nombre, cli.apellido 
+order by sum(fac.importe) desc
+end
+go
+
+--ChoferesViajeMasLargoSP
+USE [GD1C2017]
+GO
+CREATE PROCEDURE dbo.choferesViajeMasLargoSP @Anio integer = Null, @Inicio integer = Null, @Fin integer = Null
+as
+begin
+select top 5 year(vi.FECHA_INICIO) as anio , month(vi.FECHA_INICIO) as mes, chof.NOMBRE, 
+CHOF.APELLIDO, DATEDIFF(minute,vi.FECHA_INICIO,isnull(vi.FECHA_FIN,0)) as DURACION_VIAJE
+from ola_k_ase.viajes vi
+left join ola_k_ase.choferes chof on vi.CHOFER_ID= chof.ID_CHOFER
+where year(vi.FECHA_INICIO) = @Anio and month(vi.FECHA_INICIO) between @Inicio and @Fin
+group by vi.FECHA_INICIO, vi.fecha_fin, chof.NOMBRE, CHOF.APELLIDO 
+order by DATEDIFF(minute,vi.FECHA_INICIO,isnull(vi.FECHA_FIN,0)) desc
+end
+GO
+
+--ChoferesMayorRecaudacionSP
+USE [GD1C2017]
+GO
+CREATE PROCEDURE dbo.choferesMayorRecaudacionSP @Anio integer = Null, @Inicio integer = Null, @Fin integer = Null
+as
+begin
+select top 5 year(ren.fecha) as anio , month(ren.fecha) as mes, chof.NOMBRE, CHOF.APELLIDO,  sum(ren.importe) as RECAUDACION from ola_k_ase.RENDICIONES ren
+left join ola_k_ase.choferes chof on ren.CHOFER_ID= chof.ID_CHOFER
+where year(ren.FECHA) = @Anio and month(ren.FECHA) between @Inicio and @Fin 
+group by ren.fecha,chof.NOMBRE, CHOF.APELLIDO order by sum(ren.importe) desc
+end
