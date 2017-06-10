@@ -737,9 +737,8 @@ end;
 insert into OLA_K_ASE.ROLES (NOMBRE, HABILITADO) values ('Administrador', 1)
 insert into OLA_K_ASE.ROLES (NOMBRE, HABILITADO) values ('Cliente', 1)
 insert into OLA_K_ASE.ROLES (NOMBRE, HABILITADO) values ('Chofer', 1)
-
-
 insert into OLA_K_ASE.FUNCIONALIDADES (NOMBRE) values ('ABM de Rol')
+insert into OLA_K_ASE.FUNCIONALIDADES (NOMBRE) values ('Login y Seguridad')
 insert into OLA_K_ASE.FUNCIONALIDADES (NOMBRE) values ('Registro de Usuario')
 insert into OLA_K_ASE.FUNCIONALIDADES (NOMBRE) values ('ABM de Cliente')
 insert into OLA_K_ASE.FUNCIONALIDADES (NOMBRE) values ('ABM de Automóvil')
@@ -1067,3 +1066,18 @@ left join ola_k_ase.choferes chof on ren.CHOFER_ID= chof.ID_CHOFER
 where year(ren.FECHA) = @Anio and month(ren.FECHA) between @Inicio and @Fin 
 group by ren.fecha,chof.NOMBRE, CHOF.APELLIDO order by sum(ren.importe) desc
 end
+GO
+
+-- elimino la tabla del Stage
+
+USE [GD1C2017]
+GO
+Begin
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[OLA_K_ASE].[Maestra_Stg1]') AND type in (N'U'))
+DROP TABLE [OLA_K_ASE].[Maestra_Stg1]
+
+end
+GO
+
+-- 
