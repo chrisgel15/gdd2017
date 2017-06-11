@@ -14,20 +14,23 @@ namespace UberFrba.Abm_Automovil
     {
         private string marca_combo;
         private Modificacion modifForm;
+
         public Listado()
         {
             InitializeComponent();
             List<String> filtrosDisponibles = new List<string> { "Marca", "Modelo", "Patente", "Chofer" };
             initCombo(filtrosDisponibles);
-                        
         }
 
         private void initCombo(List<string> filtrosDisponibles)
         {
+            comboFiltros.Items.Add("-- Seleccione -- ");
             foreach(var f in filtrosDisponibles)
             {
                 comboFiltros.Items.Add(f);
             }
+            comboFiltros.SelectedIndex = 0;
+            initMarca();
         }
 
         private void comboFiltros_SelectionChangeCommitted(object sender, EventArgs e)
@@ -38,7 +41,7 @@ namespace UberFrba.Abm_Automovil
                 case "Marca":
                     lblMarca.Visible = true;
                     comboMarca.Visible = true;
-                    initMarca();
+                    //initMarca();
                     
                     break;
                 case "Modelo":
@@ -65,10 +68,13 @@ namespace UberFrba.Abm_Automovil
         {
             using (var dbCtx = new GD1C2017Entities())
             {
-                var marcas = dbCtx.MARCAS.ToList();
-                comboMarca.DataSource = marcas;
+                
+                var marcas = dbCtx.MARCAS.ToArray();
+                comboMarca.Items.Add("-- Seleccione -- ");
+                comboMarca.Items.AddRange(marcas);
                 comboMarca.DisplayMember = "NOMBRE";
                 comboMarca.ValueMember = "NOMBRE";
+                comboMarca.SelectedIndex = 0;
             }
         }
 
@@ -86,10 +92,11 @@ namespace UberFrba.Abm_Automovil
             txtPatente.Visible = false;
             lblPatente.Visible = false;
 
+            marca_combo = String.Empty;
             comboMarca.Visible = false;
             lblMarca.Visible = false;
 
-            
+            comboFiltros.SelectedIndex = 0;
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
@@ -116,15 +123,24 @@ namespace UberFrba.Abm_Automovil
             Deshabilitar.UseColumnTextForButtonValue = true;
 
             List<AUTO> q1 = new List<AUTO>();
+            //Separo en nombre y apellido
+            //string[] nombreApellido;
+            //nombreApellido = _chofer.Split(' ');
+            
             using (var dbCtx = new GD1C2017Entities())
             {
-
+                //var _nombre = nombreApellido[0];
+                //var _apellido = nombreApellido[1];
+                
+                
+                
                 q1 = dbCtx.AUTOS.ToList();
-                q1 = dbCtx.AUTOS.Where(a => a.MARCA.NOMBRE == _marca).ToList();
-                q1 = q1.Where(a => a.MODELO.Contains(_modelo.ToUpper())).ToList();
-                q1 = q1.Where(a => a.PATENTE.Contains(_patente)).ToList();
-                q1 = q1.Where(a => a.CHOFERE.NOMBRE.Contains(_chofer) ||
-                    a.CHOFERE.APELLIDO.Contains(_chofer)).ToList();
+                if(marca_combo != null && marca_combo != "")
+                    q1 = dbCtx.AUTOS.Where(a => a.MARCA.NOMBRE == _marca).ToList();
+                q1 = q1.Where(a => a.MODELO.ToLower().Contains(_modelo.ToLower())).ToList();
+                q1 = q1.Where(a => a.PATENTE.ToLower().Contains(_patente.ToLower())).ToList();
+                q1 = q1.Where(a => a.CHOFERE.NOMBRE.ToLower().Contains(_chofer.ToLower()) ||
+                        a.CHOFERE.APELLIDO.ToLower().Contains(_chofer.ToLower())).ToList();
                 
                 var q2 = q1.Select( o => 
                     new GridQueryResult
@@ -141,15 +157,13 @@ namespace UberFrba.Abm_Automovil
 
                 gridResultados.AutoGenerateColumns = false;
                 gridResultados.DataSource = q2;
-                
-                
-                
+                          
            }
         }
 
         private void comboMarca_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            marca_combo = comboMarca.SelectedValue.ToString();
+            marca_combo = ((MARCA)comboMarca.SelectedItem).NOMBRE;
         }
 
         private void gridResultados_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -174,7 +188,6 @@ namespace UberFrba.Abm_Automovil
                 {
                     deshabilitarItem(item);
                 }
-
             }
         }
 
@@ -194,8 +207,7 @@ namespace UberFrba.Abm_Automovil
                     auto.HABILITADO = !auto.HABILITADO;
                 
                 dbCtx.SaveChanges();
-
-                
+                           
             }
         }
 

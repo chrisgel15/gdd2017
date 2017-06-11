@@ -2,9 +2,11 @@
 
 USE [GD1C2017]
 GO
-CREATE SCHEMA [OLA_K_ASE]
+if not exists (select * from sys.schemas where name = 'OLA_K_ASE')
+begin 
+	exec('CREATE SCHEMA OLA_K_ASE')
+end 
 GO
-
 ----------------------------------------------------------Creación de la base---------------------------------------------------------------
 
 USE [GD1C2017]
@@ -735,8 +737,6 @@ end;
 insert into OLA_K_ASE.ROLES (NOMBRE, HABILITADO) values ('Administrador', 1)
 insert into OLA_K_ASE.ROLES (NOMBRE, HABILITADO) values ('Cliente', 1)
 insert into OLA_K_ASE.ROLES (NOMBRE, HABILITADO) values ('Chofer', 1)
-
-
 insert into OLA_K_ASE.FUNCIONALIDADES (NOMBRE) values ('ABM de Rol')
 insert into OLA_K_ASE.FUNCIONALIDADES (NOMBRE) values ('Login y Seguridad')
 insert into OLA_K_ASE.FUNCIONALIDADES (NOMBRE) values ('Registro de Usuario')
@@ -747,6 +747,7 @@ insert into OLA_K_ASE.FUNCIONALIDADES (NOMBRE) values ('Registro de Viajes')
 insert into OLA_K_ASE.FUNCIONALIDADES (NOMBRE) values ('Rendición de cuenta del chofer')
 insert into OLA_K_ASE.FUNCIONALIDADES (NOMBRE) values ('Facturación a Cliente')
 insert into OLA_K_ASE.FUNCIONALIDADES (NOMBRE) values ('Listado Estadístico')
+insert into OLA_K_ASE.FUNCIONALIDADES (NOMBRE) values ('ABM de Turnos')
 
 ----------------------------------------------------------MIGRACIÓN TURNOS---------------------------------------------------------------
 
@@ -1066,3 +1067,45 @@ left join ola_k_ase.choferes chof on ren.CHOFER_ID= chof.ID_CHOFER
 where year(ren.FECHA) = @Anio and month(ren.FECHA) between @Inicio and @Fin 
 group by ren.fecha,chof.NOMBRE, CHOF.APELLIDO order by sum(ren.importe) desc
 end
+GO
+
+-- elimino la tabla del Stage
+
+USE [GD1C2017]
+GO
+Begin
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[OLA_K_ASE].[Maestra_Stg1]') AND type in (N'U'))
+DROP TABLE [OLA_K_ASE].[Maestra_Stg1]
+
+end
+GO
+
+-- Asignacion de Roles y funcionalidades
+
+USE [GD1C2017]
+GO
+Begin
+--admin
+insert into OLA_K_ASE.FUNCIONALIDADES_ROLES values (1,1)
+insert into OLA_K_ASE.FUNCIONALIDADES_ROLES values (3,1)
+insert into OLA_K_ASE.FUNCIONALIDADES_ROLES values (4,1)
+insert into OLA_K_ASE.FUNCIONALIDADES_ROLES values (5,1)
+insert into OLA_K_ASE.FUNCIONALIDADES_ROLES values (6,1)
+insert into OLA_K_ASE.FUNCIONALIDADES_ROLES values (7,1)
+insert into OLA_K_ASE.FUNCIONALIDADES_ROLES values (8,1)
+insert into OLA_K_ASE.FUNCIONALIDADES_ROLES values (9,1)
+insert into OLA_K_ASE.FUNCIONALIDADES_ROLES values (10,1)
+insert into OLA_K_ASE.FUNCIONALIDADES_ROLES values (11,1)
+
+-- chofer
+insert into OLA_K_ASE.FUNCIONALIDADES_ROLES values (5,3)
+insert into OLA_K_ASE.FUNCIONALIDADES_ROLES values (6,3)
+insert into OLA_K_ASE.FUNCIONALIDADES_ROLES values (7,3)
+
+-- cliente
+insert into OLA_K_ASE.FUNCIONALIDADES_ROLES values (7,2)
+insert into OLA_K_ASE.FUNCIONALIDADES_ROLES values (4,2)
+
+end
+GO
