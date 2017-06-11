@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.aniotxtb = new System.Windows.Forms.TextBox();
             this.label = new System.Windows.Forms.Label();
             this.comboBoxTRIMESTRE = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -40,8 +39,11 @@
             this.label3 = new System.Windows.Forms.Label();
             this.gridResultados = new System.Windows.Forms.DataGridView();
             this.boxOpciones = new System.Windows.Forms.GroupBox();
+            this.anioUpDown = new System.Windows.Forms.NumericUpDown();
+            this.lblError = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.gridResultados)).BeginInit();
             this.boxOpciones.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.anioUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -52,13 +54,6 @@
             this.label1.Size = new System.Drawing.Size(38, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "Año";
-            // 
-            // aniotxtb
-            // 
-            this.aniotxtb.Location = new System.Drawing.Point(279, 27);
-            this.aniotxtb.Name = "aniotxtb";
-            this.aniotxtb.Size = new System.Drawing.Size(100, 26);
-            this.aniotxtb.TabIndex = 1;
             // 
             // label
             // 
@@ -98,7 +93,6 @@
             this.ChofMayorRecaudacionBTT.TabStop = true;
             this.ChofMayorRecaudacionBTT.Text = "Choferes con mayor recaudación";
             this.ChofMayorRecaudacionBTT.UseVisualStyleBackColor = true;
-           
             // 
             // ChofViajeMasLargoBTT
             // 
@@ -110,7 +104,6 @@
             this.ChofViajeMasLargoBTT.TabStop = true;
             this.ChofViajeMasLargoBTT.Text = "Choferes con el viaje más largo realizado";
             this.ChofViajeMasLargoBTT.UseVisualStyleBackColor = true;
-         
             // 
             // ClientesMayorConsumoBTT
             // 
@@ -122,18 +115,17 @@
             this.ClientesMayorConsumoBTT.TabStop = true;
             this.ClientesMayorConsumoBTT.Text = "Clientes con mayor consumo";
             this.ClientesMayorConsumoBTT.UseVisualStyleBackColor = true;
-            
+            // 
             // ClienteMasVecesAutoBTT
             // 
             this.ClienteMasVecesAutoBTT.AutoSize = true;
             this.ClienteMasVecesAutoBTT.Location = new System.Drawing.Point(6, 104);
             this.ClienteMasVecesAutoBTT.Name = "ClienteMasVecesAutoBTT";
-            this.ClienteMasVecesAutoBTT.Size = new System.Drawing.Size(539, 24);
+            this.ClienteMasVecesAutoBTT.Size = new System.Drawing.Size(570, 24);
             this.ClienteMasVecesAutoBTT.TabIndex = 8;
             this.ClienteMasVecesAutoBTT.TabStop = true;
-            this.ClienteMasVecesAutoBTT.Text = "Cliente que utilizo más veces el mismo automóvil en los viajes realizados";
+            this.ClienteMasVecesAutoBTT.Text = "Clientes que utilizaron más veces el mismo automóvil en los viajes realizados";
             this.ClienteMasVecesAutoBTT.UseVisualStyleBackColor = true;
-           
             // 
             // label3
             // 
@@ -159,30 +151,64 @@
             this.boxOpciones.Controls.Add(this.ChofViajeMasLargoBTT);
             this.boxOpciones.Controls.Add(this.ClientesMayorConsumoBTT);
             this.boxOpciones.Controls.Add(this.ClienteMasVecesAutoBTT);
-            this.boxOpciones.Location = new System.Drawing.Point(197, 144);
+            this.boxOpciones.Location = new System.Drawing.Point(181, 144);
             this.boxOpciones.Name = "boxOpciones";
-            this.boxOpciones.Size = new System.Drawing.Size(558, 143);
+            this.boxOpciones.Size = new System.Drawing.Size(579, 143);
             this.boxOpciones.TabIndex = 11;
             this.boxOpciones.TabStop = false;
+            // 
+            // anioUpDown
+            // 
+            this.anioUpDown.Location = new System.Drawing.Point(269, 28);
+            this.anioUpDown.Maximum = new decimal(new int[] {
+            2020,
+            0,
+            0,
+            0});
+            this.anioUpDown.Minimum = new decimal(new int[] {
+            2015,
+            0,
+            0,
+            0});
+            this.anioUpDown.Name = "anioUpDown";
+            this.anioUpDown.Size = new System.Drawing.Size(120, 26);
+            this.anioUpDown.TabIndex = 12;
+            this.anioUpDown.Value = new decimal(new int[] {
+            2015,
+            0,
+            0,
+            0});
+            // 
+            // lblError
+            // 
+            this.lblError.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblError.Location = new System.Drawing.Point(198, 58);
+            this.lblError.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblError.Name = "lblError";
+            this.lblError.Size = new System.Drawing.Size(578, 40);
+            this.lblError.TabIndex = 13;
+            this.lblError.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(956, 524);
+            this.Controls.Add(this.lblError);
+            this.Controls.Add(this.anioUpDown);
             this.Controls.Add(this.boxOpciones);
             this.Controls.Add(this.gridResultados);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.comboBoxTRIMESTRE);
             this.Controls.Add(this.label);
-            this.Controls.Add(this.aniotxtb);
             this.Controls.Add(this.label1);
             this.Name = "Form1";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.gridResultados)).EndInit();
             this.boxOpciones.ResumeLayout(false);
             this.boxOpciones.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.anioUpDown)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -191,7 +217,6 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox aniotxtb;
         private System.Windows.Forms.Label label;
         private System.Windows.Forms.ComboBox comboBoxTRIMESTRE;
         private System.Windows.Forms.Label label2;
@@ -202,5 +227,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DataGridView gridResultados;
         private System.Windows.Forms.GroupBox boxOpciones;
+        private System.Windows.Forms.NumericUpDown anioUpDown;
+        private System.Windows.Forms.Label lblError;
     }
 }
