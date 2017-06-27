@@ -25,8 +25,11 @@ namespace UberFrba.Rendicion_Viajes
             this.ddlChofer.Items.Clear();
             this.ddlTurno.Items.Clear();
 
-            this.dtInicio.Text = DateTime.Now.ToString();
-            this.dtInicio.Value = DateTime.Now;
+            //this.dtInicio.Text = DateTime.Now.ToString();
+            //this.dtInicio.Value = DateTime.Now;
+
+            this.dtInicio.Text = DateTimeHelper.GetSystemDate().ToString();
+            this.dtInicio.Value = DateTimeHelper.GetSystemDate();
 
             this.dtInicio.Format = DateTimePickerFormat.Short; 
 

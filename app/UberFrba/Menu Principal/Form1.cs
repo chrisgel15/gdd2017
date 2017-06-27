@@ -25,7 +25,13 @@ namespace UberFrba.Menu_Principal
             this.Estado = est;
             InitializeComponent();
             SetearLabels();
+            SetearFechaDelSistema();
             //  ActivarBotonesSegunRol(this.roles);
+        }
+
+        private void SetearFechaDelSistema()
+        {
+            this.lblFechaSistema.Text = DateTimeHelper.GetSystemDate().ToString();
         }
 
         private void ActivarBotonesSegunRol(List<FUNCIONALIDADE> funcionalidades)

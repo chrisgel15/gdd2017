@@ -24,8 +24,8 @@ namespace UberFrba.Facturacion
         {
             this.ddlCliente.Items.Clear();            
 
-            this.dtInicio.Text = DateTime.Now.ToString();
-            this.dtInicio.Value = new DateTime(DateTime.Now.Date.Year, DateTime.Now.Date.Month, 1);
+            this.dtInicio.Text = DateTimeHelper.GetSystemDate().ToString();
+            this.dtInicio.Value = new DateTime(DateTimeHelper.GetSystemDate().Date.Year, DateTimeHelper.GetSystemDate().Date.Month, 1);
 
             this.dtInicio.Format = DateTimePickerFormat.Custom;
             this.dtInicio.CustomFormat = "MMM-yyyy";

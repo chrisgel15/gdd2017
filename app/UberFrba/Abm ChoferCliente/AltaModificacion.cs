@@ -116,8 +116,8 @@ namespace UberFrba.Abm_ChoferCliente
             this.txtMail.Text = String.Empty;
             this.txtCodPostal.Text = String.Empty;
 
-            this.dtFechaNac.Text = DateTime.Now.Date.ToString();
-            this.dtFechaNac.Value = DateTime.Now.Date;
+            this.dtFechaNac.Text = DateTimeHelper.GetSystemDate().Date.ToString();
+            this.dtFechaNac.Value = DateTimeHelper.GetSystemDate().Date;
             
             LimpiaErrores(this.txtNombre);
             LimpiaErrores(this.txtApellido);

@@ -42,14 +42,15 @@
             this.lblRol = new System.Windows.Forms.Label();
             this.lblNombreUsuario = new System.Windows.Forms.Label();
             this.lblRolUsuario = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lblFechaSistema = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnAbmAuto
             // 
-            this.btnAbmAuto.Location = new System.Drawing.Point(18, 154);
-            this.btnAbmAuto.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnAbmAuto.Location = new System.Drawing.Point(12, 100);
             this.btnAbmAuto.Name = "btnAbmAuto";
-            this.btnAbmAuto.Size = new System.Drawing.Size(210, 71);
+            this.btnAbmAuto.Size = new System.Drawing.Size(140, 46);
             this.btnAbmAuto.TabIndex = 0;
             this.btnAbmAuto.Text = "ABM Automovil";
             this.btnAbmAuto.UseVisualStyleBackColor = true;
@@ -57,10 +58,9 @@
             // 
             // btnABMChofer
             // 
-            this.btnABMChofer.Location = new System.Drawing.Point(256, 154);
-            this.btnABMChofer.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnABMChofer.Location = new System.Drawing.Point(171, 100);
             this.btnABMChofer.Name = "btnABMChofer";
-            this.btnABMChofer.Size = new System.Drawing.Size(210, 71);
+            this.btnABMChofer.Size = new System.Drawing.Size(140, 46);
             this.btnABMChofer.TabIndex = 1;
             this.btnABMChofer.Text = "ABM Chofer";
             this.btnABMChofer.UseVisualStyleBackColor = true;
@@ -68,10 +68,9 @@
             // 
             // btnABMCliente
             // 
-            this.btnABMCliente.Location = new System.Drawing.Point(510, 154);
-            this.btnABMCliente.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnABMCliente.Location = new System.Drawing.Point(340, 100);
             this.btnABMCliente.Name = "btnABMCliente";
-            this.btnABMCliente.Size = new System.Drawing.Size(210, 71);
+            this.btnABMCliente.Size = new System.Drawing.Size(140, 46);
             this.btnABMCliente.TabIndex = 2;
             this.btnABMCliente.Text = "ABM Cliente";
             this.btnABMCliente.UseVisualStyleBackColor = true;
@@ -79,10 +78,9 @@
             // 
             // btnAbmRol
             // 
-            this.btnAbmRol.Location = new System.Drawing.Point(18, 294);
-            this.btnAbmRol.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnAbmRol.Location = new System.Drawing.Point(12, 191);
             this.btnAbmRol.Name = "btnAbmRol";
-            this.btnAbmRol.Size = new System.Drawing.Size(210, 71);
+            this.btnAbmRol.Size = new System.Drawing.Size(140, 46);
             this.btnAbmRol.TabIndex = 3;
             this.btnAbmRol.Text = "ABM Rol";
             this.btnAbmRol.UseVisualStyleBackColor = true;
@@ -90,10 +88,9 @@
             // 
             // btnAbmTurno
             // 
-            this.btnAbmTurno.Location = new System.Drawing.Point(256, 294);
-            this.btnAbmTurno.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnAbmTurno.Location = new System.Drawing.Point(171, 191);
             this.btnAbmTurno.Name = "btnAbmTurno";
-            this.btnAbmTurno.Size = new System.Drawing.Size(210, 71);
+            this.btnAbmTurno.Size = new System.Drawing.Size(140, 46);
             this.btnAbmTurno.TabIndex = 4;
             this.btnAbmTurno.Text = "ABM Turno";
             this.btnAbmTurno.UseVisualStyleBackColor = true;
@@ -101,10 +98,9 @@
             // 
             // btnFacturacion
             // 
-            this.btnFacturacion.Location = new System.Drawing.Point(510, 294);
-            this.btnFacturacion.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnFacturacion.Location = new System.Drawing.Point(340, 191);
             this.btnFacturacion.Name = "btnFacturacion";
-            this.btnFacturacion.Size = new System.Drawing.Size(210, 71);
+            this.btnFacturacion.Size = new System.Drawing.Size(140, 46);
             this.btnFacturacion.TabIndex = 5;
             this.btnFacturacion.Text = "Facturacion";
             this.btnFacturacion.UseVisualStyleBackColor = true;
@@ -112,10 +108,9 @@
             // 
             // btnRegistroViaje
             // 
-            this.btnRegistroViaje.Location = new System.Drawing.Point(18, 425);
-            this.btnRegistroViaje.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnRegistroViaje.Location = new System.Drawing.Point(12, 276);
             this.btnRegistroViaje.Name = "btnRegistroViaje";
-            this.btnRegistroViaje.Size = new System.Drawing.Size(210, 71);
+            this.btnRegistroViaje.Size = new System.Drawing.Size(140, 46);
             this.btnRegistroViaje.TabIndex = 6;
             this.btnRegistroViaje.Text = "Registro de Viaje";
             this.btnRegistroViaje.UseVisualStyleBackColor = true;
@@ -123,10 +118,9 @@
             // 
             // btnRendicion
             // 
-            this.btnRendicion.Location = new System.Drawing.Point(256, 425);
-            this.btnRendicion.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnRendicion.Location = new System.Drawing.Point(171, 276);
             this.btnRendicion.Name = "btnRendicion";
-            this.btnRendicion.Size = new System.Drawing.Size(210, 71);
+            this.btnRendicion.Size = new System.Drawing.Size(140, 46);
             this.btnRendicion.TabIndex = 7;
             this.btnRendicion.Text = "Rendicion";
             this.btnRendicion.UseVisualStyleBackColor = true;
@@ -134,10 +128,9 @@
             // 
             // btnReportes
             // 
-            this.btnReportes.Location = new System.Drawing.Point(510, 425);
-            this.btnReportes.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnReportes.Location = new System.Drawing.Point(340, 276);
             this.btnReportes.Name = "btnReportes";
-            this.btnReportes.Size = new System.Drawing.Size(210, 71);
+            this.btnReportes.Size = new System.Drawing.Size(140, 46);
             this.btnReportes.TabIndex = 8;
             this.btnReportes.Text = "Reportes";
             this.btnReportes.UseVisualStyleBackColor = true;
@@ -145,10 +138,9 @@
             // 
             // btnSalir
             // 
-            this.btnSalir.Location = new System.Drawing.Point(256, 555);
-            this.btnSalir.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnSalir.Location = new System.Drawing.Point(171, 361);
             this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(210, 71);
+            this.btnSalir.Size = new System.Drawing.Size(140, 46);
             this.btnSalir.TabIndex = 9;
             this.btnSalir.Text = "SALIR";
             this.btnSalir.UseVisualStyleBackColor = true;
@@ -157,48 +149,63 @@
             // lblUsuario
             // 
             this.lblUsuario.AutoSize = true;
-            this.lblUsuario.Location = new System.Drawing.Point(38, 34);
-            this.lblUsuario.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblUsuario.Location = new System.Drawing.Point(25, 22);
             this.lblUsuario.Name = "lblUsuario";
-            this.lblUsuario.Size = new System.Drawing.Size(68, 20);
+            this.lblUsuario.Size = new System.Drawing.Size(46, 13);
             this.lblUsuario.TabIndex = 10;
             this.lblUsuario.Text = "Usuario:";
             // 
             // lblRol
             // 
             this.lblRol.AutoSize = true;
-            this.lblRol.Location = new System.Drawing.Point(42, 80);
-            this.lblRol.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblRol.Location = new System.Drawing.Point(28, 52);
             this.lblRol.Name = "lblRol";
-            this.lblRol.Size = new System.Drawing.Size(37, 20);
+            this.lblRol.Size = new System.Drawing.Size(26, 13);
             this.lblRol.TabIndex = 11;
             this.lblRol.Text = "Rol:";
             // 
             // lblNombreUsuario
             // 
             this.lblNombreUsuario.AutoSize = true;
-            this.lblNombreUsuario.Location = new System.Drawing.Point(156, 34);
-            this.lblNombreUsuario.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblNombreUsuario.Location = new System.Drawing.Point(104, 22);
             this.lblNombreUsuario.Name = "lblNombreUsuario";
-            this.lblNombreUsuario.Size = new System.Drawing.Size(120, 20);
+            this.lblNombreUsuario.Size = new System.Drawing.Size(80, 13);
             this.lblNombreUsuario.TabIndex = 12;
             this.lblNombreUsuario.Text = "NombreUsuario";
             // 
             // lblRolUsuario
             // 
             this.lblRolUsuario.AutoSize = true;
-            this.lblRolUsuario.Location = new System.Drawing.Point(160, 78);
-            this.lblRolUsuario.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblRolUsuario.Location = new System.Drawing.Point(107, 51);
             this.lblRolUsuario.Name = "lblRolUsuario";
-            this.lblRolUsuario.Size = new System.Drawing.Size(88, 20);
+            this.lblRolUsuario.Size = new System.Drawing.Size(59, 13);
             this.lblRolUsuario.TabIndex = 13;
             this.lblRolUsuario.Text = "RolUsuario";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(253, 36);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(43, 13);
+            this.label1.TabIndex = 14;
+            this.label1.Text = "Fecha: ";
+            // 
+            // lblFechaSistema
+            // 
+            this.lblFechaSistema.AutoSize = true;
+            this.lblFechaSistema.Location = new System.Drawing.Point(349, 36);
+            this.lblFechaSistema.Name = "lblFechaSistema";
+            this.lblFechaSistema.Size = new System.Drawing.Size(0, 13);
+            this.lblFechaSistema.TabIndex = 15;
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(738, 682);
+            this.ClientSize = new System.Drawing.Size(492, 443);
+            this.Controls.Add(this.lblFechaSistema);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.lblRolUsuario);
             this.Controls.Add(this.lblNombreUsuario);
             this.Controls.Add(this.lblRol);
@@ -213,7 +220,6 @@
             this.Controls.Add(this.btnABMCliente);
             this.Controls.Add(this.btnABMChofer);
             this.Controls.Add(this.btnAbmAuto);
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "Form1";
             this.Text = "Form1";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MenuPrincipal_Close);
@@ -239,6 +245,8 @@
         private System.Windows.Forms.Label lblRol;
         private System.Windows.Forms.Label lblNombreUsuario;
         private System.Windows.Forms.Label lblRolUsuario;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblFechaSistema;
 
     }
 }

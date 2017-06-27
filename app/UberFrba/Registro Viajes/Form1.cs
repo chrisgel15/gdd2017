@@ -29,11 +29,11 @@ namespace UberFrba.Registro_Viajes
 
             this.txtKilometros.Value = 0;
 
-            this.dtInicio.Text = DateTime.Now.ToString();
-            this.dtInicio.Value = DateTime.Now;
+            this.dtInicio.Text = DateTimeHelper.GetSystemDate().ToString();
+            this.dtInicio.Value = DateTimeHelper.GetSystemDate();
 
-            this.dtFin.Text = DateTime.Now.ToString();
-            this.dtFin.Value = DateTime.Now;
+            this.dtFin.Text = DateTimeHelper.GetSystemDate().ToString();
+            this.dtFin.Value = DateTimeHelper.GetSystemDate();
 
             this.dtInicio.Format = DateTimePickerFormat.Custom;
             this.dtInicio.CustomFormat = "dd/MM/yyyy HH:mm:ss";
