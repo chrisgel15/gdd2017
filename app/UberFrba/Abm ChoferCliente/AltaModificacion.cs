@@ -44,8 +44,17 @@ namespace UberFrba.Abm_ChoferCliente
             if (!ValidaInfo())
                 return;
 
-            var altaData = new AltaModificacionData(this.txtNombre.Text, this.txtApellido.Text, int.Parse(this.txtDni.Text),
-                this.txtMail.Text, int.Parse(this.txtTelefono.Text), this.txtDireccion.Text, int.Parse(this.txtCodPostal.Text), DateTime.Parse(this.dtFechaNac.Text));
+            var nom = this.txtNombre.Text;
+            var ape = this.txtApellido.Text;
+            var dni = int.Parse(this.txtDni.Text);
+            var mail = this.txtMail.Text;
+            var telef = int.Parse(this.txtTelefono.Text);
+            var direc = this.txtDireccion.Text;
+            var cp = this.choferCliente.ValidarCodigoPostal ? int.Parse(this.txtCodPostal.Text) : 0;
+            DateTime fecNac = DateTime.Parse(this.dtFechaNac.Text);
+
+
+            var altaData = new AltaModificacionData(nom, ape, dni, mail, telef, direc, cp, fecNac);
 
             try
             {
