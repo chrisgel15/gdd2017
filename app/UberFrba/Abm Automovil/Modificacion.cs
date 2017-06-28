@@ -135,18 +135,16 @@ namespace UberFrba.Abm_Automovil
                 }
                 
                 /*Si le quiere asignar auto activo y ya tiene otro previamente*/
-                if (chofer.AUTOS.Any(a => a.HABILITADO) && modifAuto._habilitado)
+                
+                if (chofer.AUTOS.Any(a => a.HABILITADO && a.PATENTE != modifAuto._patente) && modifAuto._habilitado)
                 {
                     MessageBox.Show("El chofer ya tiene asignado un auto en estado Activo.\n" +
-                        "Debe ingresar otro chofer ó asignarle el auto con estado No Activo");
+                     "Debe ingresar otro chofer ó asignarle el auto con estado No Activo");
                     txtChofer.Text = String.Empty;
-                    
-
                     return false;
-                    
                 }
                 
-                    /*Guardo el id del chofer para actualizarselo al auto*/
+                /*Guardo el id del chofer para actualizarselo al auto*/
                 else
                     modifAuto._choferId = chofer.ID_CHOFER;
                 return true;

@@ -173,13 +173,29 @@ namespace UberFrba.Abm_Automovil
             
             if (e.ColumnIndex == grilla.Columns["Seleccionar"].Index && e.RowIndex >= 0)
             {
+                using (var dbCtx = new GD1C2017Entities()) 
+                {
+                    var q1 = dbCtx.AUTOS.Where(a => a.PATENTE == item.patente).FirstOrDefault();
+                    item.chofer = q1.CHOFERE.NOMBRE + " " + q1.CHOFERE.APELLIDO;
+                    item.habilitado = q1.HABILITADO;
+                    item.id = q1.ID_AUTO;
+                    item.licencia = q1.LICENCIA;
+                    item.marca = q1.MARCA.NOMBRE;
+                    item.modelo = q1.MODELO;
+                    item.patente = q1.PATENTE;
+                    item.rodado = q1.RODADO;
+                    
+                }
+                
                 modifForm = new Abm_Automovil.Modificacion(item);
                 modifForm.Show();
+                
 
             }
             
             if (e.ColumnIndex == grilla.Columns["Deshabilitar"].Index && e.RowIndex >= 0)
             {
+               
                 var result = MessageBox.Show("Esta Seguro?", "Deshabilitar Auto",MessageBoxButtons.YesNo,MessageBoxIcon.Question);
 
                 if (result == DialogResult.No)
@@ -189,19 +205,26 @@ namespace UberFrba.Abm_Automovil
                     deshabilitarItem(item);
                 }
             }
+            
         }
 
         private void deshabilitarItem(GridQueryResult item)
         {
+            //Separo en nombre y apellido
+            string[] nombreApellido;
+            nombreApellido = item.chofer.Split(' ');
             using (var dbCtx = new GD1C2017Entities())
             {
+                var _nombre = nombreApellido[0];
+                var _apellido = nombreApellido[1];
+
                 var auto = dbCtx.AUTOS.Where(
                     a => a.MARCA.NOMBRE == item.marca &&
                         a.MODELO == item.modelo &&
                         a.LICENCIA == item.licencia &&
                         a.PATENTE == item.patente &&
                         a.RODADO == item.rodado && (
-                        a.CHOFERE.NOMBRE == item.chofer || a.CHOFERE.APELLIDO == item.chofer)).
+                        a.CHOFERE.NOMBRE == _nombre || a.CHOFERE.APELLIDO == _apellido)).
                         First();
                 if (auto.HABILITADO)
                     auto.HABILITADO = !auto.HABILITADO;
