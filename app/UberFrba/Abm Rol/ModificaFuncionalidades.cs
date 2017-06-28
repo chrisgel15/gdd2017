@@ -57,15 +57,14 @@ namespace UberFrba.Abm_Rol
 
                 rol.FUNCIONALIDADES.Clear();
 
-                dbCtx.SaveChanges();
-
                 rol.FUNCIONALIDADES = new List<FUNCIONALIDADE>();
+
 
                 foreach (object o in this.checkedListBox1.CheckedItems)
                 {
                     FUNCIONALIDADE f = (FUNCIONALIDADE)o;
-                    rol.FUNCIONALIDADES.Add(f);
-                    rol.FUNCIONALIDADES.Add(dbCtx.FUNCIONALIDADES.Where(fun => fun.ID_FUNC == f.ID_FUNC).FirstOrDefault());
+                    var fId = dbCtx.FUNCIONALIDADES.Where(fun => fun.ID_FUNC == f.ID_FUNC).FirstOrDefault().ID_FUNC;
+                    rol.FUNCIONALIDADES.Add(dbCtx.FUNCIONALIDADES.Where(fu => fu.ID_FUNC == fId).FirstOrDefault());
                 }
 
                 dbCtx.SaveChanges();
