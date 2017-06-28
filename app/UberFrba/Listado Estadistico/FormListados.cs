@@ -22,6 +22,9 @@ namespace UberFrba.Listado_Estadistico
             {
                 comboBoxTRIMESTRE.Items.Add(i);
             }
+
+            this.anioUpDown.Value = DateTimeHelper.GetSystemDate().Year;
+
             this.ChofViajeMasLargoBTT.CheckedChanged += new EventHandler(RadioButtons_CheckedChanged_1);
             this.ChofMayorRecaudacionBTT.CheckedChanged += new EventHandler(RadioButtons_CheckedChanged_1);
             this.ClienteMasVecesAutoBTT.CheckedChanged += new EventHandler(RadioButtons_CheckedChanged_1);
