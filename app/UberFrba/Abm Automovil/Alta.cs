@@ -163,6 +163,7 @@ namespace UberFrba.Abm_Automovil
                 {
                     MessageBox.Show("Ya existe esa patente en el sistema");
                     txtPatente.Text = String.Empty;
+                    habilitaDatos = false;
                     return;
                 }
                 
