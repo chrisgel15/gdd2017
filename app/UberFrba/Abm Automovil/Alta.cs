@@ -163,6 +163,7 @@ namespace UberFrba.Abm_Automovil
                 {
                     MessageBox.Show("Ya existe esa patente en el sistema");
                     txtPatente.Text = String.Empty;
+                    habilitaDatos = false;
                     return;
                 }
                 
@@ -181,8 +182,8 @@ namespace UberFrba.Abm_Automovil
                 else
                 {
                     id_chofer = chofer.ID_CHOFER;
-                    var auto = dbCtx.AUTOS.Where(a => a.CHOFER_ID == id_chofer).FirstOrDefault();
-                    if (auto.HABILITADO)
+                    var autos = dbCtx.AUTOS.Where(a => a.CHOFER_ID == id_chofer).ToList();
+                    if (autos.Any(a => a.HABILITADO))
                     {
                         MessageBox.Show("El chofer ya tiene asignado un auto activo\n" + "seleccione un chofer diferente");
                         txtNomChofer.Text = String.Empty;
