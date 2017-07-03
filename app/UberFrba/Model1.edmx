@@ -901,22 +901,22 @@
             <End Role="ROLES" EntitySet="ROLES" />
             <End Role="USUARIOS" EntitySet="USUARIOS" />
           </AssociationSet>
-          <FunctionImport Name="choferesMayorRecaudacionSP" ReturnType="Collection(GD1C2017Model.choferesMayorRecaudacionSP_Result1)">
+          <FunctionImport Name="choferesMayorRecaudacionSP" ReturnType="Collection(GD1C2017Model.choferesMayorRecaudacionSP_Result)">
             <Parameter Name="Anio" Mode="In" Type="Int32" />
             <Parameter Name="Inicio" Mode="In" Type="Int32" />
             <Parameter Name="Fin" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="choferesViajeMasLargoSP" ReturnType="Collection(GD1C2017Model.choferesViajeMasLargoSP_Result1)">
+          <FunctionImport Name="choferesViajeMasLargoSP" ReturnType="Collection(GD1C2017Model.choferesViajeMasLargoSP_Result)">
             <Parameter Name="Anio" Mode="In" Type="Int32" />
             <Parameter Name="Inicio" Mode="In" Type="Int32" />
             <Parameter Name="Fin" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="clientesMayorConsumoSP" ReturnType="Collection(GD1C2017Model.clientesMayorConsumoSP_Result1)">
+          <FunctionImport Name="clientesMayorConsumoSP" ReturnType="Collection(GD1C2017Model.clientesMayorConsumoSP_Result)">
             <Parameter Name="Anio" Mode="In" Type="Int32" />
             <Parameter Name="Inicio" Mode="In" Type="Int32" />
             <Parameter Name="Fin" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="clientesMismoAutomovilMasFrecuenciaSP" ReturnType="Collection(GD1C2017Model.clientesMismoAutomovilMasFrecuenciaSP_Result1)">
+          <FunctionImport Name="clientesMismoAutomovilMasFrecuenciaSP" ReturnType="Collection(GD1C2017Model.clientesMismoAutomovilMasFrecuenciaSP_Result)">
             <Parameter Name="Anio" Mode="In" Type="Int32" />
             <Parameter Name="Inicio" Mode="In" Type="Int32" />
             <Parameter Name="Fin" Mode="In" Type="Int32" />
@@ -978,14 +978,14 @@
           <Property Type="String" Name="PATENTE" Nullable="true" MaxLength="10" />
           <Property Type="Int32" Name="cantidad_viajes" Nullable="true" />
         </ComplexType>
-        <ComplexType Name="choferesMayorRecaudacionSP_Result1">
+     <!--   <ComplexType Name="choferesMayorRecaudacionSP_Result1">
           <Property Type="Int32" Name="anio" Nullable="true" />
           <Property Type="Int32" Name="mes" Nullable="true" />
           <Property Type="String" Name="NOMBRE" Nullable="true" MaxLength="255" />
           <Property Type="String" Name="APELLIDO" Nullable="true" MaxLength="255" />
           <Property Type="Decimal" Name="RECAUDACION" Nullable="true" Precision="38" Scale="2" />
-        </ComplexType>
-        <ComplexType Name="choferesViajeMasLargoSP_Result1">
+        </ComplexType> -->
+   <!--     <ComplexType Name="choferesViajeMasLargoSP_Result1">
           <Property Type="Int32" Name="anio" Nullable="true" />
           <Property Type="Int32" Name="mes" Nullable="true" />
           <Property Type="String" Name="NOMBRE" Nullable="true" MaxLength="255" />
@@ -1004,8 +1004,8 @@
           <Property Type="String" Name="apellido" Nullable="true" MaxLength="255" />
           <Property Type="Int32" Name="AUTO_ID" Nullable="false" />
           <Property Type="String" Name="PATENTE" Nullable="true" MaxLength="10" />
-          <Property Type="Int32" Name="cantidad_viajes" Nullable="true" />
-        </ComplexType>
+          <Property Type="Int32" Name="cantidad_viajes" Nullable="true" /> 
+        </ComplexType> -->
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1175,7 +1175,7 @@
           </AssociationSetMapping>
           <FunctionImportMapping FunctionImportName="choferesMayorRecaudacionSP" FunctionName="GD1C2017Model.Store.choferesMayorRecaudacionSP">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="GD1C2017Model.choferesMayorRecaudacionSP_Result1">
+              <ComplexTypeMapping TypeName="GD1C2017Model.choferesMayorRecaudacionSP_Result">
                 <ScalarProperty Name="anio" ColumnName="anio" />
                 <ScalarProperty Name="mes" ColumnName="mes" />
                 <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
@@ -1186,7 +1186,7 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="choferesViajeMasLargoSP" FunctionName="GD1C2017Model.Store.choferesViajeMasLargoSP">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="GD1C2017Model.choferesViajeMasLargoSP_Result1">
+              <ComplexTypeMapping TypeName="GD1C2017Model.choferesViajeMasLargoSP_Result">
                 <ScalarProperty Name="anio" ColumnName="anio" />
                 <ScalarProperty Name="mes" ColumnName="mes" />
                 <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
@@ -1197,7 +1197,7 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="clientesMayorConsumoSP" FunctionName="GD1C2017Model.Store.clientesMayorConsumoSP">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="GD1C2017Model.clientesMayorConsumoSP_Result1">
+              <ComplexTypeMapping TypeName="GD1C2017Model.clientesMayorConsumoSP_Result">
                 <ScalarProperty Name="anio" ColumnName="anio" />
                 <ScalarProperty Name="mes" ColumnName="mes" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -1208,7 +1208,7 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="clientesMismoAutomovilMasFrecuenciaSP" FunctionName="GD1C2017Model.Store.clientesMismoAutomovilMasFrecuenciaSP">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="GD1C2017Model.clientesMismoAutomovilMasFrecuenciaSP_Result1">
+              <ComplexTypeMapping TypeName="GD1C2017Model.clientesMismoAutomovilMasFrecuenciaSP_Result">
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
                 <ScalarProperty Name="apellido" ColumnName="apellido" />
                 <ScalarProperty Name="AUTO_ID" ColumnName="AUTO_ID" />
