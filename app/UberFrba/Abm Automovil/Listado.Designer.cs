@@ -30,10 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             this.groupFiltros = new System.Windows.Forms.GroupBox();
+            this.comboChofer = new System.Windows.Forms.ComboBox();
             this.btnSalir = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
             this.btnBuscar = new System.Windows.Forms.Button();
-            this.txtChofer = new System.Windows.Forms.TextBox();
             this.lblChofer = new System.Windows.Forms.Label();
             this.txtPatente = new System.Windows.Forms.TextBox();
             this.lblPatente = new System.Windows.Forms.Label();
@@ -59,10 +59,10 @@
             // 
             // groupFiltros
             // 
+            this.groupFiltros.Controls.Add(this.comboChofer);
             this.groupFiltros.Controls.Add(this.btnSalir);
             this.groupFiltros.Controls.Add(this.btnClear);
             this.groupFiltros.Controls.Add(this.btnBuscar);
-            this.groupFiltros.Controls.Add(this.txtChofer);
             this.groupFiltros.Controls.Add(this.lblChofer);
             this.groupFiltros.Controls.Add(this.txtPatente);
             this.groupFiltros.Controls.Add(this.lblPatente);
@@ -78,6 +78,17 @@
             this.groupFiltros.TabIndex = 0;
             this.groupFiltros.TabStop = false;
             this.groupFiltros.Text = "Filtros de Búsqueda";
+            // 
+            // comboChofer
+            // 
+            this.comboChofer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboChofer.FormattingEnabled = true;
+            this.comboChofer.Location = new System.Drawing.Point(232, 95);
+            this.comboChofer.Name = "comboChofer";
+            this.comboChofer.Size = new System.Drawing.Size(121, 21);
+            this.comboChofer.TabIndex = 13;
+            this.comboChofer.Visible = false;
+            this.comboChofer.SelectionChangeCommitted += new System.EventHandler(this.comboChofer_SelectionChangeCommitted);
             // 
             // btnSalir
             // 
@@ -108,15 +119,6 @@
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = true;
             this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
-            // 
-            // txtChofer
-            // 
-            this.txtChofer.Location = new System.Drawing.Point(232, 95);
-            this.txtChofer.MaxLength = 20;
-            this.txtChofer.Name = "txtChofer";
-            this.txtChofer.Size = new System.Drawing.Size(121, 20);
-            this.txtChofer.TabIndex = 9;
-            this.txtChofer.Visible = false;
             // 
             // lblChofer
             // 
@@ -289,7 +291,6 @@
         private System.Windows.Forms.GroupBox groupFiltros;
         private System.Windows.Forms.ComboBox comboFiltros;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtChofer;
         private System.Windows.Forms.Label lblChofer;
         private System.Windows.Forms.TextBox txtPatente;
         private System.Windows.Forms.Label lblPatente;
@@ -310,5 +311,6 @@
         private System.Windows.Forms.DataGridViewButtonColumn Seleccionar;
         private System.Windows.Forms.DataGridViewButtonColumn Deshabilitar;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.ComboBox comboChofer;
     }
 }

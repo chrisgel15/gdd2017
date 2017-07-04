@@ -15,6 +15,8 @@ namespace UberFrba.Abm_Automovil
         private GridQueryResult item;
         private AutoDatosModificado modifAuto;
         private bool actualiza;
+        private bool comboModificado = false;
+        private CHOFERE chofer_combo;
        
         public Modificacion()
         {
@@ -33,7 +35,9 @@ namespace UberFrba.Abm_Automovil
         }
         private void cargaControles()
         {
-            txtChofer.Text = item.chofer;
+           // txtChofer.Text = item.chofer;
+            //comboChofer.Text = item.chofer;
+            initChofer();
             txtLicencia.Text = item.licencia;
             txtModelo.Text = item.modelo;
             txtPatente.Text = item.patente;
@@ -57,6 +61,21 @@ namespace UberFrba.Abm_Automovil
              }
         }
 
+        private void initChofer()
+        {
+            using (var dbCtx = new GD1C2017Entities())
+            {
+
+                var choferes = dbCtx.CHOFERES.Where(c => c.HABILITADO).ToArray();
+                //comboChofer.Items.Add("-- Seleccione -- ");
+                comboChofer.Items.AddRange(choferes);
+                comboChofer.DisplayMember = "NOMBRE";
+                comboChofer.ValueMember = "ID_CHOFER";
+                //comboChofer.SelectedIndex = 0;
+                comboChofer.Text = item.chofer;
+            }
+        }
+
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -71,7 +90,8 @@ namespace UberFrba.Abm_Automovil
             modifAuto._patente = txtPatente.Text;
             modifAuto._licencia = txtLicencia.Text;
             modifAuto._rodado = txtRodado.Text;
-            modifAuto._chofer = txtChofer.Text;
+            //modifAuto._chofer = txtChofer.Text;
+            //modifAuto._chofer = comboChofer.Text;
             //------------------------------------------------------//
 
             /*Valida regla de negocio de unico auto activo asignado*/
@@ -114,33 +134,44 @@ namespace UberFrba.Abm_Automovil
         private bool dvm(AutoDatosModificado modifAuto)
         {
             //Separo en nombre y apellido
-            string[] nombreApellido;
-            nombreApellido = modifAuto._chofer.Split(' ');
-
+            //string[] nombreApellido;
+            //nombreApellido = modifAuto._chofer.Split(' ');
+            
+            int choferID;
 
             using (var dbCtx = new GD1C2017Entities()) 
             {
-                var _nombre = nombreApellido[0];
-                var _apellido = nombreApellido[1];
-                /*Busco el chofer por nombre y apellido*/
-                var chofer = dbCtx.CHOFERES.
+                //var _nombre = nombreApellido[0];
+                //var _apellido = nombreApellido[1];
+                /*Busco el chofer por nombre*/
+                /*var chofer = dbCtx.CHOFERES.
                     Where(c => c.NOMBRE.Contains(_nombre.ToUpper()) && c.APELLIDO.Contains(_apellido)).
-                    FirstOrDefault();
+                    FirstOrDefault();*/
+                
+                if (comboModificado) 
+                {
+                    choferID = dbCtx.CHOFERES.Where(c => c.ID_CHOFER == chofer_combo.ID_CHOFER).FirstOrDefault().ID_CHOFER;
+                    comboModificado = false;
+                }
+                else
+                    choferID = dbCtx.AUTOS.Where(a => a.ID_AUTO == item.id).FirstOrDefault().CHOFER_ID;
 
                 /*Si no lo encuentra*/
-                if (chofer == null)
+                if (choferID == null)
                 {
                     MessageBox.Show("El chofer que desea no existe");
                     return false;
                 }
                 
                 /*Si le quiere asignar auto activo y ya tiene otro previamente*/
-                
-                if (chofer.AUTOS.Any(a => a.HABILITADO && a.PATENTE != modifAuto._patente) && modifAuto._habilitado)
+
+                var chofer = dbCtx.CHOFERES.Where(c => c.ID_CHOFER == choferID).FirstOrDefault();
+                if(chofer.AUTOS.Any(a => a.HABILITADO && a.ID_AUTO != item.id) && modifAuto._habilitado)
+                //if (chofer.AUTOS.Any(a => a.HABILITADO && a.PATENTE != modifAuto._patente) && modifAuto._habilitado)
                 {
                     MessageBox.Show("El chofer ya tiene asignado un auto en estado Activo.\n" +
                      "Debe ingresar otro chofer ó asignarle el auto con estado No Activo");
-                    txtChofer.Text = String.Empty;
+                    //txtChofer.Text = String.Empty;
                     return false;
                 }
                 
@@ -171,6 +202,19 @@ namespace UberFrba.Abm_Automovil
         private void btnUpdTurno_Click(object sender, EventArgs e)
         {
             
+        }
+
+        private void comboChofer_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            
+            
+            
+        }
+
+        private void comboChofer_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            chofer_combo = ((CHOFERE)comboChofer.SelectedItem);
+            comboModificado = true;
         }
     }
 

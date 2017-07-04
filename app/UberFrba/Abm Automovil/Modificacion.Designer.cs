@@ -43,11 +43,11 @@
             this.btnCancelar = new System.Windows.Forms.Button();
             this.lblDescripcion = new System.Windows.Forms.Label();
             this.lblChofer = new System.Windows.Forms.Label();
-            this.txtChofer = new System.Windows.Forms.TextBox();
             this.btnSalir = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.groupBoxTurnos = new System.Windows.Forms.GroupBox();
             this.checkedListBoxTurnos = new System.Windows.Forms.CheckedListBox();
+            this.comboChofer = new System.Windows.Forms.ComboBox();
             this.groupBoxTurnos.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -178,15 +178,6 @@
             this.lblChofer.TabIndex = 13;
             this.lblChofer.Text = "Chofer Asignado:";
             // 
-            // txtChofer
-            // 
-            this.txtChofer.Location = new System.Drawing.Point(121, 159);
-            this.txtChofer.MaxLength = 100;
-            this.txtChofer.Name = "txtChofer";
-            this.txtChofer.Size = new System.Drawing.Size(138, 20);
-            this.txtChofer.TabIndex = 14;
-            this.toolTip1.SetToolTip(this.txtChofer, "Tip: Ingresá nombre y apellido separado por espacio.\r\nPor ejemplo: John Doe");
-            // 
             // btnSalir
             // 
             this.btnSalir.Location = new System.Drawing.Point(216, 443);
@@ -215,14 +206,23 @@
             this.checkedListBoxTurnos.Size = new System.Drawing.Size(355, 94);
             this.checkedListBoxTurnos.TabIndex = 0;
             // 
+            // comboChofer
+            // 
+            this.comboChofer.FormattingEnabled = true;
+            this.comboChofer.Location = new System.Drawing.Point(121, 166);
+            this.comboChofer.Name = "comboChofer";
+            this.comboChofer.Size = new System.Drawing.Size(121, 21);
+            this.comboChofer.TabIndex = 17;
+            this.comboChofer.SelectedIndexChanged += new System.EventHandler(this.comboChofer_SelectedIndexChanged);
+            // 
             // Modificacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(611, 506);
+            this.Controls.Add(this.comboChofer);
             this.Controls.Add(this.groupBoxTurnos);
             this.Controls.Add(this.btnSalir);
-            this.Controls.Add(this.txtChofer);
             this.Controls.Add(this.lblChofer);
             this.Controls.Add(this.lblDescripcion);
             this.Controls.Add(this.btnCancelar);
@@ -261,10 +261,10 @@
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Label lblDescripcion;
         private System.Windows.Forms.Label lblChofer;
-        private System.Windows.Forms.TextBox txtChofer;
         private System.Windows.Forms.Button btnSalir;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.GroupBox groupBoxTurnos;
         private System.Windows.Forms.CheckedListBox checkedListBoxTurnos;
+        private System.Windows.Forms.ComboBox comboChofer;
     }
 }

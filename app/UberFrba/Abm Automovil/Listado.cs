@@ -13,6 +13,7 @@ namespace UberFrba.Abm_Automovil
     public partial class Listado : Form
     {
         private string marca_combo;
+        private string chofer_combo;
         private Modificacion modifForm;
 
         public Listado()
@@ -31,7 +32,10 @@ namespace UberFrba.Abm_Automovil
             }
             comboFiltros.SelectedIndex = 0;
             initMarca();
+            initChofer();
         }
+
+       
 
         private void comboFiltros_SelectionChangeCommitted(object sender, EventArgs e)
         {
@@ -56,7 +60,8 @@ namespace UberFrba.Abm_Automovil
                     break;
                 case "Chofer":
                     lblChofer.Visible = true;
-                    txtChofer.Visible = true;
+                    //txtChofer.Visible = true;
+                    comboChofer.Visible = true;
                     
                     break;
                 default:
@@ -78,10 +83,25 @@ namespace UberFrba.Abm_Automovil
             }
         }
 
+        private void initChofer()
+        {
+            using (var dbCtx = new GD1C2017Entities())
+            {
+
+                var choferes = dbCtx.CHOFERES.Where(c => c.HABILITADO).ToArray();
+                comboChofer.Items.Add("-- Seleccione -- ");
+                comboChofer.Items.AddRange(choferes);
+                comboChofer.DisplayMember = "NOMBRE";
+                comboChofer.ValueMember = "ID_CHOFER";
+                comboChofer.SelectedIndex = 0;
+            }
+        }
+
         private void btnClear_Click(object sender, EventArgs e)
         {
-            txtChofer.Text = String.Empty;
-            txtChofer.Visible = false;
+            //txtChofer.Text = String.Empty;
+            //txtChofer.Visible = false;
+            comboChofer.Visible = false;
             lblChofer.Visible = false;
 
             txtModelo.Text = String.Empty;
@@ -108,7 +128,8 @@ namespace UberFrba.Abm_Automovil
         {
             var _modelo = txtModelo.Text;
             var _patente = txtPatente.Text;
-            var _chofer = txtChofer.Text;
+           // var _chofer = txtChofer.Text;
+            var _chofer = chofer_combo;
             var _marca = marca_combo;
 
             gridResultados.Visible = true;
@@ -139,7 +160,8 @@ namespace UberFrba.Abm_Automovil
                     q1 = dbCtx.AUTOS.Where(a => a.MARCA.NOMBRE == _marca).ToList();
                 q1 = q1.Where(a => a.MODELO.ToLower().Contains(_modelo.ToLower())).ToList();
                 q1 = q1.Where(a => a.PATENTE.ToLower().Contains(_patente.ToLower())).ToList();
-                q1 = q1.Where(a => a.CHOFERE.NOMBRE.ToLower().Contains(_chofer.ToLower()) ||
+                if(chofer_combo != null && chofer_combo != "")
+                    q1 = q1.Where(a => a.CHOFERE.NOMBRE.ToLower().Contains(_chofer.ToLower()) ||
                         a.CHOFERE.APELLIDO.ToLower().Contains(_chofer.ToLower())).ToList();
                 
                 var q2 = q1.Select( o => 
@@ -166,6 +188,11 @@ namespace UberFrba.Abm_Automovil
             marca_combo = ((MARCA)comboMarca.SelectedItem).NOMBRE;
         }
 
+        private void comboChofer_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            chofer_combo = ((CHOFERE)comboChofer.SelectedItem).NOMBRE;
+        }
+
         private void gridResultados_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             var grilla = (DataGridView)sender;
@@ -176,7 +203,8 @@ namespace UberFrba.Abm_Automovil
                 using (var dbCtx = new GD1C2017Entities()) 
                 {
                     var q1 = dbCtx.AUTOS.Where(a => a.PATENTE == item.patente).FirstOrDefault();
-                    item.chofer = q1.CHOFERE.NOMBRE + " " + q1.CHOFERE.APELLIDO;
+                    //item.chofer = q1.CHOFERE.NOMBRE + " " + q1.CHOFERE.APELLIDO;
+                    item.chofer = q1.CHOFERE.NOMBRE;
                     item.habilitado = q1.HABILITADO;
                     item.id = q1.ID_AUTO;
                     item.licencia = q1.LICENCIA;
@@ -233,6 +261,8 @@ namespace UberFrba.Abm_Automovil
                            
             }
         }
+
+        
 
     }
 }
