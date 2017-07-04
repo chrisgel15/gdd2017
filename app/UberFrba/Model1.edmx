@@ -978,14 +978,14 @@
           <Property Type="String" Name="PATENTE" Nullable="true" MaxLength="10" />
           <Property Type="Int32" Name="cantidad_viajes" Nullable="true" />
         </ComplexType>
-        <ComplexType Name="choferesMayorRecaudacionSP_Result1">
+     <!--   <ComplexType Name="choferesMayorRecaudacionSP_Result1">
           <Property Type="Int32" Name="anio" Nullable="true" />
           <Property Type="Int32" Name="mes" Nullable="true" />
           <Property Type="String" Name="NOMBRE" Nullable="true" MaxLength="255" />
           <Property Type="String" Name="APELLIDO" Nullable="true" MaxLength="255" />
           <Property Type="Decimal" Name="RECAUDACION" Nullable="true" Precision="38" Scale="2" />
-        </ComplexType>
-        <ComplexType Name="choferesViajeMasLargoSP_Result1">
+        </ComplexType> -->
+   <!--     <ComplexType Name="choferesViajeMasLargoSP_Result1">
           <Property Type="Int32" Name="anio" Nullable="true" />
           <Property Type="Int32" Name="mes" Nullable="true" />
           <Property Type="String" Name="NOMBRE" Nullable="true" MaxLength="255" />
@@ -1004,8 +1004,8 @@
           <Property Type="String" Name="apellido" Nullable="true" MaxLength="255" />
           <Property Type="Int32" Name="AUTO_ID" Nullable="false" />
           <Property Type="String" Name="PATENTE" Nullable="true" MaxLength="10" />
-          <Property Type="Int32" Name="cantidad_viajes" Nullable="true" />
-        </ComplexType>
+          <Property Type="Int32" Name="cantidad_viajes" Nullable="true" /> 
+        </ComplexType> -->
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

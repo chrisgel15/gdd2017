@@ -227,41 +227,56 @@ namespace UberFrba.Registro_Viajes
 
             using(var dbCtx = new GD1C2017Entities())
             {
-                var viajes = dbCtx.VIAJES.Where(v => v.CLIENTE_ID == cliente.ID_CLIENTE && dtInicio.Value >= v.FECHA_INICIO && dtInicio.Value <= v.FECHA_FIN && v.FECHA_FIN != null);
 
-                foreach (VIAJE v in viajes)
+                var viajes = dbCtx.VIAJES.Where(v => v.CLIENTE_ID == cliente.ID_CLIENTE && v.FECHA_FIN != null);
+
+                foreach(VIAJE v in viajes)
                 {
-                    if (v.FECHA_FIN != null)
+                    bool fail = false;
+                    // Fecha de inicio actual entre fecha inicio y fecha fin
+                    if (dtInicio.Value >= v.FECHA_INICIO && dtInicio.Value <= v.FECHA_FIN)
+                        fail = true;
+                    else
+                        // Fecha de fin actual entre fecha inicio y fecha fin
+                        if (dtFin.Value >= v.FECHA_INICIO && dtFin.Value <= v.FECHA_FIN)
+                            fail = true;
+                        // Fecha de inicio anterior entre fecha inicio actual y fecha fin actual
+                        else
+                            if (v.FECHA_INICIO >= dtInicio.Value && v.FECHA_INICIO <= dtFin.Value)
+                                fail = true;  
+                    if (fail)
                     {
-                        bool b1 = dtInicio.Value >= v.FECHA_INICIO;
-                        bool b2 = dtInicio.Value <= v.FECHA_FIN;
+                        this.errorProvider1.SetError(dtInicio, "Existe Superposicion con las fechas de viaje del cliente");
+                        this.errorProvider1.SetError(dtFin, "Existe Superposicion con las fechas de viaje del cliente");
+                        return false;
                     }
                 }
 
 
-                if (dbCtx.VIAJES.Any(v => v.CLIENTE_ID == cliente.ID_CLIENTE && dtInicio.Value >= v.FECHA_INICIO && dtInicio.Value <= v.FECHA_FIN && v.FECHA_FIN != null))
+                var viajesChofer = dbCtx.VIAJES.Where(v => v.CHOFER_ID == chofer.ID_CHOFER && v.FECHA_FIN != null);
+
+                foreach (VIAJE v in viajesChofer)
                 {
-                    this.errorProvider1.SetError(dtInicio, "El cliente tiene un viaje en esa fecha de inicio");
-                    return false;
+                    bool fail = false;
+                    // Fecha de inicio actual entre fecha inicio y fecha fin
+                    if (dtInicio.Value >= v.FECHA_INICIO && dtInicio.Value <= v.FECHA_FIN)
+                        fail = true;
+                    else
+                        // Fecha de fin actual entre fecha inicio y fecha fin
+                        if (dtFin.Value >= v.FECHA_INICIO && dtFin.Value <= v.FECHA_FIN)
+                            fail = true;
+                        // Fecha de inicio anterior entre fecha inicio actual y fecha fin actual
+                        else
+                            if (v.FECHA_INICIO >= dtInicio.Value && v.FECHA_INICIO <= dtFin.Value)
+                                fail = true;
+                    if (fail)
+                    {
+                        this.errorProvider1.SetError(dtInicio, "Existe Superposicion con las fechas de viaje del chofer");
+                        this.errorProvider1.SetError(dtFin, "Existe Superposicion con las fechas de viaje del chofer");
+                        return false;
+                    }
                 }
 
-                if (dbCtx.VIAJES.Any(v => v.CLIENTE_ID == cliente.ID_CLIENTE && dtFin.Value >= v.FECHA_INICIO && dtFin.Value <= v.FECHA_FIN && v.FECHA_FIN != null))
-                {
-                    this.errorProvider1.SetError(dtFin, "El cliente tiene un viaje en esa fecha de Fin");
-                    return false;
-                }
-
-                if (dbCtx.VIAJES.Any(v => v.CHOFER_ID == chofer.ID_CHOFER && dtInicio.Value >= v.FECHA_INICIO && dtInicio.Value <= v.FECHA_FIN && v.FECHA_FIN != null))
-                {
-                    this.errorProvider1.SetError(dtInicio, "El chofer tiene un viaje en esa fecha de inicio");
-                    return false;
-                }
-
-                if (dbCtx.VIAJES.Any(v => v.CHOFER_ID == chofer.ID_CHOFER && dtFin.Value >= v.FECHA_INICIO && dtFin.Value <= v.FECHA_FIN && v.FECHA_FIN != null))
-                {
-                    this.errorProvider1.SetError(dtFin, "El chofer tiene un viaje en esa fecha de Fin");
-                    return false;
-                }
             }
 
             return true;
