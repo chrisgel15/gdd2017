@@ -82,6 +82,9 @@ namespace UberFrba.Abm_Turno
 
         private static void ValidacionesTurno(decimal horaInicio, decimal horaFin, TURNO turno, GD1C2017Entities dbCtx)
         {
+            if (dbCtx.TURNOS.Any(t => t.DESCRIPCION.ToUpper() == turno.DESCRIPCION.ToUpper() && turno.ID_TURNO != t.ID_TURNO))
+                throw new ExisteClienteException("Ya existe un turno con ese nombre");
+
             if (horaInicio > horaFin)
                 throw new ExisteClienteException("La hora inicio no puede ser mayor a la hora fin");
 

@@ -100,6 +100,7 @@ namespace UberFrba.Abm_ChoferCliente
             LimpiaControles();
             this.choferCliente = c;
             this.groupBox1.Text = c.Tipo;
+            this.lblCP.Visible = c.HabilitarCodigoPostal;
             this.txtCodPostal.Visible = c.HabilitarCodigoPostal;
             this.txtCodPostal.Text = c.HabilitarCodigoPostal ? String.Empty : "0";
             this.btnAceptar.Click -= btnAceptar_Click;

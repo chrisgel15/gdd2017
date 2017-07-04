@@ -141,7 +141,7 @@ namespace UberFrba.Rendicion_Viajes
                 {
                     dbCtx.RENDICIONES.Add(r);
                     dbCtx.SaveChanges();
-                    this.lblError.Text = "Se ha generado la rendicion por $ " + importeViajes.ToString();
+                    this.lblError.Text = "Se ha generado la rendicion por $ " + r.IMPORTE.ToString() + " (al 30%)";
 
                     if (listaViajes.Count > 0)
                     {
@@ -153,7 +153,7 @@ namespace UberFrba.Rendicion_Viajes
                 }
                 catch (Exception ex)
                 {
-                    this.lblError.Text = "Ocurrio un error al agregar el viaje";
+                    this.lblError.Text = "Ocurrio un error al generar la rendicion";
                 }
             }
 
