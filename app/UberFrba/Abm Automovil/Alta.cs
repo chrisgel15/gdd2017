@@ -36,7 +36,7 @@ namespace UberFrba.Abm_Automovil
                 comboMarca.SelectedIndex = 0;
 
                 //Lleno combo Turnos con los datos de la base
-                var turnos = dbCtx.TURNOS.ToArray();
+                var turnos = dbCtx.TURNOS.Where(t => t.HABILITADO).ToArray();
                 if (turnos != null)
                 {
                     comboTurno.Items.Add("-- Seleccione -- ");
